@@ -1,17 +1,23 @@
 import './Navbar.css';
+import { NavLink } from 'react-router-dom';
 
 function Navbar() {
 
+    // Methods ------------------------------------------
+
+    const getLinkStyle = ({ isActive }) => ( isActive ? 'navSelected' : null);
+
+    // View ---------------------------------------------
     return (
         <nav>
             <div className="navItem">
-                <a href='/'>Home</a>
+                <NavLink to='/' className={getLinkStyle}>Home</NavLink>
             </div>   
             <div className="navItem">
-                <a href='/signin'>Sign In</a>
+                <NavLink to='/signin' className={getLinkStyle}>Sign In</NavLink>
             </div>  
             <div className="navItem">
-                <a href='/contact'>Contact Us</a>
+                <NavLink to='/contact' className={getLinkStyle}>Contact Us</NavLink>
             </div>                           
         </nav>
     )
