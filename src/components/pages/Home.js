@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import API from '../api/API.js';
 
 function Home() {
@@ -36,7 +37,8 @@ function Home() {
               ? <p> No Exercise Types found</p>
               : exerciseTypes.map((exerciseType) => 
                 <p> key={exerciseType.id}{exerciseType.exerciseTypeName}</p>
-                )
+              )
+
         }
         </section>
     )

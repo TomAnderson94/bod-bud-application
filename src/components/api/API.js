@@ -1,6 +1,7 @@
 import API_URL from './apiURL.js';
 
 
+
 export const API = {};
 API.get = (endpoint) => callFetch(endpoint, 'GET', null);
 API.post = (endpoint, data) => callFetch(endpoint, 'POST', data);
@@ -33,6 +34,7 @@ const callFetch = async (endpoint, method, dataObj) => {
         message: error.message
         };
     }
+
 };
 
 export default callFetch;
