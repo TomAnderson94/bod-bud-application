@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import callFetch from "../api/API.js";
+
 import API from '../api/API.js';
 
 function Home() {
@@ -36,7 +36,9 @@ function Home() {
             : exerciseTypes.length === 0
               ? <p> No Exercise Types found</p>
               : exerciseTypes.map((exerciseType) => 
-                <p> key={exerciseType.id}{exerciseType.exerciseTypeName}</p>)
+                <p> key={exerciseType.id}{exerciseType.exerciseTypeName}</p>
+              )
+
         }
         </section>
     )
