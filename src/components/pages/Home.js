@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import callFetch from "../api/API.js";
+import API from '../api/API.js';
 
 function Home() {
     // Initialisation ----------------------------------------
@@ -16,8 +17,10 @@ function Home() {
     // Context -----------------------------------------------
     // Methods -----------------------------------------------
     const apiCall = async (endpoint) => {
-        const result = await callFetch(endpoint, 'GET');
-        setExerciseTypes(result);
+        const response = await API.get(endpoint);
+        response.isSuccess
+          ? setExerciseTypes(response.result)
+          : setLoadingMessage(response.message) 
     };
 
     useEffect(() => { apiCall(endpoint) }, [endpoint]);
