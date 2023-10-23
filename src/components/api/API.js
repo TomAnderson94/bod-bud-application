@@ -14,7 +14,7 @@ const callFetch = async (endpoint, method, dataObj) => {
     let requestObj = { method: method }; //GET, POST, PUT or DELETE
     if (dataObj) requestObj = {
         ...requestObj,
-        headers: { "Content-type": "application/json" },
+        headers: { 'Content-type': 'application/json' },
         body: JSON.stringify(dataObj),
     };
 

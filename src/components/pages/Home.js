@@ -35,9 +35,9 @@ function Home() {
             ? <p>{loadingMessage}</p>
             : exerciseTypes.length === 0
               ? <p> No Exercise Types found</p>
-              : exerciseTypes.map((exerciseType) => 
-                <p> key={exerciseType.id}{exerciseType.exerciseTypeName}</p>
-              )
+              : exerciseTypes.map((exerciseType) => (
+                <p key={exerciseType.ExerciseTypeID}>{exerciseType.exerciseTypeName}</p>
+              ))
 
         }
         </section>
