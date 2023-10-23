@@ -37,4 +37,4 @@ const callFetch = async (endpoint, method, dataObj) => {
 
 };
 
-export default callFetch;
+export default API;
