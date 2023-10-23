@@ -18,6 +18,8 @@ function Home() {
     // Methods -----------------------------------------------
     const apiCall = async (endpoint) => {
         const response = await API.get(endpoint);
+        console.log(response); // Log the response
+
         response.isSuccess
           ? setExerciseTypes(response.result)
           : setLoadingMessage(response.message) 
@@ -36,7 +38,7 @@ function Home() {
             : exerciseTypes.length === 0
               ? <p> No Exercise Types found</p>
               : exerciseTypes.map((exerciseType) => (
-                <p key={exerciseType.ExerciseTypeID}>{exerciseType.exerciseTypeName}</p>
+                <p key={exerciseType.exerciseTypeID}>{exerciseType.ExerciseTypeName}</p>
               ))
 
         }
