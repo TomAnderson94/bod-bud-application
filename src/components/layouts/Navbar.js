@@ -14,10 +14,10 @@ function Navbar() {
                 <NavLink to='/' className={getLinkStyle}>Home</NavLink>
             </div>   
             <div className="navItem">
-                <NavLink to='/signin' className={getLinkStyle}>Sign In</NavLink>
+                <NavLink to='/signin' className={getLinkStyle}>MyProfile</NavLink>
             </div>  
             <div className="navItem">
-                <NavLink to='/contact' className={getLinkStyle}>Contact Us</NavLink>
+                <NavLink to='/contact' className={getLinkStyle}>MyFriends</NavLink>
             </div>                           
         </nav>
     )

@@ -1,0 +1,40 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .card {
+    width: calc(25% - 16px); 
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0px;
+    background-color: #fff;
+    margin: 6px;
+    text-align: center;
+  }
+  
+  .card h2 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+  
+  .card img {
+    max-width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .card {
+      flex: 1 0 calc(50% - 32px);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .card {
+      flex: 1 0 calc(100% - 32px);
+    }
+  }
+  

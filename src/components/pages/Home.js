@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Card from "../UI/Card.js";
 
 import API from '../api/API.js';
 
@@ -34,16 +35,21 @@ function Home() {
         <h1>Exercise Types</h1>
         {
           !exerciseTypes
-            ? <p>{loadingMessage}</p>
+            ? (<p>{loadingMessage}</p>)
             : exerciseTypes.length === 0
-              ? <p> No Exercise Types found</p>
-              : exerciseTypes.map((exerciseType) => (
-                <p key={exerciseType.exerciseTypeID}>{exerciseType.ExerciseTypeName}</p>
-              ))
+              ? (<p> No Exercise Types found</p>)
 
-        }
+              : (<div className="card-container">
+                  {exerciseTypes.map((exerciseType) => (
+                <Card 
+                  key={exerciseType.exerciseTypeID}
+                  exerciseType={exerciseType}
+                />
+              ))}
+              </div>
+        )}
         </section>
-    )
+    );
 }
 
 export default Home;
