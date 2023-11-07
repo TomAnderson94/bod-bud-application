@@ -3,11 +3,12 @@
 nav {
     display: flex;
     overflow: hidden;
-    background-color: #edafb8;
+    background-color: white;
 }
 
 nav div.navItem { padding: 10px; }
-nav div.navItem:hover { background-color: #f4cdd3; }
-nav div.navItem a { color: white; text-decoration: none; }
+nav div.navItem:hover { background-color: #002147; color: white; }
+nav div.navItem:hover a { color: white; }
+nav div.navItem a { color: #002147; text-decoration: none; font-weight: bold; }
 nav div.navItem a.navSelected { color: black; }
 

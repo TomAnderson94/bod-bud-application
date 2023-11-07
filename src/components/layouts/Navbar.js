@@ -18,6 +18,9 @@ function Navbar() {
             </div>  
             <div className="navItem">
                 <NavLink to='/contact' className={getLinkStyle}>MyFriends</NavLink>
+            </div>                 
+            <div className="navItem">
+                <NavLink to='/strengthtraining' className={getLinkStyle}>Strength Training</NavLink>
             </div>                           
         </nav>
     )
