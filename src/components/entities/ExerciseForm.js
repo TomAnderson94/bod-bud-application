@@ -27,13 +27,11 @@ export default function ExerciseForm() {
 import React, { useState } from 'react';
 import './ExerciseForm.css'; 
 
-function ExerciseForm({ onSubmit }) {
+function ExerciseForm({ onSubmit, exercises }) {
 // Initialisation -------------------------------------------
 
 // State ----------------------------------------------------
-const [userUserID, setUserUserID] = useState("");
 const [exerciseExerciseID, setExerciseExerciseID] = useState("");
-const [exerciseName, setExerciseName] = useState("");
 const [weight, setWeight] = useState("");
 const [reps, setReps] = useState("");
 const [sets, setSets] = useState("");
@@ -42,20 +40,34 @@ const [date, setDate] = useState("");
 // Handlers -------------------------------------------------
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ userUserID, exerciseExerciseID, exerciseName, weight, reps, sets, date });
+    onSubmit({ 
+        UserUserID: 1,
+        ExerciseExerciseID: exerciseExerciseID,
+        Weight: parseFloat(weight),
+        Reps: parseInt(reps),
+        Sets: parseInt(sets),
+        Date: date
+      });
   };
 
 // View -----------------------------------------------------
   return (
     <form onSubmit={handleSubmit} className="form-container">
-      <div className="form-field">
-        <input
-          type="text"
-          placeholder="Exercise Name"
-          value={exerciseName}
-          onChange={(e) => setExerciseName(e.target.value)}
+      <div className='form-field'>
+        <select
+          id="exercise"
+          value={exerciseExerciseID}
+          onChange={(e) => setExerciseExerciseID(e.target.value)}
           required
-        />
+        >
+            <option value="">Select Exercise</option>
+            {exercises.map((exercise) => (
+                <option key={exercise.ExerciseID} value={exercise.ExerciseID}>
+                    {exercise.ExerciseName}
+                </option>
+            ))}
+        </select>
+
       </div>
       <div className="form-field">
         <input

@@ -5,38 +5,68 @@ import './StrengthTraining.css';
 
 function StrengthTraining() {
     // Initialisation ----------------------------------------
-    const endpoint = '/userExercises';
+    const endpoint = `/userExercises`;
+    const exerciseEndpoint = `/exercises`;
+
 
     // State -------------------------------------------------
-    const [userExercises, setUserExercises] = useState(null);
+    const [userExercises, setUserExercises] = useState([]);
+    const [exercises, setExercises] = useState([]); // Holds the list of exercises for the dropdown
     const [loadingMessage, setLoadingMessage] = useState('Loading exercises...');
+
+    // Fetch available exercises
+    useEffect(() => {
+        const fetchExercises = async () => {
+            try {
+                const response = await API.get(exerciseEndpoint);
+                console.log(response);
+                response.isSuccess
+                ? setExercises(response.result)         
+                : 
+                setLoadingMessage('Failed to load exercises: ' + response.message)
+            } catch (err) {
+                setLoadingMessage('An error occurred while fetching exercises: ' + err.message);
+            }
+            
+        };
+        fetchExercises();
+    }, [exerciseEndpoint]);
+
+
 
     // Methods -----------------------------------------------
     const apiCall = async (endpoint) => {
         try {
-            const response = await API.get(endpoint);
-            console.log(response); // Log the response
-
-            if (response.isSuccess) {
-                setUserExercises(response.result);
-                setLoadingMessage(''); // Clear loading message on success
-            } else {
-                setLoadingMessage('No exercises found');
-            }
+          const response = await API.get(endpoint);
+          if (response.isSuccess) {
+            setUserExercises(response.result);
+            console.log("Received exercises:", response.result);
+          } else {
+            setLoadingMessage(response.message);
+          }
         } catch (err) {
-            setLoadingMessage(err.message || 'An error occurred while fetching exercises');
+          setLoadingMessage(err.message || 'An error occurred while fetching exercises');
         }
-    };
+      };
+
+/*
+    response.isSuccess
+    ? setUserExercises(response.result)
+    : setLoadingMessage(response.message) 
+}
+
+*/
+
 
     const addExercise = async (newExercise) => {
         setLoadingMessage('Adding exercise...');
         try {
-            const response = await API.post(endpoint, newExercise);
+            const response = await API.post('/userExercises', newExercise);
             console.log(response); // Log the response
 
             if (response.isSuccess) {
-                // Functional update to handle potential null state
-                setUserExercises(prevUserExercises => [...(prevUserExercises || []), response.result]);
+                // Add the new exercise to the list of user exercises
+                setUserExercises([...userExercises, response.result]);
                 setLoadingMessage(''); 
             } else {
                 // If response does not have data, log error and update loading message
@@ -56,26 +86,31 @@ function StrengthTraining() {
     return (
         <div className="strength-training-container">
             <h1>Strength Training</h1>
-            <ExerciseForm onSubmit={addExercise} />
+            <ExerciseForm onSubmit={addExercise} exercises={exercises} />
             {!userExercises
             ? (<p>{loadingMessage}</p>)
             : userExercises.length === 0
               ? (<p> No Exercises found</p>)
 
               : (<div className='records-container'>
-                    {userExercises.map((userExercise) => (
-                    <div key={userExercise.userExerciseID} className="record-item">
-                        <span className="record-attribute">{userExercise.exerciseName}</span>
-                        <span className="record-attribute">{userExercise.weight}kg</span>
-                        <span className="record-attribute">x{userExercise.reps} reps</span>
-                        <span className="record-attribute">x{userExercise.sets} sets</span>
-                        <span className="record-attribute">{userExercise.date}</span>
-                    </div>
-                ))}
-        </div>
-    )}
+                {Array.isArray(userExercises) && userExercises.map((userExercise) => {
+                    // Find the matching exercise name 
+                    const exerciseName = exercises.find(exercise => exercise.ExerciseID === userExercise.ExerciseExerciseID)?.ExerciseName || 'Exercise not found';
+
+                    return (
+                        <div key={userExercise.UserExerciseID} className="record-item">
+                            <span className="record-attribute">{exerciseName}</span>
+                            <span className="record-attribute">{userExercise.Weight}kg</span>
+                            <span className="record-attribute">x{userExercise.Reps} reps</span>
+                            <span className="record-attribute">x{userExercise.Sets} sets</span>
+                            <span className="record-attribute">{userExercise.Date}</span>
+                        </div>
+                    );
+                })}
+        </div>)
+    }
 </div>
-    );
-}
+    );}
+
 
 export default StrengthTraining;
