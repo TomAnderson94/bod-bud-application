@@ -1,29 +1,3 @@
-/*
-
-const emptyExercise = {
-    ExerciseName: "",
-    Weight: 0,
-    Reps: 0,
-    Sets: 0,
-    Date: "",
-    Comments: "",
-
-};
-
-
-export default function ExerciseForm() {
-    // Initialisation -------------------------------------------
-    // State ----------------------------------------------------
-
-    // Handlers -------------------------------------------------
-
-    // View -----------------------------------------------------
-
-
-
-} */
-
-
 import React, { useState } from 'react';
 import './ExerciseForm.css'; 
 

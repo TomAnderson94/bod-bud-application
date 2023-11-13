@@ -96,6 +96,8 @@ function StrengthTraining() {
                 {Array.isArray(userExercises) && userExercises.map((userExercise) => {
                     // Find the matching exercise name 
                     const exerciseName = exercises.find(exercise => exercise.ExerciseID === userExercise.ExerciseExerciseID)?.ExerciseName || 'Exercise not found';
+                    const date = new Date(userExercise.Date);
+                    const formattedDate = date.toLocaleDateString();
 
                     return (
                         <div key={userExercise.UserExerciseID} className="record-item">
@@ -103,7 +105,7 @@ function StrengthTraining() {
                             <span className="record-attribute">{userExercise.Weight}kg</span>
                             <span className="record-attribute">x{userExercise.Reps} reps</span>
                             <span className="record-attribute">x{userExercise.Sets} sets</span>
-                            <span className="record-attribute">{userExercise.Date}</span>
+                            <span className="record-attribute">{formattedDate}</span>
                         </div>
                     );
                 })}

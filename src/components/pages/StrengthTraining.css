@@ -7,7 +7,7 @@
 }
 
 .exercise-detail {
-    margin-bottom: 10px; /* Add some space between each exercise */
+    margin-bottom: 10px; /* Add space between each exercise */
 }
 
 
@@ -22,8 +22,9 @@
   }
   
   .record-attribute {
-    margin: 0 5px; /* Add some space between each attribute */
-    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 5px; /* Add space between each attribute */
+    white-space: nowrap; /* Keeps content on a single line */
+    width: 100px;
   }
   
   /* Responsive layout for smaller screens */
@@ -33,8 +34,5 @@
       align-items: flex-start; /* Aligns items to the start of the flex container */
     }
     
-    .record-attribute {
-      margin: 5px 0; /* Space between stacked attributes */
-    }
   }
   
