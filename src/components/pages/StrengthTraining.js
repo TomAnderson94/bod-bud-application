@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import ExerciseForm from '../entities/ExerciseForm';
 import API from '../api/API';
 import './StrengthTraining.css';
+import ExerciseItem from '../entities/ExerciseItem';
 
 function StrengthTraining() {
     // Initialisation ----------------------------------------
@@ -100,13 +101,14 @@ function StrengthTraining() {
                     const formattedDate = date.toLocaleDateString();
 
                     return (
-                        <div key={userExercise.UserExerciseID} className="record-item">
-                            <span className="record-attribute">{exerciseName}</span>
-                            <span className="record-attribute">{userExercise.Weight}kg</span>
-                            <span className="record-attribute">x{userExercise.Reps} reps</span>
-                            <span className="record-attribute">x{userExercise.Sets} sets</span>
-                            <span className="record-attribute">{formattedDate}</span>
-                        </div>
+                        <ExerciseItem 
+                            key={userExercise.UserExerciseID} 
+                            exerciseName={exerciseName}
+                            Weight={userExercise.Weight}
+                            Reps={userExercise.Reps}
+                            Sets={userExercise.Sets}
+                            formattedDate={formattedDate}
+                        />
                     );
                 })}
         </div>)
