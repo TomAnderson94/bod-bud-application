@@ -1,8 +1,8 @@
+import ExerciseList from '../entities/ExerciseList';
 import { useState, useEffect } from 'react';
 import ExerciseForm from '../entities/ExerciseForm';
 import API from '../api/API';
 import './StrengthTraining.css';
-import ExerciseItem from '../entities/ExerciseItem';
 
 function StrengthTraining() {
     // Initialisation ----------------------------------------
@@ -93,27 +93,12 @@ function StrengthTraining() {
             : userExercises.length === 0
               ? (<p> No Exercises found</p>)
 
-              : (<div className='records-container'>
-                {Array.isArray(userExercises) && userExercises.map((userExercise) => {
-                    // Find the matching exercise name 
-                    const exerciseName = exercises.find(exercise => exercise.ExerciseID === userExercise.ExerciseExerciseID)?.ExerciseName || 'Exercise not found';
-                    const date = new Date(userExercise.Date);
-                    const formattedDate = date.toLocaleDateString();
-
-                    return (
-                        <ExerciseItem 
-                            key={userExercise.UserExerciseID} 
-                            exerciseName={exerciseName}
-                            Weight={userExercise.Weight}
-                            Reps={userExercise.Reps}
-                            Sets={userExercise.Sets}
-                            formattedDate={formattedDate}
-                        />
-                    );
-                })}
-        </div>)
-    }
-</div>
+              : (<ExerciseList 
+                userExercises={userExercises}
+                exercises={exercises}
+                />)
+            }
+        </div>
     );}
 
 
