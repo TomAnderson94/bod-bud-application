@@ -1,7 +1,7 @@
 import React from "react";
 import './ExerciseItem.css';
 
-function ExerciseItem({ exerciseName, Weight, Reps, Sets, formattedDate }) {
+function ExerciseItem({ exerciseName, Weight, Reps, Sets, formattedDate, onUpdate, onDelete }) {
     return (
         <div className="record-item">
             <span className="record-attribute">{exerciseName}</span>
@@ -9,6 +9,8 @@ function ExerciseItem({ exerciseName, Weight, Reps, Sets, formattedDate }) {
             <span className="record-attribute">x{Reps} reps</span>
             <span className="record-attribute">x{Sets} sets</span>
             <span className="record-attribute">{formattedDate}</span>
+            <button onClick={onUpdate} className="modify-button">Modify Record</button>
+            <button onClick={onDelete} className="delete-button">Delete Record</button>
         </div>
     );
 }

@@ -14,6 +14,7 @@ function StrengthTraining() {
     const [userExercises, setUserExercises] = useState([]);
     const [exercises, setExercises] = useState([]); // Holds the list of exercises for the dropdown
     const [loadingMessage, setLoadingMessage] = useState('Loading exercises...');
+    const [showForm, setShowForm] = useState(false);
 
     // Fetch available exercises
     useEffect(() => {
@@ -50,13 +51,13 @@ function StrengthTraining() {
         }
       };
 
-/*
-    response.isSuccess
-    ? setUserExercises(response.result)
-    : setLoadingMessage(response.message) 
-}
 
-*/
+    // Handlers ------------------------------------------------
+    const handleAdd = () => setShowForm(true);
+    const handleCancel = () => setShowForm(false);
+ //   const handleSuccess = () => {
+ //       handleCancel();
+    
 
 
     const addExercise = async (newExercise) => {
@@ -80,6 +81,50 @@ function StrengthTraining() {
         }
     };
 
+
+  //  const updateExercise = () => { }
+
+  //  const deleteExercise = () => { }
+
+  const updateExercise = async (UserExerciseID, UserUserID, updatedExercise) => {
+    setLoadingMessage('Updating exercise...');
+    console.log(UserExerciseID, "and", UserUserID);
+    try {
+        const response = await API.put(`/userExercises/${UserExerciseID}/${UserUserID}`, updatedExercise);
+        if (response.isSuccess) {
+            setUserExercises(userExercises.map(exercise => 
+                exercise.UserExerciseID === UserExerciseID ? { ...exercise, ...updatedExercise } : exercise
+            ));
+            setLoadingMessage('');
+        } else {
+            setLoadingMessage('Exercise could not be updated: ' + response.message);
+        }
+    } catch (err) {
+        console.error('An error occurred while updating the exercise:', err);
+        setLoadingMessage('An error occurred while updating the exercise.');
+    }
+};
+
+
+    
+const deleteExercise = async (UserExerciseID, UserUserID) => {
+    if (window.confirm("Are you sure you want to delete this exercise?")) {
+        try {
+            const response = await API.delete(`/userExercises/${UserExerciseID}/${UserUserID}`);
+            if (response.isSuccess) {
+                setUserExercises(userExercises.filter(ex => ex.UserExerciseID !== UserExerciseID));
+            } else {
+                console.error('Failed to delete:', response.message);
+            }
+        } catch (err) {
+            console.error('Error deleting exercise:', err);
+        }
+    }
+};
+
+
+
+
     useEffect(() => { apiCall(endpoint) }, [endpoint]);
 
 
@@ -87,16 +132,25 @@ function StrengthTraining() {
     return (
         <div className="strength-training-container">
             <h1>Strength Training</h1>
-            <ExerciseForm onSubmit={addExercise} exercises={exercises} />
-            {!userExercises
-            ? (<p>{loadingMessage}</p>)
-            : userExercises.length === 0
-              ? (<p> No Exercises found</p>)
 
-              : (<ExerciseList 
-                userExercises={userExercises}
-                exercises={exercises}
-                />)
+            {!showForm && (
+                <button onClick={handleAdd}>Record New Exercise</button>
+            )}
+
+            {showForm && (
+                <ExerciseForm onSubmit={addExercise} exercises={exercises} onCancel={handleCancel}/>
+            )}
+            
+            {!userExercises
+                ? (<p>{loadingMessage}</p>)
+                : userExercises.length === 0
+                    ? (<p> No Exercises found</p>)
+                    : (<ExerciseList 
+                        userExercises={userExercises}
+                        exercises={exercises}
+                        onUpdate={updateExercise}
+                        onDelete={deleteExercise}
+                    />)
             }
         </div>
     );}
