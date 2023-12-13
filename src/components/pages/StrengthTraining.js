@@ -86,14 +86,13 @@ function StrengthTraining() {
 
   //  const deleteExercise = () => { }
 
-  const updateExercise = async (UserExerciseID, UserUserID, updatedExercise) => {
+  const updateExercise = async (updatedExercise) => {
     setLoadingMessage('Updating exercise...');
-    console.log(UserExerciseID, "and", UserUserID);
     try {
-        const response = await API.put(`/userExercises/${UserExerciseID}/${UserUserID}`, updatedExercise);
+        const response = await API.put(`/userExercises/${updatedExercise.UserExerciseID}/${updatedExercise.UserUserID}`, updatedExercise);
         if (response.isSuccess) {
             setUserExercises(userExercises.map(exercise => 
-                exercise.UserExerciseID === UserExerciseID ? { ...exercise, ...updatedExercise } : exercise
+                exercise.UserExerciseID === updatedExercise.UserExerciseID ?  updatedExercise : exercise
             ));
             setLoadingMessage('');
         } else {
