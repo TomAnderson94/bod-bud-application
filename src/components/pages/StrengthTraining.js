@@ -88,6 +88,8 @@ function StrengthTraining() {
 
   const updateExercise = async (updatedExercise) => {
     setLoadingMessage('Updating exercise...');
+    console.log('update userExerciseID check: ', updatedExercise.UserExerciseID);
+
     try {
         const response = await API.put(`/userExercises/${updatedExercise.UserExerciseID}/${updatedExercise.UserUserID}`, updatedExercise);
         if (response.isSuccess) {
@@ -106,20 +108,29 @@ function StrengthTraining() {
 
 
     
-const deleteExercise = async (UserExerciseID, UserUserID) => {
-    if (window.confirm("Are you sure you want to delete this exercise?")) {
-        try {
-            const response = await API.delete(`/userExercises/${UserExerciseID}/${UserUserID}`);
-            if (response.isSuccess) {
-                setUserExercises(userExercises.filter(ex => ex.UserExerciseID !== UserExerciseID));
-            } else {
-                console.error('Failed to delete:', response.message);
-            }
-        } catch (err) {
-            console.error('Error deleting exercise:', err);
+const deleteExercise = async (exerciseToDelete) => {
+    console.log('delete check: ', exerciseToDelete);
+    console.log('delete userExerciseID check: ', exerciseToDelete.UserExerciseID);
+
+    if (!window.confirm("Are you sure you want to delete this exercise?")) return;
+
+    setLoadingMessage('Deleting exercise...');
+    try {
+        const response = await API.delete(`/userExercises/${exerciseToDelete}/1`);
+        if (response.isSuccess) {
+            setUserExercises(userExercises.filter(exercise => 
+                exercise.UserExerciseID !== exerciseToDelete.UserExerciseID
+            ));
+            setLoadingMessage('');
+        } else {
+            setLoadingMessage('Exercise could not be deleted: ' + response.message);
         }
+    } catch (err) {
+        console.error('An error occurred while deleting the exercise:', err);
+        setLoadingMessage('An error occurred while deleting the exercise.');
     }
 };
+
 
 
 
