@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Card from "../UI/Card.js";
 
@@ -11,11 +12,15 @@ function Home() {
     // State -------------------------------------------------
     const [exerciseTypes, setExerciseTypes] = useState(null);
     const [loadingMessage, setLoadingMessage] = useState('Loading records...');
+    const navigate = useNavigate();
 
 
 
+    // Handlers ----------------------------------------------
+  const handleStrengthTrainingClick = () => {
+    navigate('/strengthtraining');
+  };
 
-    // Context -----------------------------------------------
     // Methods -----------------------------------------------
     const apiCall = async (endpoint) => {
         const response = await API.get(endpoint);
@@ -44,6 +49,7 @@ function Home() {
                 <Card 
                   key={exerciseType.exerciseTypeID}
                   exerciseType={exerciseType}
+                  onClick={handleStrengthTrainingClick}
                 />
               ))}
               </div>

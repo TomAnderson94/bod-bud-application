@@ -41,6 +41,9 @@ function StrengthTraining() {
         try {
           const response = await API.get(endpoint);
           if (response.isSuccess) {
+            response.result.forEach((e) => {
+                e.editing = false;
+            })
             setUserExercises(response.result);
             console.log("Received exercises:", response.result);
           } else {
@@ -86,15 +89,16 @@ function StrengthTraining() {
 
   //  const deleteExercise = () => { }
 
-  const updateExercise = async (updatedExercise) => {
+  const updateExercise = async (exerciseToUpdate) => {
     setLoadingMessage('Updating exercise...');
-    console.log('update userExerciseID check: ', updatedExercise.UserExerciseID);
+    console.log('update userExerciseID check: ', exerciseToUpdate.UserExerciseID);
+    exerciseToUpdate.editing = true;
 
     try {
-        const response = await API.put(`/userExercises/${updatedExercise.UserExerciseID}/${updatedExercise.UserUserID}`, updatedExercise);
+        const response = await API.put(`/userExercises/${exerciseToUpdate.UserExerciseID}/${exerciseToUpdate.UserUserID}`, exerciseToUpdate);
         if (response.isSuccess) {
             setUserExercises(userExercises.map(exercise => 
-                exercise.UserExerciseID === updatedExercise.UserExerciseID ?  updatedExercise : exercise
+                exercise.UserExerciseID === exerciseToUpdate.UserExerciseID ?  exerciseToUpdate : exercise
             ));
             setLoadingMessage('');
         } else {
@@ -107,7 +111,6 @@ function StrengthTraining() {
 };
 
 
-    
 const deleteExercise = async (exerciseToDelete) => {
     console.log('delete check: ', exerciseToDelete);
     console.log('delete userExerciseID check: ', exerciseToDelete.UserExerciseID);
@@ -131,8 +134,16 @@ const deleteExercise = async (exerciseToDelete) => {
     }
 };
 
+const updateExerciseName = (e, userExerciseId) => {
+    let newUserExercises = userExercises.map(userExercise => {
+        if (userExercise.UserExerciseID === userExerciseId) {
+            userExercise.ExerciseExerciseID = e.target.value
+        }
 
-
+        return userExercise
+    })
+    setUserExercises(newUserExercises);
+}
 
 
     useEffect(() => { apiCall(endpoint) }, [endpoint]);
@@ -160,6 +171,7 @@ const deleteExercise = async (exerciseToDelete) => {
                         exercises={exercises}
                         onUpdate={updateExercise}
                         onDelete={deleteExercise}
+                        onExerciseNameChange={updateExerciseName}
                     />)
             }
         </div>

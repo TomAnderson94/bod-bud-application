@@ -1,7 +1,7 @@
 import React from "react";
 import ExerciseItem from "./ExerciseItem";
 
-function ExerciseList({ userExercises, exercises, onUpdate, onDelete }) {
+function ExerciseList({ userExercises, exercises, onUpdate, onDelete, onExerciseNameChange }) {
   return (
     <div className='records-container'>
       {Array.isArray(userExercises) && userExercises.map((userExercise) => {
@@ -13,13 +13,13 @@ function ExerciseList({ userExercises, exercises, onUpdate, onDelete }) {
         return (
           <ExerciseItem
             key={userExercise.UserExerciseID}
+            userExercise={userExercise}
             exerciseName={exerciseName}
-            Weight={userExercise.Weight}
-            Reps={userExercise.Reps}
-            Sets={userExercise.Sets}
+            exercises={exercises}
             formattedDate={formattedDate}
             onUpdate={() => onUpdate(userExercise)}
             onDelete={() => onDelete(userExercise.UserExerciseID)}
+            onExerciseNameChange={(e, userExerciseId) => onExerciseNameChange(e, userExerciseId)}
           />
         );
       })}
