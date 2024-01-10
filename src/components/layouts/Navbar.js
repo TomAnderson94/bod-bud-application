@@ -14,14 +14,17 @@ function Navbar() {
                 <NavLink to='/' className={getLinkStyle}>Home</NavLink>
             </div>   
             <div className="navItem">
-                <NavLink to='/signin' className={getLinkStyle}>MyProfile</NavLink>
+                <NavLink to='/login' className={getLinkStyle}>MyProfile</NavLink>
             </div>  
             <div className="navItem">
                 <NavLink to='/contact' className={getLinkStyle}>MyFriends</NavLink>
             </div>                 
             <div className="navItem">
                 <NavLink to='/strengthtraining' className={getLinkStyle}>Strength Training</NavLink>
-            </div>                           
+            </div>     
+            <div className="navItem">
+                <NavLink to='/login' className={getLinkStyle}>Login</NavLink>
+            </div>                      
         </nav>
     )
 }

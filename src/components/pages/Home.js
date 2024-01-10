@@ -10,7 +10,7 @@ function Home() {
     const endpoint = `/exerciseTypes`;
 
     // State -------------------------------------------------
-    const [exerciseTypes, setExerciseTypes] = useState(null);
+    const [exerciseTypes, setExerciseTypes] = useState([]);
     const [loadingMessage, setLoadingMessage] = useState('Loading records...');
     const navigate = useNavigate();
 
