@@ -22,12 +22,12 @@ function existingExerciseItem(userExercise, exerciseName, formattedDate, onUpdat
             <span className="record-attribute">x{userExercise.Sets} sets</span>
             <span className="record-attribute">{formattedDate}</span>  
             <button onClick={onUpdate} className="modify-button">Modify Record</button>
-            <button onClick={onDelete} className="delete-button">Delete Record</button>  
+            <button onClick={() => onDelete(userExercise)} className="delete-button">Delete Record</button>  
         </div>
             )
 }
 
-function exerciseItemToEdit(userExercise, exercises, onExerciseNameChange, onUpdate) {
+function exerciseItemToEdit(userExercise, exercises, onExerciseNameChange, onUpdate, onCancel) {
     console.log(userExercise)
     return (
         <div className="record-item">
@@ -48,7 +48,7 @@ function exerciseItemToEdit(userExercise, exercises, onExerciseNameChange, onUpd
 
                 </div>
                 <button onClick={onUpdate} className="modify-button">Update</button>
-                <button className="delete-button">Cancel</button>
+                <button onClick={onCancel}className="delete-button">Cancel</button>
         </div>
             )
 }

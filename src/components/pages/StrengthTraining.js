@@ -122,7 +122,7 @@ function StrengthTraining() {
             const response = await API.delete(`/userExercises/${exerciseToDelete}/1`);
             if (response.isSuccess) {
                 setUserExercises(userExercises.filter(exercise => 
-                    exercise.UserExerciseID !== exerciseToDelete.UserExerciseID
+                    exercise.UserExerciseID !== exerciseToDelete
                 ));
                 setLoadingMessage('');
             } else {
