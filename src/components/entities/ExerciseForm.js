@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ExerciseForm.css'; 
 
-function ExerciseForm({ onSubmit, exercises }) {
+function ExerciseForm({ onSubmit, onCancel, exercises }) {
 // Initialisation -------------------------------------------
 
 // State ----------------------------------------------------
@@ -23,6 +23,7 @@ const [date, setDate] = useState("");
         Date: date
       });
   };
+
 
 // View -----------------------------------------------------
   return (
@@ -80,7 +81,8 @@ const [date, setDate] = useState("");
         />
       </div>
       <div className="form-field">
-        <button type="submit" className="submit-button">Record Exercise</button>
+        <button type="submit" className="submit-button">Record Exercise</button>                
+        <button className="cancel-button" onClick={onCancel}>Cancel</button>
       </div>
     </form>
   );

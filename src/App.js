@@ -1,3 +1,4 @@
+import ProfilePage from "./components/pages/ProfilePage";
 import AdminDashboard from "./components/pages/AdminDashboard";
 import TrainerDashboard from "./components/pages/TrainerDashboard";
 import StrengthTraining from "./components/pages/StrengthTraining";
@@ -17,13 +18,16 @@ function App() {
   <BrowserRouter>
     <Layout>
       <Routes>
-        <Route path="/exerciser-dashboard" element={<ExerciserDashboard />} />
+        <Route path="/" element={<ExerciserDashboard />} />
         <Route path="/Login" element={<LoginPage />} />
         <Route path="/Contact" element={<ContactUs />} />
         <Route path="/404" element={<PageNotFound />} />
-        <Route path="/strength-training" element={<StrengthTraining />} />
+        <Route path="/strengthtraining" element={<StrengthTraining />} />
+        <Route path="exerciser-dashboard/" element={<ExerciserDashboard />} />
         <Route path="/trainer-dashboard" element={<TrainerDashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/myprofile" element={<ProfilePage />} />
+
       </Routes>
     </Layout>
   </BrowserRouter>

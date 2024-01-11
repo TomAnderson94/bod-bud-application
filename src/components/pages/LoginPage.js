@@ -19,17 +19,17 @@ function Login({ onLoginSuccess }) {
         } else if (username.includes('admin')) {
             navigate('/admin-dashboard');
         } else {
-            // Handle invalid username
+            alert('Invalid username');
         }
     };
 
    return (
-    <>
+    <div className ="login-container">
         <h1>Login</h1>
         <form onSubmit={handleSubmit}>
             <input
             type="text"
-            placeholder="Username"
+            placeholder="Username   .exerciser/.trainer/.admin"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             />
@@ -41,11 +41,9 @@ function Login({ onLoginSuccess }) {
             />
             <button type="submit">Login</button>
         </form>
-    </>);
+    </div>
+    );
 }
-
-
-
  
 
 export default Login;

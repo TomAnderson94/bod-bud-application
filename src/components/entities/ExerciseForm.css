@@ -12,6 +12,7 @@
     min-width: 120px; /* This prevents the fields from becoming too narrow */
   }
   
+  .form-field select,
   .form-field input,
   .form-field label {
     display: block;
@@ -23,6 +24,19 @@
   .submit-button {
     padding: 10px 20px;
     border: none;
+    width: 100%;
+    background-color: #002147;
+    color: white;
+    border: 2px solid white;
+    cursor: pointer;
+    border-radius: 4px;
+    white-space: nowrap; /* Prevents the text inside the button from wrapping */
+  }
+  .cancel-button {
+    padding: 5px 10px;
+    margin-top: 5px;
+    width: 100%;
+    border: none;
     background-color: #002147;
     color: white;
     border: 2px solid white;
@@ -32,6 +46,10 @@
   }
   
   .submit-button:hover {
+    background-color: #024083;
+  }
+
+  .cancel-button:hover {
     background-color: #024083;
   }
   
@@ -45,8 +63,15 @@
       width: 100%; /* On smaller screens, the fields take the full width */
       max-width: 100%; /* Ensuring the fields don't exceed the width of their container */
     }
+    .cancel-button {
+      width: 100%; /* On smaller screens, the fields take the full width */
+      max-width: 100%; /* Ensuring the fields don't exceed the width of their container */
+    }
   
     .submit-button {
+      margin-top: 10px; /* Adds space between the last field and the button */
+    }
+    .cancel-button {
       margin-top: 10px; /* Adds space between the last field and the button */
     }
   }

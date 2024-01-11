@@ -89,61 +89,61 @@ function StrengthTraining() {
 
   //  const deleteExercise = () => { }
 
-  const updateExercise = async (exerciseToUpdate) => {
-    setLoadingMessage('Updating exercise...');
-    console.log('update userExerciseID check: ', exerciseToUpdate.UserExerciseID);
-    exerciseToUpdate.editing = true;
+    const updateExercise = async (exerciseToUpdate) => {
+        setLoadingMessage('Updating exercise...');
+        console.log('update userExerciseID check: ', exerciseToUpdate.UserExerciseID);
+        exerciseToUpdate.editing = true;
 
-    try {
-        const response = await API.put(`/userExercises/${exerciseToUpdate.UserExerciseID}/${exerciseToUpdate.UserUserID}`, exerciseToUpdate);
-        if (response.isSuccess) {
-            setUserExercises(userExercises.map(exercise => 
-                exercise.UserExerciseID === exerciseToUpdate.UserExerciseID ?  exerciseToUpdate : exercise
-            ));
-            setLoadingMessage('');
-        } else {
-            setLoadingMessage('Exercise could not be updated: ' + response.message);
+        try {
+            const response = await API.put(`/userExercises/${exerciseToUpdate.UserExerciseID}/${exerciseToUpdate.UserUserID}`, exerciseToUpdate);
+            if (response.isSuccess) {
+                setUserExercises(userExercises.map(exercise => 
+                    exercise.UserExerciseID === exerciseToUpdate.UserExerciseID ?  exerciseToUpdate : exercise
+                ));
+                setLoadingMessage('');
+            } else {
+                setLoadingMessage('Exercise could not be updated: ' + response.message);
+            }
+        } catch (err) {
+            console.error('An error occurred while updating the exercise:', err);
+            setLoadingMessage('An error occurred while updating the exercise.');
         }
-    } catch (err) {
-        console.error('An error occurred while updating the exercise:', err);
-        setLoadingMessage('An error occurred while updating the exercise.');
+    };
+
+
+    const deleteExercise = async (exerciseToDelete) => {
+        console.log('delete check: ', exerciseToDelete);
+        console.log('delete userExerciseID check: ', exerciseToDelete.UserExerciseID);
+
+        if (!window.confirm("Are you sure you want to delete this exercise?")) return;
+
+        setLoadingMessage('Deleting exercise...');
+        try {
+            const response = await API.delete(`/userExercises/${exerciseToDelete}/1`);
+            if (response.isSuccess) {
+                setUserExercises(userExercises.filter(exercise => 
+                    exercise.UserExerciseID !== exerciseToDelete.UserExerciseID
+                ));
+                setLoadingMessage('');
+            } else {
+                setLoadingMessage('Exercise could not be deleted: ' + response.message);
+            }
+        } catch (err) {
+            console.error('An error occurred while deleting the exercise:', err);
+            setLoadingMessage('An error occurred while deleting the exercise.');
+        }
+    };
+
+    const updateExerciseName = (e, userExerciseId) => {
+        let newUserExercises = userExercises.map(userExercise => {
+            if (userExercise.UserExerciseID === userExerciseId) {
+                userExercise.ExerciseExerciseID = e.target.value
+            }
+
+            return userExercise
+        })
+        setUserExercises(newUserExercises);
     }
-};
-
-
-const deleteExercise = async (exerciseToDelete) => {
-    console.log('delete check: ', exerciseToDelete);
-    console.log('delete userExerciseID check: ', exerciseToDelete.UserExerciseID);
-
-    if (!window.confirm("Are you sure you want to delete this exercise?")) return;
-
-    setLoadingMessage('Deleting exercise...');
-    try {
-        const response = await API.delete(`/userExercises/${exerciseToDelete}/1`);
-        if (response.isSuccess) {
-            setUserExercises(userExercises.filter(exercise => 
-                exercise.UserExerciseID !== exerciseToDelete.UserExerciseID
-            ));
-            setLoadingMessage('');
-        } else {
-            setLoadingMessage('Exercise could not be deleted: ' + response.message);
-        }
-    } catch (err) {
-        console.error('An error occurred while deleting the exercise:', err);
-        setLoadingMessage('An error occurred while deleting the exercise.');
-    }
-};
-
-const updateExerciseName = (e, userExerciseId) => {
-    let newUserExercises = userExercises.map(userExercise => {
-        if (userExercise.UserExerciseID === userExerciseId) {
-            userExercise.ExerciseExerciseID = e.target.value
-        }
-
-        return userExercise
-    })
-    setUserExercises(newUserExercises);
-}
 
 
     useEffect(() => { apiCall(endpoint) }, [endpoint]);
@@ -155,9 +155,10 @@ const updateExerciseName = (e, userExerciseId) => {
             <h1>Strength Training</h1>
 
             {!showForm && (
-                <button onClick={handleAdd}>Record New Exercise</button>
+                <button className="record-button" onClick={handleAdd}>Record New Exercise</button>
+                
             )}
-
+            
             {showForm && (
                 <ExerciseForm onSubmit={addExercise} exercises={exercises} onCancel={handleCancel}/>
             )}
