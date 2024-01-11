@@ -37,7 +37,7 @@ function Home() {
     // View --------------------------------------------------
     return (
         <section>
-        <h1>Exercise Types</h1>
+        <h1>Exerciser</h1>
         {
           !exerciseTypes
             ? (<p>{loadingMessage}</p>)

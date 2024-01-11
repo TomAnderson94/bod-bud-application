@@ -1,26 +1,25 @@
 import { useState } from 'react';
-import API from '../api/API';
+import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 
 
 function Login({ onLoginSuccess }) {
     const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [password, setPassword] = useState(''); 
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setErrorMessage('');
 
-        try {
-            const response = await API.post('/login', { username, password});
-            if (response.isSuccess) {
-                onLoginSuccess(response.token); // Assuming the backend sends a token??
-            } else {
-                setErrorMessage('Login failed. Please try again.');
-            }
-        } catch (error) {
-            setErrorMessage('An error occurred.')
+        // Direct to different view based on the username
+        if (username.includes('exerciser')) {
+            navigate('/exerciser-dashboard');
+        } else if (username.includes('trainer')) {
+            navigate('/trainer-dashboard');
+        } else if (username.includes('admin')) {
+            navigate('/admin-dashboard');
+        } else {
+            // Handle invalid username
         }
     };
 
@@ -41,8 +40,6 @@ function Login({ onLoginSuccess }) {
             onChange={(e) => setPassword(e.target.value)}
             />
             <button type="submit">Login</button>
-
-            {errorMessage && <p>{errorMessage}</p>}
         </form>
     </>);
 }
