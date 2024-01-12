@@ -2,12 +2,13 @@ import React from "react";
 import './ExerciseItem.css';
 //import ExerciseForm from "./ExerciseForm";
 
-function ExerciseItem({ userExercise, exerciseName, exercises, formattedDate, onUpdate, onDelete, onExerciseNameChange }) {
+function ExerciseItem({ userExercise, exerciseName, exercises, formattedDate, onUpdate, onDelete, onCancelEdit, onExerciseNameChange, onWeightChange, onRepsChange, onSetsChange }) {
     
  //   const modify = false;
     return (
         <div>
-            {!userExercise.editing ? existingExerciseItem(userExercise, exerciseName, formattedDate, onUpdate, onDelete) : exerciseItemToEdit(userExercise, exercises, onExerciseNameChange, onUpdate)}
+            {!userExercise.editing ? 
+            existingExerciseItem(userExercise, exerciseName, formattedDate, onUpdate, onDelete, onCancelEdit) : exerciseItemToEdit(userExercise, exercises, onExerciseNameChange, onUpdate, onDelete, onWeightChange, onRepsChange, onSetsChange, onCancelEdit)} 
         </div> 
 
     );
@@ -27,7 +28,7 @@ function existingExerciseItem(userExercise, exerciseName, formattedDate, onUpdat
             )
 }
 
-function exerciseItemToEdit(userExercise, exercises, onExerciseNameChange, onUpdate, onCancel) {
+function exerciseItemToEdit(userExercise, exercises, onExerciseNameChange, onUpdate, onCancelEdit, onWeightChange, onRepsChange, onSetsChange) {
     console.log(userExercise)
     return (
         <div className="record-item">
@@ -45,10 +46,38 @@ function exerciseItemToEdit(userExercise, exercises, onExerciseNameChange, onUpd
                             </option>
                         ))}
                     </select>
+                    </div>
+                    <div className="form-field">
+                    <input
+                        type="number"
+                        placeholder="Weight (kg)"
+                        value={userExercise.Weight}
+                        onChange={(e) => onWeightChange(e.target.value)}
+                        step="0.5" // To allow incrementing by 0.5
+                        required
+                        />
+                    </div>
+                    <div className="form-field">
+                        <input
+                        type="number"
+                        placeholder="Reps"
+                        value={userExercise.Reps}
+                        onChange={(e) => onRepsChange(e.target.value)}
+                        required
+                        />
+                    </div>
+                    <div className="form-field">
+                        <input
+                        type="number"
+                        placeholder="Sets"
+                        value={userExercise.Sets}
+                        onChange={(e) => onSetsChange(e.target.value)}
+                        required
+                        />
+                    </div>
 
-                </div>
                 <button onClick={onUpdate} className="modify-button">Update</button>
-                <button onClick={onCancel}className="delete-button">Cancel</button>
+                <button onClick={onCancelEdit}className="delete-button">Cancel</button>
         </div>
             )
 }

@@ -15,6 +15,7 @@ function StrengthTraining() {
     const [exercises, setExercises] = useState([]); // Holds the list of exercises for the dropdown
     const [loadingMessage, setLoadingMessage] = useState('Loading exercises...');
     const [showForm, setShowForm] = useState(false);
+    const [editingExercise, setEditingExercise] = useState(null); // State for exercise record being edited
 
     // Fetch available exercises
     useEffect(() => {
@@ -145,6 +146,27 @@ function StrengthTraining() {
         setUserExercises(newUserExercises);
     }
 
+    // Methods for handling edit changes
+    const handleWeightChange = (weight) => {
+        setEditingExercise(prev => ({ ...prev, Weight: weight }));
+    };
+
+    const handleRepsChange = (reps) => {
+        setEditingExercise(prev => ({ ...prev, Reps: reps }));
+    };
+
+    const handleSetsChange = (sets) => {
+        setEditingExercise(prev => ({ ...prev, Sets: sets }));
+    };    
+
+    const cancelEdit = () => {
+        setEditingExercise(null);
+        setUserExercises(userExercises.map(ex => {
+            return { ...ex, editing: false };
+        }));
+
+    };
+
 
     useEffect(() => { apiCall(endpoint) }, [endpoint]);
 
@@ -173,6 +195,11 @@ function StrengthTraining() {
                         onUpdate={updateExercise}
                         onDelete={deleteExercise}
                         onExerciseNameChange={updateExerciseName}
+                        onWeightChange={handleWeightChange}
+                        onRepsChange={handleRepsChange}
+                        onSetsChange={handleSetsChange}
+                        onCancelEdit={cancelEdit}
+
                     />)
             }
         </div>

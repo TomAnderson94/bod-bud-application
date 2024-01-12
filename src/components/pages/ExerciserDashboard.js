@@ -4,7 +4,7 @@ import Card from "../UI/Card.js";
 
 import API from '../api/API.js';
 
-function Home() {
+function ExerciserDashboard() {
     // Initialisation ----------------------------------------
     //const loggedInUserID = 279;
     const endpoint = `/exerciseTypes`;
@@ -36,7 +36,7 @@ function Home() {
 
     // View --------------------------------------------------
     return (
-        <section>
+      <div className="exerciser-dashboard">
         <h1>Exerciser</h1>
         {
           !exerciseTypes
@@ -54,8 +54,8 @@ function Home() {
               ))}
               </div>
         )}
-        </section>
+      </div>
     );
 }
 
-export default Home;
+export default ExerciserDashboard;
