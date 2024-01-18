@@ -68,11 +68,28 @@ function StrengthTraining() {
         setLoadingMessage('Adding exercise...');
         try {
             const response = await API.post('/userExercises', newExercise);
-            console.log(response); // Log the response
+            console.log("response = ", response); // Log the response
+            console.log("newExercise = ", newExercise); 
+
+            console.log("current exercise list = ", exercises); 
+            console.log("selected exercise ID = ", newExercise.ExerciseExerciseID); 
+
 
             if (response.isSuccess) {
+
+                // Find the exercise name from the exercises list
+                const exerciseName = exercises.find(exercise => exercise.ExerciseID === parseInt(newExercise.ExerciseExerciseID))?.ExerciseName || 'Exercise not found';
+                console.log("Found exercise name = ", exerciseName); 
+
+                // Construct the new exercise with the necessary data
+                const addedExercise = {
+                    ...newExercise,
+                    UserExerciseID: response.result.id,
+                    ExerciseName: exerciseName,
+                    formattedDate: new Date(newExercise.Date).toLocaleDateString()
+                };
                 // Add the new exercise to the list of user exercises
-                setUserExercises([...userExercises, response.result]);
+                setUserExercises([...userExercises, addedExercise]);
                 setLoadingMessage(''); 
             } else {
                 // If response does not have data, log error and update loading message
@@ -91,13 +108,15 @@ function StrengthTraining() {
   //  const deleteExercise = () => { }
 
     const updateExercise = async (exerciseToUpdate) => {
+        setEditingExercise(exerciseToUpdate)
         setLoadingMessage('Updating exercise...');
         console.log('update userExerciseID check: ', exerciseToUpdate.UserExerciseID);
+
         exerciseToUpdate.editing = true;
 
         try {
             const response = await API.put(`/userExercises/${exerciseToUpdate.UserExerciseID}/${exerciseToUpdate.UserUserID}`, exerciseToUpdate);
-            if (response.isSuccess) {
+            if (response.isSuccess && response.result) {
                 setUserExercises(userExercises.map(exercise => 
                     exercise.UserExerciseID === exerciseToUpdate.UserExerciseID ?  exerciseToUpdate : exercise
                 ));
@@ -195,6 +214,7 @@ function StrengthTraining() {
                         onUpdate={updateExercise}
                         onDelete={deleteExercise}
                         onExerciseNameChange={updateExerciseName}
+
                         onWeightChange={handleWeightChange}
                         onRepsChange={handleRepsChange}
                         onSetsChange={handleSetsChange}
