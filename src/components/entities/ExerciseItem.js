@@ -3,18 +3,25 @@ import './ExerciseItem.css';
 //import ExerciseForm from "./ExerciseForm";
 
 function ExerciseItem({ userExercise, exerciseName, exercises, formattedDate, onUpdate, onDelete, onCancelEdit, onExerciseNameChange, onWeightChange, onRepsChange, onSetsChange }) {
-    
+
  //   const modify = false;
+
+ const handleChange = (field, value) => {
+    onUpdate({ ...userExercise, [field]: value });
+ };
+
+
     return (
         <div>
             {!userExercise.editing ? 
-            existingExerciseItem(userExercise, exerciseName, formattedDate, onUpdate, onDelete, onCancelEdit) : exerciseItemToEdit(userExercise, exercises, onExerciseNameChange, onUpdate, onDelete, onWeightChange, onRepsChange, onSetsChange, onCancelEdit)} 
+            existingExerciseItem(userExercise, exerciseName, formattedDate, () => onUpdate({ ...userExercise, editing:true }), onDelete, onCancelEdit) 
+            : exerciseItemToEdit(userExercise, exercises, onExerciseNameChange, () => onUpdate({ ...userExercise, editing:false }), onDelete, onWeightChange, onRepsChange, onSetsChange, onCancelEdit)} 
         </div> 
 
     );
 }
 
-function existingExerciseItem(userExercise, exerciseName, formattedDate, onUpdate, onDelete) {
+function existingExerciseItem(userExercise, exerciseName, formattedDate, onEdit, onDelete) {
     return (
         <div className="record-item">
             <span className="record-attribute">{exerciseName}</span>
@@ -22,14 +29,35 @@ function existingExerciseItem(userExercise, exerciseName, formattedDate, onUpdat
             <span className="record-attribute">x{userExercise.Reps} reps</span>
             <span className="record-attribute">x{userExercise.Sets} sets</span>
             <span className="record-attribute">{formattedDate}</span>  
-            <button onClick={onUpdate} className="modify-button">Modify Record</button>
+            <button onClick={onEdit} className="modify-button">Modify Record</button>
             <button onClick={() => onDelete(userExercise)} className="delete-button">Delete Record</button>  
         </div>
             )
 }
 
-function exerciseItemToEdit(userExercise, exercises, onExerciseNameChange, onUpdate, onCancelEdit, onWeightChange, onRepsChange, onSetsChange) {
-    console.log(userExercise)
+function exerciseItemToEdit(userExercise, exercises, onExerciseNameChange, onUpdate, handleChange, onCancelEdit, onWeightChange, onRepsChange, onSetsChange) {
+
+    console.log("to edit: ", userExercise)
+
+    const handleWeightChange = (e) => {
+        const updatedExercise = { ...userExercise, Weight: parseFloat(e.target.value) };
+        onWeightChange(updatedExercise);
+        console.log("on edit weight: ", updatedExercise.Weight)
+
+    };  
+    
+    const handleRepsChange = (e) => {
+        const updatedExercise = { ...userExercise, Reps: parseInt(e.target.value) };
+        onRepsChange(updatedExercise);
+    };
+
+    const handleSetsChange = (e) => {
+        const updatedExercise = { ...userExercise, Sets: parseInt(e.target.value) };
+        onSetsChange(updatedExercise);
+    };    
+
+
+
     return (
         <div className="record-item">
             <div className='form-field'>
@@ -52,7 +80,7 @@ function exerciseItemToEdit(userExercise, exercises, onExerciseNameChange, onUpd
                         type="number"
                         placeholder="Weight (kg)"
                         value={userExercise.Weight}
-                        onChange={(e) => onWeightChange(e.target.value)}
+                        onChange={handleWeightChange}
                         step="0.5" // To allow incrementing by 0.5
                         required
                         />
@@ -62,7 +90,7 @@ function exerciseItemToEdit(userExercise, exercises, onExerciseNameChange, onUpd
                         type="number"
                         placeholder="Reps"
                         value={userExercise.Reps}
-                        onChange={(e) => onRepsChange(e.target.value)}
+                        onChange={handleRepsChange}
                         required
                         />
                     </div>
@@ -71,7 +99,7 @@ function exerciseItemToEdit(userExercise, exercises, onExerciseNameChange, onUpd
                         type="number"
                         placeholder="Sets"
                         value={userExercise.Sets}
-                        onChange={(e) => onSetsChange(e.target.value)}
+                        onChange={handleSetsChange}
                         required
                         />
                     </div>

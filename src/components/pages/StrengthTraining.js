@@ -130,6 +130,12 @@ function StrengthTraining() {
         }
     };
 
+    const handleUpdate = (updatedExercise) => {
+        setUserExercises(userExercises.map(exercise =>
+            exercise.UserExerciseID === updatedExercise.UserExerciseID ? updatedExercise : exercise
+        ));
+    };
+
 
     const deleteExercise = async (exerciseToDelete) => {
         console.log('delete check: ', exerciseToDelete);
@@ -166,17 +172,28 @@ function StrengthTraining() {
     }
 
     // Methods for handling edit changes
-    const handleWeightChange = (weight) => {
-        setEditingExercise(prev => ({ ...prev, Weight: weight }));
+
+    const handleExerciseChange = (updatedExercise) => {
+        setUserExercises(userExercises.map(exercise =>
+            exercise.UserExerciseID === updatedExercise.UserExerciseID ? updatedExercise : exercise
+            ));
+    };
+/*
+    const handleWeightChange = (e) => {
+        const updatedExercise = { ...userExercises, Weight: e.target.value };
+        onWeightChange(updatedExercise);
+    };  
+    
+    const handleRepsChange = (e) => {
+        const updatedExercise = { ...userExercises, Reps: parseInt(e.target.value) };
+        onRepsChange(updatedExercise);
     };
 
-    const handleRepsChange = (reps) => {
-        setEditingExercise(prev => ({ ...prev, Reps: reps }));
-    };
-
-    const handleSetsChange = (sets) => {
-        setEditingExercise(prev => ({ ...prev, Sets: sets }));
-    };    
+    const handleSetsChange = (e) => {
+        const updatedExercise = { ...userExercises, Sets: parseInt(e.target.value) };
+        onSetsChange(updatedExercise);
+    };   
+   */
 
     const cancelEdit = () => {
         setEditingExercise(null);
@@ -215,9 +232,9 @@ function StrengthTraining() {
                         onDelete={deleteExercise}
                         onExerciseNameChange={updateExerciseName}
 
-                        onWeightChange={handleWeightChange}
-                        onRepsChange={handleRepsChange}
-                        onSetsChange={handleSetsChange}
+                        onWeightChange={handleExerciseChange}
+                        onRepsChange={handleExerciseChange}
+                        onSetsChange={handleExerciseChange}
                         onCancelEdit={cancelEdit}
 
                     />)

@@ -6,7 +6,7 @@ function ExerciseList({ userExercises, exercises, onUpdate, onDelete, onExercise
     <div className='records-container'>
       {Array.isArray(userExercises) && userExercises.map((userExercise) => {
         // Find the matching exercise name
-        const exerciseName = exercises.find(exercise => exercise.ExerciseID === userExercise.ExerciseExerciseID)?.ExerciseName || 'Exercise not found';
+        const exerciseName = exercises.find(exercise => exercise.ExerciseID === parseInt(userExercise.ExerciseExerciseID))?.ExerciseName || 'Exercise not found';
         const date = new Date(userExercise.Date);
         const formattedDate = date.toLocaleDateString();
 
