@@ -59,8 +59,6 @@ function StrengthTraining() {
     // Handlers ------------------------------------------------
     const handleAdd = () => setShowForm(true);
     const handleCancel = () => setShowForm(false);
- //   const handleSuccess = () => {
- //       handleCancel();
     
 
 
@@ -103,23 +101,24 @@ function StrengthTraining() {
     };
 
 
-  //  const updateExercise = () => { }
-
-  //  const deleteExercise = () => { }
-
     const updateExercise = async (exerciseToUpdate) => {
         setEditingExercise(exerciseToUpdate)
         setLoadingMessage('Updating exercise...');
         console.log('update userExerciseID check: ', exerciseToUpdate.UserExerciseID);
+        console.log('update Exercise Name check: ', exerciseToUpdate.ExerciseExerciseID);
+        console.log('before API call: ', exerciseToUpdate);
 
         exerciseToUpdate.editing = true;
 
         try {
             const response = await API.put(`/userExercises/${exerciseToUpdate.UserExerciseID}/${exerciseToUpdate.UserUserID}`, exerciseToUpdate);
             if (response.isSuccess && response.result) {
-                setUserExercises(userExercises.map(exercise => 
-                    exercise.UserExerciseID === exerciseToUpdate.UserExerciseID ?  exerciseToUpdate : exercise
-                ));
+                const updatedExercises = userExercises.map(exercise => 
+                    exercise.UserExerciseID === exerciseToUpdate.UserExerciseID ?  {...exercise, ...exerciseToUpdate, editing: false} : exercise
+                );
+                setUserExercises(updatedExercises);
+        console.log('Updated userExercises: ', updatedExercises);
+
                 setLoadingMessage('');
             } else {
                 setLoadingMessage('Exercise could not be updated: ' + response.message);

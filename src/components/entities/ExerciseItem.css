@@ -12,6 +12,37 @@
     white-space: nowrap; /* Keeps content on a single line */
     width: 100px;
   }
+
+  .modify-button {
+    padding: 5px 10px;
+    border: none;
+    width: 13%;
+    background-color: #002147;
+    color: white;
+    border: 2px solid white;
+    cursor: pointer;
+    border-radius: 4px;
+    white-space: nowrap; /* Prevents the text inside the button from wrapping */
+  }
+  .delete-button {
+    padding: 5px 10px;
+    width: 13%;
+    border: none;
+    background-color: #002147;
+    color: white;
+    border: 2px solid white;
+    cursor: pointer;
+    border-radius: 4px;
+    white-space: nowrap; /* Prevents the text inside the button from wrapping */
+  }
+
+  .modify-button:hover {
+    background-color: #05502d;
+  }
+
+  .delete-button:hover {
+    background-color: #880303;
+  }
   
 
     /* Responsive layout for smaller screens */

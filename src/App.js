@@ -18,7 +18,7 @@ function App() {
   <BrowserRouter>
     <Layout>
       <Routes>
-        <Route path="/" element={<ExerciserDashboard />} />
+        <Route path="/" element={<LoginPage />} />
         <Route path="/Login" element={<LoginPage />} />
         <Route path="/Contact" element={<ContactUs />} />
         <Route path="/404" element={<PageNotFound />} />
