@@ -17,7 +17,7 @@ function ExerciseList({ userExercises, exercises, onUpdate, onDelete, onExercise
             exerciseName={exerciseName}
             exercises={exercises}
             formattedDate={formattedDate}
-            onUpdate={() => onUpdate(userExercise)}
+            onUpdate={(updatedExercise) => onUpdate(updatedExercise)}
             onDelete={() => onDelete(userExercise.UserExerciseID)}
             onExerciseNameChange={(e, userExerciseId) => onExerciseNameChange(e, userExerciseId)}
             onWeightChange={onWeightChange}
