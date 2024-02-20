@@ -1,0 +1,39 @@
+.profile-page {
+    padding: 10px;
+  }
+
+.profile-details p {
+    margin-bottom: 10px;
+}  
+
+.profile-details img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .edit-button {
+    cursor: pointer;
+    padding: 8px 15px;
+    background-color: #002147;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+  .edit-button:hover {
+    background-color: #024083;
+  }
+
+  .modal-save-button {
+    cursor: pointer;
+    padding: 8px 15px;
+    background-color: #002147;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  

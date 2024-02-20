@@ -1,70 +1,17 @@
-import { createContext, useContext, useState, useCallback } from 'react';
-import CardMain from './CardMain.js';
-import Action from './Actions.js';
-import './Modal.scss';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './Modal.css'; // Make sure to create a corresponding CSS file for styling
 
-const ModalContext = createContext();
-
-export default function Modal() {
-  // Properties ----------------------------------
-  // State ---------------------------------------
-  // Context -------------------------------------
-  const { modal: { show, title, content, actions } } = useModal();
-
-  // Methods -------------------------------------
-  // View ----------------------------------------
-  return (
-    show
-      ? <div className="ModalOverlay">
-          <main className = "ModalPane">
-            <CardMain>
-              <header>
-                <p>{title}</p>
-              </header>
-              <main className="ModalContent">
-                {content}
-              </main>
-              {
-                actions && (
-                  <div className="ModalActions">
-                    <Action.Tray>
-                      {actions.map(action => action)}
-                    </Action.Tray>
-                  </div>
-                )
-              }
-            </CardMain>
-          </main>
-        </div>
-      : null
+const Modal = ({ onClose, children }) => {
+  return ReactDOM.createPortal(
+    <div className="modal-backdrop" onClick={onClose}>
+      <div className="modal-content" onClick={e => e.stopPropagation()}>
+        {children}
+        <button onClick={onClose} className="modal-close-button">Close</button>
+      </div>
+    </div>,
+    document.body
   );
-}
+};
 
-const useModal = () => useContext(ModalContext);
-
-const Provider = ({ children }) => {
-  // Properties ----------------------------------
-  // State ---------------------------------------
-  const [modal, setModal] = useState({ show: false, title: null, content: null, actions: null });
-
-  // Context -------------------------------------
-  // Methods -------------------------------------
-  const handleModal = useCallback((newModal) => {
-    newModal.show ? setModal(newModal) : setModal({show: false, title: null, content: null, actions: null});
-  }, []);
-    
-  // View ----------------------------------------
-  return (
-    <ModalContext.Provider value={{ modal, handleModal }}>
-      <Modal />
-      {children}
-    </ModalContext.Provider>
-  );
-}
-
-// -----------------------------------------
-// Compose Modal Object ////////////////////
-// -----------------------------------------
-
-Modal.useModal = useModal;
-Modal.Provider = Provider;
+export default Modal;
