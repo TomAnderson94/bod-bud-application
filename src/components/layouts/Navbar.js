@@ -11,7 +11,7 @@ function Navbar() {
     return (
         <nav>
             <div className="navItem">
-                <NavLink to='/' className={getLinkStyle}>Home</NavLink>
+                <NavLink to='/exerciser-dashboard' className={getLinkStyle}>Home</NavLink>
             </div>   
             <div className="navItem">
                 <NavLink to='/myprofile' className={getLinkStyle}>MyProfile</NavLink>

@@ -17,8 +17,24 @@ function ExerciserDashboard() {
 
 
     // Handlers ----------------------------------------------
-  const handleStrengthTrainingClick = () => {
-    navigate('/strengthtraining');
+  const handleExerciseTypeClick = (exerciseType) => {
+    console.log("clicked exercise type: ", exerciseType.ExerciseTypeName);
+    switch (exerciseType.ExerciseTypeName) {
+      case 'Cardio Exercise':
+        navigate('/cardioexercise');
+        break;
+      case 'Stretching':
+        navigate('/stretching');
+        break;
+      case 'Strength Training':
+        navigate('/strengthtraining');
+        break;
+      case 'Rehabilitation':
+        navigate('/rehabilitation');
+        break;
+      default:
+        navigate('/404');
+    }
   };
 
     // Methods -----------------------------------------------
@@ -49,7 +65,7 @@ function ExerciserDashboard() {
                 <Card 
                   key={exerciseType.exerciseTypeID}
                   exerciseType={exerciseType}
-                  onClick={handleStrengthTrainingClick}
+                  onClick={() => handleExerciseTypeClick(exerciseType)}
                 />
               ))}
               </div>
