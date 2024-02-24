@@ -1,6 +1,6 @@
-import ExerciseList from '../entities/ExerciseList';
+import CardioList from '../entities/CardioList';
 import { useState, useEffect } from 'react';
-import ExerciseForm from '../entities/ExerciseForm';
+import CardioForm from '../entities/CardioForm';
 import API from '../api/API';
 import './CardioExercise.css';
 
@@ -156,15 +156,18 @@ function CardioExercise() {
         };
     
         const updateExerciseName = (e, cardioExercisesId) => {
-            let newCardioExercises = cardioExercises.map(cardioExercises => {
-                if (cardioExercises.ID === cardioExercisesId) {
-                    cardioExercises.ExerciseExerciseID = e.target.value
+            const newCardioExercises = cardioExercises.map(cardioExercise => {
+                if (cardioExercise.ID === cardioExercisesId) {
+                    return {
+                        ...cardioExercise,
+                        ExerciseExerciseID: e.target.value
+                    };
                 }
-    
-                return cardioExercises
-            })
+                return cardioExercise;
+            });
             setCardioExercises(newCardioExercises);
-        }
+        };
+        
     
         // Methods for handling edit changes
     
@@ -192,17 +195,17 @@ function CardioExercise() {
             <p>Run away from your problems... but keep running</p>
 
             {!showForm && (
-                <button className="record-button" onClick={() => setShowForm(true)}>Record New Exercise</button>
+                <button className="record-button" onClick={handleAdd}>Record New Exercise</button>
             )}
             {showForm && (
-                <ExerciseForm onSubmit={addExercise} exercises={exercises} onCancel={() => setShowForm(false)} />
+                <CardioForm onSubmit={addExercise} exercises={exercises} onCancel={handleCancel} />
             )}
             {!cardioExercises ? (
                 <p>{loadingMessage}</p>
             ) : cardioExercises.length === 0 ? (
                 <p>No Exercises found</p>
             ) : (
-                <ExerciseList 
+                <CardioList 
                     cardioExercises={cardioExercises}
                     exercises={exercises}
                     onUpdate={updateExercise}
