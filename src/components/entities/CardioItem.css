@@ -8,15 +8,17 @@
   }
 
   .cardio-attribute {
-    margin: 0 5px; /* Add space between each attribute */
+    margin: 0px 5px; /* Add space between each attribute */
     white-space: nowrap; /* Keeps content on a single line */
-    flex-grow: 1;
+    text-align: left;
+    flex: 1;    
   }
 
   .modify-button {
-    padding: 5px 10px;
+    padding: 5px 8px;
+    margin-right: 5px; 
     border: none;
-    width: 13%;
+    width: auto;
     background-color: #002147;
     color: white;
     border: 2px solid white;
@@ -25,8 +27,8 @@
     white-space: nowrap; /* Prevents the text inside the button from wrapping */
   }
   .delete-button {
-    padding: 5px 10px;
-    width: 13%;
+    padding: 5px 8px;
+    width: auto;
     border: none;
     background-color: #002147;
     color: white;
