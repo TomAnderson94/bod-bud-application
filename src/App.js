@@ -33,10 +33,6 @@ function App() {
         <Route path="/rehabilitation" element={<Rehabilitation />} />
         <Route path="/cardioexercise" element={<Cardio />} />
         <Route path="/stretching" element={<Stretching />} />
-
-
-
-
       </Routes>
     </Layout>
   </BrowserRouter>

@@ -8,7 +8,7 @@ import './CardioExercise.css';
 
 function CardioExercise() {
 
-    const endpoint = `/cardioExercises`;
+    const endpoint = `/cardioExercises/:userid`;
     const exerciseEndpoint = `/exercises`;
 
     const [cardioExercises, setCardioExercises] = useState([]);
@@ -133,8 +133,8 @@ function CardioExercise() {
     
     
         const deleteExercise = async (exerciseToDelete) => {
-            console.log('delete check: ', exerciseToDelete);
-            console.log('delete ID check: ', exerciseToDelete.ID);
+            console.log("unique ID = ", exerciseToDelete); 
+
     
             if (!window.confirm("Are you sure you want to delete this exercise?")) return;
     
@@ -173,8 +173,7 @@ function CardioExercise() {
     
         const handleExerciseChange = (updatedExercise) => {
             setCardioExercises(cardioExercises.map(exercise =>
-                exercise.ID === updatedExercise.UserExerciseID ? updatedExercise : exercise
-                ));
+                exercise.ID === updatedExercise.ID ? updatedExercise : exercise                ));
         };
 
         const cancelEdit = () => {
@@ -211,7 +210,11 @@ function CardioExercise() {
                     onUpdate={updateExercise}
                     onDelete={deleteExercise}
                     onExerciseNameChange={updateExerciseName}
+                    onDurationChange={handleExerciseChange}
+                    onDistanceChange={handleExerciseChange}
+                    onAdditionalInfoChange={handleExerciseChange}
                     onCancelEdit={cancelEdit}
+
                 />
             )}
 

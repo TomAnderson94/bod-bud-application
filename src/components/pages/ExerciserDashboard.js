@@ -6,7 +6,6 @@ import API from '../api/API.js';
 
 function ExerciserDashboard() {
     // Initialisation ----------------------------------------
-    //const loggedInUserID = 279;
     const endpoint = `/exerciseTypes`;
 
     // State -------------------------------------------------
@@ -17,25 +16,25 @@ function ExerciserDashboard() {
 
 
     // Handlers ----------------------------------------------
-  const handleExerciseTypeClick = (exerciseType) => {
-    console.log("clicked exercise type: ", exerciseType.ExerciseTypeName);
-    switch (exerciseType.ExerciseTypeName) {
-      case 'Cardio Exercise':
-        navigate('/cardioexercise');
-        break;
-      case 'Stretching':
-        navigate('/stretching');
-        break;
-      case 'Strength Training':
-        navigate('/strengthtraining');
-        break;
-      case 'Rehabilitation':
-        navigate('/rehabilitation');
-        break;
-      default:
-        navigate('/404');
-    }
-  };
+    const handleExerciseTypeClick = (exerciseType) => {
+      console.log("clicked exercise type: ", exerciseType.ExerciseTypeName);
+      switch (exerciseType.ExerciseTypeName) {
+        case 'Cardio Exercise':
+          navigate('/cardioexercise');
+          break;
+        case 'Stretching':
+          navigate('/stretching');
+          break;
+        case 'Strength Training':
+          navigate('/strengthtraining');
+          break;
+        case 'Rehabilitation':
+          navigate('/rehabilitation');
+          break;
+        default:
+          navigate('/404');
+      }
+    };
 
     // Methods -----------------------------------------------
     const apiCall = async (endpoint) => {

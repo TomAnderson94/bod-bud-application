@@ -90,11 +90,9 @@ function StrengthTraining() {
                 setUserExercises([...userExercises, addedExercise]);
                 setLoadingMessage(''); 
             } else {
-                // If response does not have data, log error and update loading message
                 setLoadingMessage('Exercise could not be recorded: ' + response.message);
             }
         } catch (err) {
-            // Log error and update loading message
             console.error('An error occurred while saving the exercise:', err);
             setLoadingMessage('An error occurred while saving the exercise.');
         }
@@ -138,7 +136,6 @@ function StrengthTraining() {
 
     const deleteExercise = async (exerciseToDelete) => {
         console.log('delete check: ', exerciseToDelete);
-        console.log('delete userExerciseID check: ', exerciseToDelete.UserExerciseID);
 
         if (!window.confirm("Are you sure you want to delete this exercise?")) return;
 
