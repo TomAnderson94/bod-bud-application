@@ -1,0 +1,67 @@
+.routine-details-container {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.routine-details-header {
+    margin-bottom: 20px;
+}
+
+.routine-details-header h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.routine-details-header p {
+    font-size: 16px;
+    margin: 0;
+    color: #666;
+}
+
+.routine-exercises {
+    margin-bottom: 20px;
+}
+
+.routine-exercises h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.routine-exercises ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.routine-exercises li {
+    margin-bottom: 12px;
+}
+
+.routine-details-buttons {
+    text-align: right;
+}
+
+.routine-details-button {
+    padding: 8px 16px;
+    margin-left: 8px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.routine-details-button.delete-button {
+    background-color: #dc3545;
+}
+
+.routine-details-button:hover {
+    background-color: #0056b3;
+}
+
+.routine-details-button.delete-button:hover {
+    background-color: #c82333;
+}

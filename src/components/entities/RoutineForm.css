@@ -5,6 +5,7 @@
   .routine-form-container label {
     display: block;
     margin-bottom: 5px;
+    color: #002147;
   }
   
   .routine-form-container input[type="text"] {

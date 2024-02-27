@@ -6,26 +6,31 @@ function RoutineDetails({ routine, routineExercises, handleEdit, onDelete, onClo
     if (!routine) {
         return <div>No routine details available</div>;
     }
-     
+
     return (
     <div className="routine-details">
-      <h2>{routine.RoutineName}</h2>
-      <p>Description: {routine.RoutineDescription}</p>
-      <h3>Routine Exercises:</h3>
-      <ul>
-        {routineExercises.map((exercise, index) => (
-          <li key={index}>
-            <p>Exercise Name: {exercise.ExerciseID}</p>
-            <p>Order: {exercise.Order}</p>
-            <p>Custom Weight: {exercise.CustomWeight}</p>
-            <p>Custom Reps: {exercise.CustomReps}</p>
-            <p>Custom Sets: {exercise.CustomSets}</p>
-            <p>Custom Duration: {exercise.CustomDuration}</p>
-            <p>Custom Distance: {exercise.CustomDistance}</p>
-            <p>Custom Additional Info: {exercise.CustomAdditionalInfo}</p>
-          </li>
-        ))}
-      </ul>
+        <div className="routine-details-header">
+        <h2>{routine.RoutineName}</h2>
+        <p>Description: {routine.RoutineDescription}</p>
+        <div className="routine-exercises">
+        <h3>Routine Exercises:</h3>
+        <ul>
+            {routineExercises.map((exercise, index) => (
+            <li key={index}>
+                <p>Exercise Name: {exercise.ExerciseID}</p>
+                <p>Order: {exercise.Order}</p>
+                <p>Custom Weight: {exercise.CustomWeight}</p>
+                <p>Custom Reps: {exercise.CustomReps}</p>
+                <p>Custom Sets: {exercise.CustomSets}</p>
+                <p>Custom Duration: {exercise.CustomDuration}</p>
+                <p>Custom Distance: {exercise.CustomDistance}</p>
+                <p>Custom Additional Info: {exercise.CustomAdditionalInfo}</p>
+            </li>
+            ))}
+        </ul>
+        </div>
+      </div>
+
       <button onClick={onClose} className="modify-button">Close</button>
       <button onClick={handleEdit} className="modify-button">Modify Routine</button>
       <button onClick={() => onDelete(routine)} className="delete-button">Delete Routine</button>
