@@ -196,11 +196,13 @@ function StrengthTraining() {
         setUserExercises(userExercises.map(ex => {
             return { ...ex, editing: false };
         }));
-
     };
 
-
     useEffect(() => { apiCall(endpoint) }, [endpoint]);
+
+
+    // Filter exercises to show only exercise type 3
+    const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeTypeID === 3);
 
 
     // View --------------------------------------------------
@@ -214,7 +216,7 @@ function StrengthTraining() {
             )}
             
             {showForm && (
-                <ExerciseForm onSubmit={addExercise} exercises={exercises} onCancel={handleCancel}/>
+                <ExerciseForm onSubmit={addExercise} exercises={filteredExercises} onCancel={handleCancel}/>
             )}
             
             {!userExercises

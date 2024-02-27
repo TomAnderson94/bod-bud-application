@@ -177,6 +177,8 @@ function CardioExercise() {
             apiCall(endpoint);
         }, [endpoint]);
 
+        const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeTypeID === 1);
+
     return (
         <div className="cardio-exercise-container">
             <h1>Cardio Exercise</h1>
@@ -186,7 +188,7 @@ function CardioExercise() {
                 <button className="record-button" onClick={handleAdd}>Record New Exercise</button>
             )}
             {showForm && (
-                <CardioForm onSubmit={addExercise} exercises={exercises} onCancel={handleCancel} />
+                <CardioForm onSubmit={addExercise} exercises={filteredExercises} onCancel={handleCancel} />
             )}
             {!cardioExercises ? (
                 <p>{loadingMessage}</p>
