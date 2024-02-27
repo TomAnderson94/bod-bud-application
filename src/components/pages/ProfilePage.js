@@ -3,13 +3,14 @@ import API from '../api/API.js';
 import Modal from "../UI/Modal.js";
 import './ProfilePage.css';
 import RoutineForm from "../entities/RoutineForm.js";
+import RoutineList from "../entities/RoutineList.js";
 
 function ProfilePage() {
     // Initialisation ----------------------------------------
     const userID = 1; // Hardcoded for demonstration purposes
     const endpoint = `/profiles/${userID}`;
     const routinesEndpoint = `/routines`;
-    const exerciseEndpoint = `/exercises`;
+    const routineExercisesEndpoint = `/routineexercises`;
 
 
 
@@ -18,7 +19,7 @@ function ProfilePage() {
     const [loadingMessage, setLoadingMessage] = useState('Loading profile...');
     const [modalOpen, setModalOpen] = useState(false);
     const [showRoutineForm, setShowRoutineForm] = useState(false);
-    const [exercises, setExercises] = useState([]);
+    const [routineExercises, setRoutineExercises] = useState([]);
     const [routines, setRoutines] = useState([]);
 
     const fetchProfile = async (endpoint) => {
@@ -38,11 +39,11 @@ function ProfilePage() {
         }
     };
 
-    const fetchExercises = async () => {
+    const fetchRoutineExercises = async () => {
         try {
-            const response = await API.get(exerciseEndpoint);
+            const response = await API.get(routineExercisesEndpoint);
             if (response.isSuccess) {
-                setExercises(response.result);
+                setRoutineExercises(response.result);
             } else {
                 setLoadingMessage('Failed to load exercises: ' + response.message);
             }
@@ -51,14 +52,13 @@ function ProfilePage() {
         }
     };
 
-    const fetchRoutines = async (routinesEndpoint) => {
+    const fetchRoutines = async () => {
         try {
-            const response = await API.get(routinesEndpoint);
-            console.log(response); // Log the response
-
+            const response = await API.get(`/routines/1`);
             if (response.isSuccess && response.result.length > 0) {
                 // Assuming the first result is the routine
-                setRoutines(response.result[0]);
+                setRoutines(response.result);
+                console.log("response.result: ", response.result);
                 setLoadingMessage('');
             } else {
                 setLoadingMessage(response.message || 'Failed to load routines.');
@@ -73,8 +73,8 @@ function ProfilePage() {
     }, [endpoint]); 
 
     useEffect(() => {
-        fetchExercises();
-    }, [exerciseEndpoint]);
+        fetchRoutineExercises();
+    }, [routineExercisesEndpoint]);
 
     useEffect(() => {
         fetchRoutines();
@@ -96,11 +96,57 @@ function ProfilePage() {
             alert('Failed to update profile');
         }
     };
-    const handleRoutineFormSubmit = async (e) => {
-        console.log(e);
+
+    const addRoutine = async (newRoutine) => {
+        setLoadingMessage('Adding routine...');
+        try {
+            const response = await API.post(routinesEndpoint, newRoutine);
+            console.log("response = ", response); // Log the response
+            console.log("newRoutine = ", newRoutine); 
+
+            console.log("current routine list = ", routines); 
+            console.log("selected routine ID = ", newRoutine.ExerciseExerciseID); 
+
+
+            if (response.isSuccess) {
+                // Add the new routine to the list of routines
+                setRoutines([...routines, newRoutine]);
+                setLoadingMessage(''); 
+            } else {
+                // If response does not have data, log error and update loading message
+                setLoadingMessage('Routine could not be recorded: ' + response.message);
+            }
+        } catch (err) {
+            // Log error and update loading message
+            console.error('An error occurred while saving the routine:', err);
+            setLoadingMessage('An error occurred while saving the routine.');
+        }
+    };
+
+    const handleRoutineUpdate = async (updatedRoutine) => {
+        setLoadingMessage('Updating routine...');
+        try {
+            const response = await API.put(`/routines/${updatedRoutine.RoutineID}/1`, updatedRoutine);
+            if (response.isSuccess && response.result) {
+                const updatedRoutines = routines.map(routine => 
+                    routine.RoutineID === updatedRoutine.RoutineID ? updatedRoutine : routine
+                );
+                setRoutines(updatedRoutines);
+                setLoadingMessage('');
+            } else {
+                setLoadingMessage('Routine could not be updated: ' + response.message);
+            }
+        } catch (err) {
+            console.error('An error occurred while updating the routine:', err);
+            setLoadingMessage('An error occurred while updating the routine.');
+        }
+    };
+
+  /*  const handleRoutineFormSubmit = async (e) => {
+        console.log("form submit: ", e);
         try {
             // Submit updated routine to backend
-            const response = await API.put(routinesEndpoint, routines);
+            const response = await API.post(routinesEndpoint, routines);
             if (response.isSuccess) {
                 toggleModal(); // Close the modal
                 fetchRoutines(); // Refresh routines details
@@ -110,7 +156,7 @@ function ProfilePage() {
         } catch (error) {
             alert("An error occurred while creating custom routine");
         }
-    };
+    }; */
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -118,6 +164,11 @@ function ProfilePage() {
             ...prevState,
             [name]: value
         }));
+    };
+
+    const handleRoutineClick = (routineID) => {
+        console.log('Clicked Routine ID: ', routineID);
+
     };
 
     // View --------------------------------------------------
@@ -139,6 +190,17 @@ function ProfilePage() {
                     </div>
                 </div>
             )}
+            {routines && (
+                <div>
+                    <h2>My Routines</h2>
+                    <RoutineList 
+                    routines={routines} 
+                    onItemClick={handleRoutineClick} 
+                    onSubmit={addRoutine} 
+                    onUpdate={handleRoutineUpdate}
+                    />
+                </div>
+            )}
             {modalOpen && (
                 <Modal onClose={toggleModal}>
                     <form onSubmit={handleFormSubmit}>
@@ -156,7 +218,10 @@ function ProfilePage() {
             )}
             {showRoutineForm && (
                 <Modal onClose={() => setShowRoutineForm(false)}>
-                    <RoutineForm exercises={exercises} onSubmit={handleRoutineFormSubmit} onCancel={() => setShowRoutineForm(false)} />
+                    <RoutineForm 
+                    routineExercises={routineExercises} 
+                    onSubmit={addRoutine} 
+                    onCancel={() => setShowRoutineForm(false)} />
                 </Modal>
             )}
         </div>

@@ -5,24 +5,44 @@ import RoutineExerciseForm from './RoutineExercisesForm';
 function RoutineForm({ onSubmit, onCancel, exercises }) {
     const [routineName, setRoutineName] = useState("");
     const [routineDescription, setRoutineDescription] = useState("");
+    
+/*    
     const [routineExercises, setRoutineExercises] = useState([]);
+
+    const [exerciseID, setExerciseID] = useState("");
+    const [order, setOrder] = useState('');
+    const [customWeight, setCustomWeight] = useState('');
+    const [customReps, setCustomReps] = useState('');
+    const [customSets, setCustomSets] = useState('');
+    const [customDuration, setCustomDuration] = useState('');
+    const [customDistance, setCustomDistance] = useState('');
+    const [customAdditionalInfo, setCustomAdditionalInfo] = useState('');
 
 
     const handleRoutineExerciseSubmit = (exerciseData) => {
         setRoutineExercises([...routineExercises, exerciseData]);
     };
 
+    const handleAddExercise = (exerciseID) => {
+        setRoutineExercises([...routineExercises, exerciseID]);
+    };
+
+    const handleRemoveExercise = (exerciseID) => {
+        setRoutineExercises(routineExercises.filter((id) => id !== exerciseID));
+    };
+*/
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit({
-            routineName,
-            routineDescription,
-            routineExercises
+            UserID: 1, // Hard coding the user ID for demonstration purposes
+            RoutineName: routineName,
+            RoutineDescription: routineDescription,
         });
         // Clear input fields after submission
         setRoutineName('');
         setRoutineDescription('');
-        setRoutineExercises([]);
     };
     /*
     const handleRemoveExercise = (index) => {
@@ -44,38 +64,30 @@ function RoutineForm({ onSubmit, onCancel, exercises }) {
     }; */
 
     return (
-        <div className="routine-form-container">
-            <h2> Create Custom Routine</h2>
-            <form onSubmit={(e) => handleSubmit(e)} >
-                <label>Routine Name:</label>
-                <input 
-                type="text" 
-                value={routineName} 
-                onChange={(e) => setRoutineName(e.target.value)} required 
+        <form onSubmit={handleSubmit} className="routine-form-container">
+            <div className='form-field'>
+                <input
+                    type="text"
+                    placeholder="Routine Name"
+                    value={routineName}
+                    onChange={(e) => setRoutineName(e.target.value)}
+                    required
                 />
-                <label>Routine Description:</label>
-                <textarea  
-                value={routineDescription} 
-                onChange={(e) => setRoutineDescription(e.target.value)} required 
+            </div>
+            <div className="form-field">
+                <input
+                    type="text"
+                    placeholder="Routine Description"
+                    value={routineDescription}
+                    onChange={(e) => setRoutineDescription(e.target.value)}
+                    required
                 />
-                <button type="submit" onSubmit={handleSubmit}>Save Routine</button>
-            </form>
-
-            
-            <RoutineExerciseForm exercises={exercises} onSubmit={handleRoutineExerciseSubmit} />
-
-            <h3>Added Routine Exercises:</h3>
-            <ul>
-                {routineExercises.map((exercise, index) => (
-                    <li key={index}>
-                        {exercise.ExerciseID} 
-                        - {exercise.CustomWeight}kg - {exercise.CustomReps} reps - {exercise.CustomSets} sets - 
-                    </li>
-                ))}
-            </ul>
-
-            <button onClick={onCancel}>Cancel</button>
-        </div>
+            </div>
+            <div className="form-field">
+                <button type="submit" className="submit-button">Create Routine</button>
+                <button className="cancel-button" onClick={onCancel}>Cancel</button>
+            </div>
+        </form>
     );
 }
 

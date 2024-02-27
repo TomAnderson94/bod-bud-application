@@ -24,6 +24,7 @@ function CardioExercise() {
                 const response = await API.get(exerciseEndpoint);
                 if (response.isSuccess) {
                     setExercises(response.result);
+                    console.log("response.result: ", response.result);
                 } else {
                     setLoadingMessage('Failed to load exercises: ' + response.message);
                 }
