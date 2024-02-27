@@ -8,7 +8,7 @@ import './CardioExercise.css';
 
 function CardioExercise() {
 
-    const endpoint = `/cardioExercises/:userid`;
+    const endpoint = `/cardioExercises/1`;
     const exerciseEndpoint = `/exercises`;
 
     const [cardioExercises, setCardioExercises] = useState([]);
@@ -53,132 +53,132 @@ function CardioExercise() {
         }
     };
 
-        // Handlers ------------------------------------------------
-        const handleAdd = () => setShowForm(true);
-        const handleCancel = () => setShowForm(false);
-        
+    // Handlers ------------------------------------------------
+    const handleAdd = () => setShowForm(true);
+    const handleCancel = () => setShowForm(false);
     
-    
-        const addExercise = async (newExercise) => {
-            setLoadingMessage('Adding exercise...');
-            try {
-                const response = await API.post('/cardioExercises', newExercise);
-                console.log("response = ", response); // Log the response
-                console.log("newExercise = ", newExercise); 
-    
-                console.log("current exercise list = ", exercises); 
-                console.log("selected exercise ID = ", newExercise.ExerciseExerciseID); 
-    
-    
-                if (response.isSuccess) {
-    
-                    // Find the exercise name from the exercises list
-                    const exerciseName = exercises.find(exercise => exercise.ExerciseID === parseInt(newExercise.ExerciseExerciseID))?.ExerciseName || 'Exercise not found';
-                    console.log("Found exercise name = ", exerciseName); 
-    
-                    // Construct the new exercise with the necessary data
-                    const addedExercise = {
-                        ...newExercise,
-                        ID: response.result.id,
-                        ExerciseName: exerciseName,
-                        formattedDate: new Date(newExercise.Date).toLocaleDateString()
-                    };
-                    // Add the new exercise to the list of user exercises
-                    setCardioExercises([...cardioExercises, addedExercise]);
-                    setLoadingMessage(''); 
-                } else {
-                    // If response does not have data, log error and update loading message
-                    setLoadingMessage('Exercise could not be recorded: ' + response.message);
-                }
-            } catch (err) {
-                // Log error and update loading message
-                console.error('An error occurred while saving the exercise:', err);
-                setLoadingMessage('An error occurred while saving the exercise.');
+
+
+    const addExercise = async (newExercise) => {
+        setLoadingMessage('Adding exercise...');
+        try {
+            const response = await API.post('/cardioExercises', newExercise);
+            console.log("response = ", response); // Log the response
+            console.log("newExercise = ", newExercise); 
+
+            console.log("current exercise list = ", exercises); 
+            console.log("selected exercise ID = ", newExercise.ExerciseExerciseID); 
+
+
+            if (response.isSuccess) {
+
+                // Find the exercise name from the exercises list
+                const exerciseName = exercises.find(exercise => exercise.ExerciseID === parseInt(newExercise.ExerciseExerciseID))?.ExerciseName || 'Exercise not found';
+                console.log("Found exercise name = ", exerciseName); 
+
+                // Construct the new exercise with the necessary data
+                const addedExercise = {
+                    ...newExercise,
+                    ID: response.result.id,
+                    ExerciseName: exerciseName,
+                    formattedDate: new Date(newExercise.Date).toLocaleDateString()
+                };
+                // Add the new exercise to the list of user exercises
+                setCardioExercises([...cardioExercises, addedExercise]);
+                setLoadingMessage(''); 
+            } else {
+                // If response does not have data, log error and update loading message
+                setLoadingMessage('Exercise could not be recorded: ' + response.message);
             }
-        };
-      
-        const updateExercise = async (exerciseToUpdate) => {
-            setEditingExercise(exerciseToUpdate)
-            setLoadingMessage('Updating exercise...');
-            console.log('update ID check: ', exerciseToUpdate.ID);
-            console.log('update Exercise Name check: ', exerciseToUpdate.ExerciseExerciseID);
-            console.log('before API call: ', exerciseToUpdate);
+        } catch (err) {
+            // Log error and update loading message
+            console.error('An error occurred while saving the exercise:', err);
+            setLoadingMessage('An error occurred while saving the exercise.');
+        }
+    };
     
-            exerciseToUpdate.editing = true;
-    
-            try {
-                const response = await API.put(`/cardioExercises/${exerciseToUpdate.ID}/${exerciseToUpdate.UserID}`, exerciseToUpdate);
-                if (response.isSuccess && response.result) {
-                    const updatedExercises = cardioExercises.map(exercise => 
-                        exercise.ID === exerciseToUpdate.ID ?  {...exercise, ...exerciseToUpdate, editing: false} : exercise
-                    );
-                    setCardioExercises(updatedExercises);
-            console.log('Updated cardioExercises: ', updatedExercises);
-    
-                    setLoadingMessage('');
-                } else {
-                    setLoadingMessage('Exercise could not be updated: ' + response.message);
-                }
-            } catch (err) {
-                console.error('An error occurred while updating the exercise:', err);
-                setLoadingMessage('An error occurred while updating the exercise.');
+    const updateExercise = async (exerciseToUpdate) => {
+        setEditingExercise(exerciseToUpdate)
+        setLoadingMessage('Updating exercise...');
+        console.log('update ID check: ', exerciseToUpdate.ID);
+        console.log('update Exercise Name check: ', exerciseToUpdate.ExerciseExerciseID);
+        console.log('before API call: ', exerciseToUpdate);
+
+        exerciseToUpdate.editing = true;
+
+        try {
+            const response = await API.put(`/cardioExercises/${exerciseToUpdate.ID}/${exerciseToUpdate.UserID}`, exerciseToUpdate);
+            if (response.isSuccess && response.result) {
+                const updatedExercises = cardioExercises.map(exercise => 
+                    exercise.ID === exerciseToUpdate.ID ?  {...exercise, ...exerciseToUpdate, editing: false} : exercise
+                );
+                setCardioExercises(updatedExercises);
+        console.log('Updated cardioExercises: ', updatedExercises);
+
+                setLoadingMessage('');
+            } else {
+                setLoadingMessage('Exercise could not be updated: ' + response.message);
             }
-        };
-    
-        const deleteExercise = async (exerciseToDelete) => {
-            console.log("unique ID = ", exerciseToDelete); 
+        } catch (err) {
+            console.error('An error occurred while updating the exercise:', err);
+            setLoadingMessage('An error occurred while updating the exercise.');
+        }
+    };
 
-            if (!window.confirm("Are you sure you want to delete this exercise?")) return;
-    
-            setLoadingMessage('Deleting exercise...');
-            try {
-                const response = await API.delete(`/cardioExercises/${exerciseToDelete}/1`);
-                if (response.isSuccess) {
-                    setCardioExercises(cardioExercises.filter(exercise => 
-                        exercise.ID !== exerciseToDelete
-                    ));
-                    setLoadingMessage('');
-                } else {
-                    setLoadingMessage('Exercise could not be deleted: ' + response.message);
-                }
-            } catch (err) {
-                console.error('An error occurred while deleting the exercise:', err);
-                setLoadingMessage('An error occurred while deleting the exercise.');
+    const deleteExercise = async (exerciseToDelete) => {
+        console.log("unique ID = ", exerciseToDelete); 
+
+        if (!window.confirm("Are you sure you want to delete this exercise?")) return;
+
+        setLoadingMessage('Deleting exercise...');
+        try {
+            const response = await API.delete(`/cardioExercises/${exerciseToDelete}/1`);
+            if (response.isSuccess) {
+                setCardioExercises(cardioExercises.filter(exercise => 
+                    exercise.ID !== exerciseToDelete
+                ));
+                setLoadingMessage('');
+            } else {
+                setLoadingMessage('Exercise could not be deleted: ' + response.message);
             }
-        };
+        } catch (err) {
+            console.error('An error occurred while deleting the exercise:', err);
+            setLoadingMessage('An error occurred while deleting the exercise.');
+        }
+    };
+
+    const updateExerciseName = (e, cardioExercisesId) => {
+        const newCardioExercises = cardioExercises.map(cardioExercise => {
+            if (cardioExercise.ID === cardioExercisesId) {
+                return {
+                    ...cardioExercise,
+                    ExerciseExerciseID: e.target.value
+                };
+            }
+            return cardioExercise;
+        });
+        setCardioExercises(newCardioExercises);
+    };
     
-        const updateExerciseName = (e, cardioExercisesId) => {
-            const newCardioExercises = cardioExercises.map(cardioExercise => {
-                if (cardioExercise.ID === cardioExercisesId) {
-                    return {
-                        ...cardioExercise,
-                        ExerciseExerciseID: e.target.value
-                    };
-                }
-                return cardioExercise;
-            });
-            setCardioExercises(newCardioExercises);
-        };
-        
-        // Methods for handling edit changes
-        const handleExerciseChange = (updatedExercise) => {
-            setCardioExercises(cardioExercises.map(exercise =>
-                exercise.ID === updatedExercise.ID ? updatedExercise : exercise                ));
-        };
+    // Methods for handling edit changes
+    const handleExerciseChange = (updatedExercise) => {
+        setCardioExercises(cardioExercises.map(exercise =>
+            exercise.ID === updatedExercise.ID ? updatedExercise : exercise                ));
+    };
 
-        const cancelEdit = () => {
-            setEditingExercise(null);
-            setCardioExercises(cardioExercises.map(ex => {
-                return { ...ex, editing: false };
-            }));
-    
-        };
+    const cancelEdit = () => {
+        setEditingExercise(null);
+        setCardioExercises(cardioExercises.map(ex => {
+            return { ...ex, editing: false };
+        }));
 
-        useEffect(() => {
-            apiCall(endpoint);
-        }, [endpoint]);
+    };
 
-        const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeTypeID === 1);
+    useEffect(() => {
+        apiCall(endpoint);
+    }, [endpoint]);
+
+    const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeTypeID === 1);
 
     return (
         <div className="cardio-exercise-container">
@@ -206,10 +206,8 @@ function CardioExercise() {
                     onDistanceChange={handleExerciseChange}
                     onAdditionalInfoChange={handleExerciseChange}
                     onCancelEdit={cancelEdit}
-
                 />
             )}
-
         </div>
         )
 }

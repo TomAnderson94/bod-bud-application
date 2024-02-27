@@ -4,13 +4,14 @@ import Modal from "../UI/Modal.js";
 import './ProfilePage.css';
 import RoutineForm from "../entities/RoutineForm.js";
 import RoutineList from "../entities/RoutineList.js";
+import RoutineDetails from "../entities/RoutineDetails.js";
 
 function ProfilePage() {
     // Initialisation ----------------------------------------
     const userID = 1; // Hardcoded for demonstration purposes
     const endpoint = `/profiles/${userID}`;
     const routinesEndpoint = `/routines`;
-    const routineExercisesEndpoint = `/routineexercises`;
+    const routineExercisesEndpoint = `/routineexercises/1`;
 
 
 
@@ -21,15 +22,16 @@ function ProfilePage() {
     const [showRoutineForm, setShowRoutineForm] = useState(false);
     const [routineExercises, setRoutineExercises] = useState([]);
     const [routines, setRoutines] = useState([]);
+    const [showDetailsModal, setShowDetailsModal] = useState(false);
+    const [selectedRoutine, setSelectedRoutine] = useState(null);
 
     const fetchProfile = async (endpoint) => {
         try {
             const response = await API.get(endpoint);
-            console.log(response); // Log the response
-
             if (response.isSuccess && response.result.length > 0) {
                 // Assuming the first result is the profile
                 setProfile(response.result[0]);
+                console.log("profiles GET result: ", response.result); // Log the response
                 setLoadingMessage('');
             } else {
                 setLoadingMessage(response.message || 'Failed to load profile.');
@@ -44,6 +46,7 @@ function ProfilePage() {
             const response = await API.get(routineExercisesEndpoint);
             if (response.isSuccess) {
                 setRoutineExercises(response.result);
+                console.log("routine exercises GET result: ", response.result);
             } else {
                 setLoadingMessage('Failed to load exercises: ' + response.message);
             }
@@ -58,7 +61,7 @@ function ProfilePage() {
             if (response.isSuccess && response.result.length > 0) {
                 // Assuming the first result is the routine
                 setRoutines(response.result);
-                console.log("response.result: ", response.result);
+                console.log("routines GET result: ", response.result);
                 setLoadingMessage('');
             } else {
                 setLoadingMessage(response.message || 'Failed to load routines.');
@@ -81,13 +84,13 @@ function ProfilePage() {
     }, [routinesEndpoint]);
 
 
+
     // Methods -----------------------------------------------
     const toggleModal = () => setModalOpen(!modalOpen);
 
     // Handlers ------------------------------------------------
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        // Submit updated profile to backend
         const response = await API.put(endpoint, profile);
         if (response.isSuccess) {
             toggleModal(); // Close the modal
@@ -103,21 +106,16 @@ function ProfilePage() {
             const response = await API.post(routinesEndpoint, newRoutine);
             console.log("response = ", response); // Log the response
             console.log("newRoutine = ", newRoutine); 
-
             console.log("current routine list = ", routines); 
             console.log("selected routine ID = ", newRoutine.ExerciseExerciseID); 
 
-
             if (response.isSuccess) {
-                // Add the new routine to the list of routines
                 setRoutines([...routines, newRoutine]);
                 setLoadingMessage(''); 
             } else {
-                // If response does not have data, log error and update loading message
                 setLoadingMessage('Routine could not be recorded: ' + response.message);
             }
         } catch (err) {
-            // Log error and update loading message
             console.error('An error occurred while saving the routine:', err);
             setLoadingMessage('An error occurred while saving the routine.');
         }
@@ -142,22 +140,6 @@ function ProfilePage() {
         }
     };
 
-  /*  const handleRoutineFormSubmit = async (e) => {
-        console.log("form submit: ", e);
-        try {
-            // Submit updated routine to backend
-            const response = await API.post(routinesEndpoint, routines);
-            if (response.isSuccess) {
-                toggleModal(); // Close the modal
-                fetchRoutines(); // Refresh routines details
-            } else {
-                alert('Failed to update routines');
-            }
-        } catch (error) {
-            alert("An error occurred while creating custom routine");
-        }
-    }; */
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setProfile(prevState => ({
@@ -166,9 +148,16 @@ function ProfilePage() {
         }));
     };
 
-    const handleRoutineClick = (routineID) => {
-        console.log('Clicked Routine ID: ', routineID);
+    const handleRoutineClick = (routine) => {
+        setSelectedRoutine(routine);
+        console.log("clicked: ", routine);
+        setShowDetailsModal(true);
+    };
 
+    // Handler function to handle routine selection
+    const handleRoutineSelect = (routine) => {
+        console.log("selected routine: ", routine);
+        setSelectedRoutine(routine);
     };
 
     // View --------------------------------------------------
@@ -198,6 +187,7 @@ function ProfilePage() {
                     onItemClick={handleRoutineClick} 
                     onSubmit={addRoutine} 
                     onUpdate={handleRoutineUpdate}
+                    handleRoutineSelect={handleRoutineSelect}                    
                     />
                 </div>
             )}
@@ -222,6 +212,15 @@ function ProfilePage() {
                     routineExercises={routineExercises} 
                     onSubmit={addRoutine} 
                     onCancel={() => setShowRoutineForm(false)} />
+                </Modal>
+            )}
+            {showDetailsModal && selectedRoutine && (
+                <Modal onClose={() => setShowDetailsModal(false)}>
+                    <RoutineDetails 
+                    routine={selectedRoutine}
+                    routineExercises={routineExercises}
+                    onClose ={() => setShowDetailsModal(false)}
+                    />
                 </Modal>
             )}
         </div>
