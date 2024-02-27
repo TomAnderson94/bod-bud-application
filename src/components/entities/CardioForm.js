@@ -40,7 +40,7 @@ function CardioForm({ onSubmit, onCancel, exercises }) {
             <div className="form-field">
                 <input
                     type="number"
-                    placeholder="Duration (minutes)"
+                    placeholder="Duration(minutes)"
                     value={duration}
                     onChange={(e) => setDuration(e.target.value)}
                     required
@@ -49,7 +49,7 @@ function CardioForm({ onSubmit, onCancel, exercises }) {
             <div className="form-field">
                 <input
                     type="number"
-                    placeholder="Distance (km)"
+                    placeholder="Distance(km)"
                     value={distance}
                     onChange={(e) => setDistance(e.target.value)}
                     step="0.1"
@@ -58,10 +58,10 @@ function CardioForm({ onSubmit, onCancel, exercises }) {
             </div>
             <div className="form-field">
                 <input
-                    type="text" // Change to text input for additionalInfo
+                    type="text" 
                     placeholder="Additional Info"
                     value={additionalInfo}
-                    onChange={(e) => setAdditionalInfo(e.target.value)} // Update additionalInfo state
+                    onChange={(e) => setAdditionalInfo(e.target.value)} 
                 />
             </div>
             <div className="form-field">

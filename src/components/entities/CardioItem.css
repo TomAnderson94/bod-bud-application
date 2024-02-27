@@ -14,6 +14,25 @@
     flex: 1;    
   }
 
+  .cardio-attribute-additional-info {
+    margin: 0px 5px; /* Add space between each attribute */
+    flex-wrap: wrap;
+    text-align: left;
+    flex: 1;   
+    max-width: 200px; /* Maximum width for the attribute */
+    word-wrap: break-word;
+    overflow-wrap: break-word; /* Allow long words to break and wrap onto the next line */
+  }
+
+  .cardio-item .form-field input,
+  .cardio-item .form-field select {
+    width: 98%;
+    display: block;
+    margin-bottom: 5px;
+    padding: 10px;
+    flex: 1;
+  }
+
   .modify-button {
     padding: 5px 8px;
     margin-right: 5px; 
@@ -45,7 +64,6 @@
   .delete-button:hover {
     background-color: #880303;
   }
-  
 
     /* Responsive layout for smaller screens */
     @media (max-width: 768px) {
@@ -53,5 +71,4 @@
           flex-direction: column;
           align-items: flex-start; /* Aligns items to the start of the flex container */
         }
-        
       }

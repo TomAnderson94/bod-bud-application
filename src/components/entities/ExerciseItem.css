@@ -13,6 +13,15 @@
     width: 100px;
   }
 
+  .record-item .form-field input, 
+  .record-item .form-field select {
+    width: 98%;
+    display: block;
+    margin-bottom: 5px;
+    padding: 10px;
+    flex: 1;
+  }
+
   .modify-button {
     padding: 5px 10px;
     border: none;

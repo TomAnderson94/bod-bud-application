@@ -95,8 +95,7 @@ function CardioExercise() {
                 setLoadingMessage('An error occurred while saving the exercise.');
             }
         };
-    
-    
+      
         const updateExercise = async (exerciseToUpdate) => {
             setEditingExercise(exerciseToUpdate)
             setLoadingMessage('Updating exercise...');
@@ -125,17 +124,9 @@ function CardioExercise() {
             }
         };
     
-        const handleUpdate = (updatedExercise) => {
-            setCardioExercises(cardioExercises.map(exercise =>
-                exercise.ID === updatedExercise.ID ? updatedExercise : exercise
-            ));
-        };
-    
-    
         const deleteExercise = async (exerciseToDelete) => {
             console.log("unique ID = ", exerciseToDelete); 
 
-    
             if (!window.confirm("Are you sure you want to delete this exercise?")) return;
     
             setLoadingMessage('Deleting exercise...');
@@ -168,9 +159,7 @@ function CardioExercise() {
             setCardioExercises(newCardioExercises);
         };
         
-    
         // Methods for handling edit changes
-    
         const handleExerciseChange = (updatedExercise) => {
             setCardioExercises(cardioExercises.map(exercise =>
                 exercise.ID === updatedExercise.ID ? updatedExercise : exercise                ));

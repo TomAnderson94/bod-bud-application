@@ -39,13 +39,27 @@ function CardioItem({ cardioExercise, exerciseName, exercises, onUpdate, onDelet
                     <span className="cardio-attribute">{exerciseName} </span>
                     <span className="cardio-attribute">{editedExercise.Duration} minutes</span>
                     <span className="cardio-attribute">{editedExercise.Distance} km</span>
-                    <span className="cardio-attribute">{editedExercise.AdditionalInfo} </span>
+                    <span className="cardio-attribute-additional-info">{editedExercise.AdditionalInfo} </span>
                     <span className="cardio-attribute">{formattedDate}</span>
                     <button onClick={handleEdit} className="modify-button">Modify Record</button>
-                    <button onClick={() => onDelete(cardioExercise.ID)} className="delete-button">Delete Record</button>
+                    <button onClick={() => onDelete(cardioExercise)} className="delete-button">Delete Record</button>
                 </div>
             ) : (
                 <div className="cardio-item">
+                    <div className='form-field'>
+                        <select
+                            id="exercise"
+                            value={editedExercise.ExerciseExerciseID}
+                            onChange={(e) => setEditedExercise({ ...editedExercise, ExerciseExerciseID: e.target.value })}
+                        >
+                            <option value="">Select Exercise</option>
+                            {exercises.map((exercise) => (
+                                <option key={exercise.ExerciseID} value={exercise.ExerciseID}>
+                                    {exercise.ExerciseName}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                     <div className="form-field">
                         <input
                             type="number"
