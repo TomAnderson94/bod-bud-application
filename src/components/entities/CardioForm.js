@@ -11,7 +11,7 @@ function CardioForm({ onSubmit, onCancel, exercises }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit({
-            UserUserID: 1,
+            UserID: 1,
             ExerciseExerciseID: exerciseExerciseID,
             Duration: parseInt(duration),
             Distance: parseFloat(distance),
