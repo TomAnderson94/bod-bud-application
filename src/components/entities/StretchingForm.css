@@ -1,0 +1,77 @@
+
+.stretch-form-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between; /* This will space out the child elements evenly */
+    align-items: center; /* This will align the child elements vertically */
+  }
+  
+  .form-field {
+    flex: 1; /* Each field will take equal space */
+    min-width: 120px; /* This prevents the fields from becoming too narrow */
+  }
+  
+  .form-field input,
+  .form-field label {
+    display: block;
+    width: 103%;
+    margin-bottom: 5px;
+    padding: 10px;
+  }
+  
+  .submit-button {
+    padding: 10px 20px;
+    border: none;
+    width: 100%;
+    background-color: #002147;
+    color: white;
+    border: 2px solid white;
+    cursor: pointer;
+    border-radius: 4px;
+    white-space: nowrap; /* Prevents the text inside the button from wrapping */
+  }
+  .cancel-button {
+    padding: 5px 10px;
+    margin-top: 5px;
+    width: 100%;
+    border: none;
+    background-color: #002147;
+    color: white;
+    border: 2px solid white;
+    cursor: pointer;
+    border-radius: 4px;
+    white-space: nowrap; /* Prevents the text inside the button from wrapping */
+  }
+  
+  .submit-button:hover {
+    background-color: #024083;
+  }
+
+  .cancel-button:hover {
+    background-color: #024083;
+  }
+  
+  @media (max-width: 768px) { /* Adjust the breakpoint as needed */
+    .cardio-form-container {
+      flex-direction: column;
+    }
+  
+    .form-field,
+    .submit-button {
+      width: 100%; /* On smaller screens, the fields take the full width */
+      max-width: 100%; /* Ensuring the fields don't exceed the width of their container */
+    }
+    .cancel-button {
+      width: 100%; /* On smaller screens, the fields take the full width */
+      max-width: 100%; /* Ensuring the fields don't exceed the width of their container */
+    }
+  
+    .submit-button {
+      margin-top: 10px; /* Adds space between the last field and the button */
+    }
+    .cancel-button {
+      margin-top: 10px; /* Adds space between the last field and the button */
+    }
+  }
+  

@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "../UI/Card";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import API from "../api/API";
 
@@ -7,6 +8,8 @@ function TrainerDashboard() {
 
     const usersEndpoint = '/users';
     const profilesEndpoint = '/profiles';
+    const navigate = useNavigate();
+
 
     const [users, setUsers] = useState([]);
     const [loadingMessage, setLoadingMessage] = useState('Loading records...');
@@ -45,6 +48,11 @@ function TrainerDashboard() {
         fetchProfile(profilesEndpoint);
     }, [profilesEndpoint]); 
 
+    const handleProfileClick = (profileID) => {
+        navigate(`/myprofile/${profileID}`);
+        console.log("endpoint id: ", `/myprofile/${profileID}`);
+    };
+
     // View --------------------------------------------------
     return (
     <div className="trainer-dashboard">
@@ -58,9 +66,10 @@ function TrainerDashboard() {
           : (<div className="card-container">
               {profiles.map((profile) => (
                 <Card 
-                  key={profile.ProfileID}
-                  title={profile.ProfileName}
-                  imageURL={profile.ProfileURL}
+                key={profile.ProfileID}
+                title={profile.ProfileName}
+                imageURL={profile.ProfileURL}
+                onClick={() => handleProfileClick(profile.ProfileID)}
                 />
           ))}
           </div>

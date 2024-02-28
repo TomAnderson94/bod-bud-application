@@ -62,7 +62,7 @@ function ExerciserDashboard() {
               : (<div className="card-container">
                   {exerciseTypes.map((exerciseType) => (
                     <Card 
-                      key={exerciseType.exerciseTypeID}
+                      key={exerciseType.ExerciseTypeID}
                       title={exerciseType.ExerciseTypeName}
                       imageURL={exerciseType.ExerciseTypeURL}
                       onClick={() => handleExerciseTypeClick(exerciseType)}

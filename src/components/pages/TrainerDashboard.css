@@ -3,3 +3,11 @@
     background-color: #002147; 
      
 }
+.profile-link {
+    text-decoration: none;
+    color: #002147;    
+}
+  
+  .profile-link:hover {
+    text-decoration: underline;
+  }

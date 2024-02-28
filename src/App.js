@@ -11,7 +11,8 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Rehabilitation from "./components/pages/Rehabilitation";
 import Cardio from "./components/pages/CardioExercise";
-import Stretching from "./components/pages/Stretching";
+import StretchingExercises from "./components/pages/StretchingExercises";
+import UserProfileView from "./components/pages/UserProfileView";
 
 
 function App() {
@@ -30,9 +31,12 @@ function App() {
         <Route path="/trainer-dashboard" element={<TrainerDashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/myprofile" element={<ProfilePage />} />
+        <Route path="/myprofile/:profileID" element={<ProfilePage />} />
         <Route path="/rehabilitation" element={<Rehabilitation />} />
         <Route path="/cardioexercise" element={<Cardio />} />
-        <Route path="/stretching" element={<Stretching />} />
+        <Route path="/stretching" element={<StretchingExercises />} />
+        <Route path="/user-profile-view/:profileID" element={<UserProfileView />} />
+
       </Routes>
     </Layout>
   </BrowserRouter>
