@@ -11,6 +11,9 @@ function Navbar() {
     return (
         <nav>
             <div className="navItem">
+                <NavLink to='/login' className={getLinkStyle}>Login</NavLink>
+            </div>  
+            <div className="navItem">
                 <NavLink to='/exerciser-dashboard' className={getLinkStyle}>Home</NavLink>
             </div>   
             <div className="navItem">
@@ -21,10 +24,7 @@ function Navbar() {
             </div>                 
             <div className="navItem">
                 <NavLink to='/strengthtraining' className={getLinkStyle}>Strength Training</NavLink>
-            </div>     
-            <div className="navItem">
-                <NavLink to='/login' className={getLinkStyle}>Login</NavLink>
-            </div>      
+            </div>         
             <div className="navItem">
                 <NavLink to='/trainer-dashboard' className={getLinkStyle}>Trainer</NavLink>
             </div>  

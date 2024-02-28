@@ -16,7 +16,7 @@ function RoutineDetails({ routine, routineExercises, handleEdit, onDelete, onClo
         <h3>Routine Exercises:</h3>
         <ul>
             {routineExercises.map((exercise, index) => (
-            <li key={index}>
+            <li key={index} className="routine-exercise-item">
                 <p>Exercise Name: {exercise.ExerciseID}</p>
                 <p>Order: {exercise.Order}</p>
                 <p>Custom Weight: {exercise.CustomWeight}</p>

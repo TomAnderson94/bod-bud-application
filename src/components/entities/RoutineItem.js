@@ -58,9 +58,11 @@ function RoutineItem({ routine, onItemClick, onUpdate, onDelete, handleRoutineSe
         <div>
             {!editedRoutine.editing ? (
                 <div className="routine-item" onClick={() => onItemClick(routine)}>
-                    <h3>{editedRoutine.RoutineName}</h3>
-                    <p>{editedRoutine.RoutineDescription}</p>              
-        </div>
+                    <h3>- {editedRoutine.RoutineName} -</h3>
+                    <div className="description-wrapper">
+                        <p>{editedRoutine.RoutineDescription}</p>              
+                    </div>
+                </div>
 
             ) : (
                 <div className="routine-item">
