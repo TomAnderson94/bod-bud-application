@@ -20,7 +20,7 @@
     padding: 10px;
   }
   
-  .submit-button {
+  .stretch-submit-button {
     padding: 10px 20px;
     border: none;
     width: 100%;
@@ -31,7 +31,7 @@
     border-radius: 4px;
     white-space: nowrap; /* Prevents the text inside the button from wrapping */
   }
-  .cancel-button {
+  .stretch-cancel-button {
     padding: 5px 10px;
     margin-top: 5px;
     width: 100%;
@@ -44,12 +44,15 @@
     white-space: nowrap; /* Prevents the text inside the button from wrapping */
   }
   
-  .submit-button:hover {
-    background-color: #024083;
+  .stretch-submit-button:hover {
+    background-color: #ffffff;
+    color: #002147;
   }
 
-  .cancel-button:hover {
-    background-color: #024083;
+  .stretch-cancel-button:hover {
+    background-color: #ffffff;
+    color: #002147;
+
   }
   
   @media (max-width: 768px) { /* Adjust the breakpoint as needed */

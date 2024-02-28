@@ -2,9 +2,9 @@
     display: flex;
     justify-content: space-between; /* Distributes space evenly between items */
     align-items: center; /* Aligns items vertically */
-    padding: 10px;
+    padding: 8px;
     margin-top: 10px; /* Space between each record */
-    border-bottom: 1px solid #ccc; /* Just a bottom border for a cleaner look */
+    border-bottom: 1px solid #002147; /* Just a bottom border for a cleaner look */
   }
 
   .stretch-attribute {

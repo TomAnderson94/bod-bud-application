@@ -20,7 +20,7 @@ function StretchingExercises() {
                 console.log("success: ", response.result);  
                 response.result.forEach((e) => {
                     e.editing = false;
-                });
+                })
                 setStretchingExercises(response.result);
                 console.log("Received stretching exercises:", response.result);
             } else {
@@ -130,11 +130,11 @@ function StretchingExercises() {
 
     return (
         <div className="stretching-exercise-container">
-            <h1>Stretching</h1>
+            <h1>StretchZone</h1>
             <p>We're flexible... are you?</p>
 
             {!showForm && (
-                <button className="record-button" onClick={handleAdd}>Record New Exercise</button>
+                <button className="rehab-record-button" onClick={handleAdd}>Record New Exercise</button>
             )}
             {showForm && (
                 <StretchingForm onSubmit={addExercise} onCancel={handleCancel} />

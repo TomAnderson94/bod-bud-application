@@ -27,7 +27,16 @@ function Navbar() {
             </div>      
             <div className="navItem">
                 <NavLink to='/trainer-dashboard' className={getLinkStyle}>Trainer</NavLink>
-            </div>                               
+            </div>  
+            <div className="navItem">
+                <NavLink to='/cardioexercise' className={getLinkStyle}>Cardio</NavLink>
+            </div>      
+            <div className="navItem">
+                <NavLink to='/stretching' className={getLinkStyle}>StretchZone</NavLink>
+            </div>      
+            <div className="navItem">
+                <NavLink to='/rehabilitation' className={getLinkStyle}>Rehabilitation</NavLink>
+            </div>                                   
         </nav>
     )
 }

@@ -45,6 +45,9 @@
     margin-bottom: 10px;
     margin-top: 10px;
   }
+  .record-button:hover {
+    background-color: #024083;
+  }
   .edit-button:hover {
     background-color: #024083;
   }

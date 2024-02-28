@@ -1,10 +1,34 @@
 .stretching-exercise-container {
-    background-color: #C3D7E9; 
-    /*color: white;*/ 
-    color: #002147;
+    background-color: #7edcec; 
+
+    /*colors: baby blue: #90cce7; sky blue: #86deee;*/ 
+    color: #ffffff;
     min-height: 100vh; 
     padding: 20px; 
 }
 
+.stretching-exercise-container h1{
+    padding-bottom: 10px;
+}
 
+.stretching-exercise-container p{
+    padding-bottom: 10px;
+}
+
+.rehab-record-button {
+    padding: 10px 20px;
+    border: none;
+    margin-top: 10px;
+    background-color: #002147;
+    color: white;
+    border: 2px solid white;
+    cursor: pointer;
+    border-radius: 4px;
+    white-space: nowrap; /* Prevents the text inside the button from wrapping */
+  }
+
+.rehab-record-button:hover {
+    background-color: #ffffff;
+    color: #002147;
+  }
 

@@ -66,8 +66,8 @@ function StretchingForm({ onSubmit, onCancel }) {
                 />
             </div>
             <div className="form-field">
-                <button type="submit" className="submit-button">Record Stretch</button>
-                <button className="cancel-button" onClick={onCancel}>Cancel</button>
+                <button type="submit" className="stretch-submit-button">Record Stretch</button>
+                <button className="stretch-cancel-button" onClick={onCancel}>Cancel</button>
             </div>
         </form>
     );
