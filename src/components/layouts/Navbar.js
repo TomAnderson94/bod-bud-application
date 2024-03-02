@@ -17,7 +17,7 @@ function Navbar() {
                 <NavLink to='/exerciser-dashboard' className={getLinkStyle}>Home</NavLink>
             </div>   
             <div className="navItem">
-                <NavLink to='/myprofile' className={getLinkStyle}>MyProfile</NavLink>
+                <NavLink to='/myprofile/1' className={getLinkStyle}>MyProfile</NavLink>
             </div>  
             <div className="navItem">
                 <NavLink to='/contact' className={getLinkStyle}>MyFriends</NavLink>

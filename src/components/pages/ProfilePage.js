@@ -5,11 +5,13 @@ import './ProfilePage.css';
 import RoutineForm from "../entities/RoutineForm.js";
 import RoutineList from "../entities/RoutineList.js";
 import RoutineDetails from "../entities/RoutineDetails.js";
+import { useParams } from "react-router-dom";
 
 function ProfilePage() {
     // Initialisation ----------------------------------------
-    const userID = 1; // Hardcoded for demonstration purposes
-    const endpoint = `/profiles/${userID}`;
+   // const userID = 1; // Hardcoded for demonstration purposes
+    const { profileID } = useParams();
+    const endpoint = `/profiles/${profileID}`;
     const routinesEndpoint = `/routines`;
     const routineExercisesEndpoint = `/routineexercises/1`;
 
