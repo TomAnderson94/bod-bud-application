@@ -13,6 +13,7 @@ import Rehabilitation from "./components/pages/Rehabilitation";
 import Cardio from "./components/pages/CardioExercise";
 import StretchingExercises from "./components/pages/StretchingExercises";
 import UserProfileView from "./components/pages/UserProfileView";
+import RoutineDetailsPage from './components/pages/RoutineDetailsPage';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         <Route path="/cardioexercise" element={<Cardio />} />
         <Route path="/stretching" element={<StretchingExercises />} />
         <Route path="/user-profile-view/:profileID" element={<UserProfileView />} />
+        <Route path='/routines/:routineID' element={<RoutineDetailsPage />} />
 
       </Routes>
     </Layout>

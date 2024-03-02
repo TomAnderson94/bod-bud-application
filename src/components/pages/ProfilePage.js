@@ -5,7 +5,7 @@ import './ProfilePage.css';
 import RoutineForm from "../entities/RoutineForm.js";
 import RoutineList from "../entities/RoutineList.js";
 import RoutineDetails from "../entities/RoutineDetails.js";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 function ProfilePage() {
     // Initialisation ----------------------------------------
@@ -14,6 +14,8 @@ function ProfilePage() {
     const endpoint = `/profiles/${profileID}`;
     const routinesEndpoint = `/routines`;
     const routineExercisesEndpoint = `/routineexercises/1`;
+
+    const navigate = useNavigate();
 
 
 
@@ -153,7 +155,8 @@ function ProfilePage() {
     const handleRoutineClick = (routine) => {
         setSelectedRoutine(routine);
         console.log("clicked: ", routine);
-        setShowDetailsModal(true);
+        const routineDetailsURL = `/routines/${routine.RoutineID}`;
+        navigate(routineDetailsURL);
     };
 
     // Handler function to handle routine selection
@@ -214,15 +217,6 @@ function ProfilePage() {
                     routineExercises={routineExercises} 
                     onSubmit={addRoutine} 
                     onCancel={() => setShowRoutineForm(false)} />
-                </Modal>
-            )}
-            {showDetailsModal && selectedRoutine && (
-                <Modal onClose={() => setShowDetailsModal(false)}>
-                    <RoutineDetails 
-                    routine={selectedRoutine}
-                    routineExercises={routineExercises}
-                    onClose ={() => setShowDetailsModal(false)}
-                    />
                 </Modal>
             )}
         </div>
