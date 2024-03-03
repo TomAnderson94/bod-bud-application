@@ -1,6 +1,7 @@
 import React from 'react';
+import './RoutineDetails.css';
 
-function RoutineDetails({ routine, routineExercises, handleEdit, onDelete, onClose }) {
+function RoutineDetails({ routine, routineExercises, exercises, handleEdit, onDelete, onClose }) {
  
     // Check if routine is null or undefined
     if (!routine) {
@@ -8,32 +9,36 @@ function RoutineDetails({ routine, routineExercises, handleEdit, onDelete, onClo
     }
 
     return (
-    <div className="routine-details">
-        <div className="routine-details-header">
+    <div className='routine-details-container'>
+        <div className='routine-details-header'>
         <h2>{routine.RoutineName}</h2>
         <p>Description: {routine.RoutineDescription}</p>
-        <div className="routine-exercises">
+        <div className='routine-exercises'>
         <h3>Routine Exercises:</h3>
         <ul>
-            {routineExercises.map((exercise, index) => (
-            <li key={index} className="routine-exercise-item">
-                <p>Exercise Name: {exercise.ExerciseID}</p>
-                <p>Order: {exercise.Order}</p>
-                <p>Custom Weight: {exercise.CustomWeight}</p>
-                <p>Custom Reps: {exercise.CustomReps}</p>
-                <p>Custom Sets: {exercise.CustomSets}</p>
-                <p>Custom Duration: {exercise.CustomDuration}</p>
-                <p>Custom Distance: {exercise.CustomDistance}</p>
-                <p>Custom Additional Info: {exercise.CustomAdditionalInfo}</p>
-            </li>
-            ))}
+            {routineExercises.map((exercise, index) => {
+              const exerciseName = exercises.find(item => item.ExerciseID === exercise.ExerciseID)?.ExerciseName || 'Exercise not found';
+              
+              return (
+                <li key={index} className='routine-exercise-item'>
+                    <p> {exercise.Order} ) </p>                   
+                    <p> {exerciseName}</p>
+                    <p> {exercise.CustomWeight} kg</p>
+                    <p> {exercise.CustomReps} reps</p>
+                    <p> {exercise.CustomSets} sets</p>
+                    <p> {exercise.CustomDuration} minutes</p>
+                    <p> {exercise.CustomDistance} km</p>
+                    <p className='additional-info' >Additional Info: {exercise.CustomAdditionalInfo}</p>
+                </li>
+              );
+            })}
         </ul>
         </div>
-      </div>
+    </div>
 
-      <button onClick={onClose} className="modify-button">Close</button>
-      <button onClick={handleEdit} className="modify-button">Modify Routine</button>
-      <button onClick={() => onDelete(routine)} className="delete-button">Delete Routine</button>
+      <button onClick={onClose} className='routine-details-button'>Back</button>
+      <button onClick={handleEdit} className='routine-details-button'>Add an Exercise</button>
+      <button onClick={() => onDelete(routine)} className='routine-details-delete-button'>Delete Routine</button>
     </div>
   );
 }

@@ -30,5 +30,7 @@
 .rehab-record-button:hover {
     background-color: #ffffff;
     color: #002147;
+    border: 2px solid #002147;
+
   }
 

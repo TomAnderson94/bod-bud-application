@@ -7,15 +7,11 @@ import SearchBar from "../entities/SearchBar";
 
 function TrainerDashboard() {
 
-    const usersEndpoint = '/users';
     const profilesEndpoint = '/profiles';
     const navigate = useNavigate();
 
-
     const [loadingMessage, setLoadingMessage] = useState('Loading records...');
     const [profiles, setProfiles] = useState([]);
-    const [filteredProfiles, setFilteredProfiles] = useState([]);
-
 
 
     // Methods -----------------------------------------------
