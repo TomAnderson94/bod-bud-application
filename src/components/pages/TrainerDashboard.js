@@ -3,6 +3,7 @@ import Card from "../UI/Card";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import API from "../api/API";
+import SearchBar from "../entities/SearchBar";
 
 function TrainerDashboard() {
 
@@ -11,23 +12,13 @@ function TrainerDashboard() {
     const navigate = useNavigate();
 
 
-    const [users, setUsers] = useState([]);
     const [loadingMessage, setLoadingMessage] = useState('Loading records...');
     const [profiles, setProfiles] = useState([]);
+    const [filteredProfiles, setFilteredProfiles] = useState([]);
+
 
 
     // Methods -----------------------------------------------
-    const apiCall = async (usersEndpoint) => {
-        const response = await API.get(usersEndpoint);
-        console.log(response); // Log the response
-
-        response.isSuccess
-            ? setUsers(response.result)
-            : setLoadingMessage(response.message) 
-    };
-
-    useEffect(() => { apiCall(usersEndpoint) }, [usersEndpoint]);
-
     const fetchProfile = async (profilesEndpoint) => {
         try {
             const response = await API.get(profilesEndpoint);
@@ -53,29 +44,39 @@ function TrainerDashboard() {
         console.log("endpoint id: ", `/myprofile/${profileID}`);
     };
 
+    const handleSearch = (searchQuery) => {
+        const matchingProfile = profiles.find(profile => profile.ProfileName.toLowerCase() === searchQuery.toLowerCase());
+        console.log("search is: ", searchQuery);
+        if (matchingProfile) {
+            navigate(`/myprofile/${matchingProfile.ProfileID}`)
+        } else {
+            alert("Profile not found")
+        }
+    };
+
     // View --------------------------------------------------
     return (
     <div className="trainer-dashboard">
     <h1>Trainer</h1>
-    {
-      !profiles
-        ? (<p>{loadingMessage}</p>)
-        : profiles.length === 0
-          ? (<p> No clients found</p>)
+    <SearchBar onSearch={handleSearch} />
+        {!profiles
+            ? (<p>{loadingMessage}</p>)
+            : profiles.length === 0
+                ? (<p> No clients found</p>)
 
-          : (<div className="card-container">
-              {profiles.map((profile) => (
-                <Card 
-                key={profile.ProfileID}
-                title={profile.ProfileName}
-                imageURL={profile.ProfileURL}
-                onClick={() => handleProfileClick(profile.ProfileID)}
-                />
-          ))}
-          </div>
-    )}
-  </div>
-);
+                : (<div className="card-container">
+                    {profiles.map((profile) => (
+                    <Card 
+                    key={profile.ProfileID}
+                    title={profile.ProfileName}
+                    imageURL={profile.ProfileURL}
+                    onClick={() => handleProfileClick(profile.ProfileID)}
+                    />
+                    ))}
+                    </div>
+                )}
+        </div>
+    );
 }
 
 export default TrainerDashboard;
