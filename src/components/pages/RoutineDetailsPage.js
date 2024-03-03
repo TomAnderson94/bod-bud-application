@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import API from '../api/API.js';
 import RoutineDetails from "../entities/RoutineDetails.js";
+import Modal from "../UI/Modal.js";
 
 function RoutineDetailsPage() {
     const { routineID, userID, routinesID } = useParams();
@@ -15,6 +16,9 @@ function RoutineDetailsPage() {
     const [routineExercises, setRoutineExercises] = useState([]);
     const [exercises, setExercises] = useState([]);
     const [loadingMessage, setLoadingMessage] = useState('Loading routine details...');
+    const [modalOpen, setModalOpen] = useState(false);
+
+
 
     const fetchRoutine = async () => {
         try {
@@ -74,6 +78,45 @@ function RoutineDetailsPage() {
         fetchExercises();
     }, [exercisesEndpoint]);
 
+    const toggleModal = () => setModalOpen(!modalOpen);
+
+    const handleAddExercise = () => {
+        setModalOpen(true);
+    };
+
+    const handleModalClose = () => {
+        setModalOpen(false);
+    };
+
+    // const handleExerciseSubmit =
+
+
+    const deleteRoutine = async (routineToDelete) => {
+        console.log("unique ID = ", routineToDelete); 
+
+        if (!window.confirm("Are you sure you want to delete this routine?")) return;
+
+        setLoadingMessage('Deleting routine...');
+        try {
+            const response = await API.delete(`/routineExercises/${routineToDelete}/1`);
+            if (response.isSuccess) {
+                setRoutineExercises(routineExercises.filter(routine => 
+                    routine.RoutineID !== routineToDelete
+                ));
+                setLoadingMessage('');
+            } else {
+                setLoadingMessage('Routine could not be deleted: ' + response.message);
+            }
+        } catch (err) {
+            console.error('An error occurred while deleting the routine:', err);
+            setLoadingMessage('An error occurred while deleting the routine.');
+        }
+    };
+
+    // Handlers ------------------------------------------------
+
+    // View --------------------------------------------------
+
     if (!routine) {
         return <div>{loadingMessage}</div>;
     }
@@ -85,7 +128,20 @@ function RoutineDetailsPage() {
             routine={routine}
             routineExercises={routineExercises}
             exercises={exercises}
+            onAddExercise={handleAddExercise}
+            onDelete={deleteRoutine}
             />
+                 {modalOpen && (
+                <Modal onClose={toggleModal}>
+                    <form >
+                        <label>Name:</label>
+                        <label>Goals:</label>
+                        <label>Interests:</label>
+                        <label>Profile URL:</label>
+                        <button type="submit" className="modal-save-button">Save Changes</button>
+                    </form>
+                </Modal>
+                )}
         </div>
     );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import './RoutineDetails.css';
 
-function RoutineDetails({ routine, routineExercises, exercises, handleEdit, onDelete, onClose }) {
+function RoutineDetails({ routine, routineExercises, exercises, addExercise, handleEdit, onDelete, onClose }) {
  
     // Check if routine is null or undefined
     if (!routine) {
@@ -37,7 +37,7 @@ function RoutineDetails({ routine, routineExercises, exercises, handleEdit, onDe
     </div>
 
       <button onClick={onClose} className='routine-details-button'>Back</button>
-      <button onClick={handleEdit} className='routine-details-button'>Add an Exercise</button>
+      <button onClick={addExercise} className='routine-details-button'>Add an Exercise</button>
       <button onClick={() => onDelete(routine)} className='routine-details-delete-button'>Delete Routine</button>
     </div>
   );
