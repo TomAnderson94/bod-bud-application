@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import API from '../api/API.js';
 import RoutineDetails from "../entities/RoutineDetails.js";
 import Modal from "../UI/Modal.js";
+import RoutineExerciseForm from "../entities/RoutineExercisesForm.js";
 
 function RoutineDetailsPage() {
     const { routineID, userID, routinesID } = useParams();
@@ -17,6 +18,16 @@ function RoutineDetailsPage() {
     const [exercises, setExercises] = useState([]);
     const [loadingMessage, setLoadingMessage] = useState('Loading routine details...');
     const [modalOpen, setModalOpen] = useState(false);
+    const [newRoutineExercise, setNewRoutineExercise] = useState({
+        ExerciseID: '',
+        Order: '',
+        CustomWeight: '',
+        CustomReps: '',
+        CustomSets: '',
+        CusomDuration: '',
+        CustomDistance: '',
+        CustomAdditionalInfo: '',
+     });
 
 
 
@@ -81,29 +92,66 @@ function RoutineDetailsPage() {
     const toggleModal = () => setModalOpen(!modalOpen);
 
     const handleAddExercise = () => {
-        setModalOpen(true);
+        toggleModal();
     };
 
     const handleModalClose = () => {
         setModalOpen(false);
     };
 
-    // const handleExerciseSubmit =
+     const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setNewRoutineExercise({ ...newRoutineExercise, [name]: value }); 
+     };
+
+     const handleSubmitExercise = async (newRoutineExercise) => {
+        setLoadingMessage('Adding routine exercise...');
+        try {
+            newRoutineExercise.RoutinesID = routineID;
+            const response = await API.post('/routineExercises', newRoutineExercise);
+            console.log("response = ", response); // Log the response
+            console.log("newRoutineExercise = ", newRoutineExercise); 
+
+            console.log("current routine exercise id = ", newRoutineExercise.RoutineExerciseID); 
+            console.log("current routines id = ", newRoutineExercise.RoutinesID); 
+
+            console.log("order = ", newRoutineExercise.Order); 
+            console.log("selected exercise ID = ", newRoutineExercise.ExerciseID); 
+
+            
+            if (response.isSuccess) {
+                setRoutineExercises([...routineExercises, newRoutineExercise]);
+                setLoadingMessage('');
+                setModalOpen(false);
+                fetchExercises(exercisesEndpoint); // Refresh exercises details
+            } else {
+                setLoadingMessage('Exercise could not be added: ', response.message);
+            }
+        } catch (err) {
+            console.log('An error occurred while adding the routine exercise', err);
+            setLoadingMessage('An error occurred while adding the routine exercise.');
+        }
+     };
 
 
     const deleteRoutine = async (routineToDelete) => {
-        console.log("unique ID = ", routineToDelete); 
+        console.log("body = ", routineToDelete); 
+        console.log("user ID = ", routineToDelete.UserID); 
+        console.log("routine ID = ", routineToDelete.RoutineID); 
 
         if (!window.confirm("Are you sure you want to delete this routine?")) return;
 
         setLoadingMessage('Deleting routine...');
         try {
-            const response = await API.delete(`/routineExercises/${routineToDelete}/1`);
+            const response = await API.delete(`/routines/${routineToDelete.RoutineID}/${routineToDelete.UserID}`);
             if (response.isSuccess) {
                 setRoutineExercises(routineExercises.filter(routine => 
-                    routine.RoutineID !== routineToDelete
+                    routine.RoutineID !== routineToDelete.RoutineID
                 ));
                 setLoadingMessage('');
+                console.log('routine deleted successfully'); 
+
+
             } else {
                 setLoadingMessage('Routine could not be deleted: ' + response.message);
             }
@@ -131,15 +179,13 @@ function RoutineDetailsPage() {
             onAddExercise={handleAddExercise}
             onDelete={deleteRoutine}
             />
-                 {modalOpen && (
+            {modalOpen && (
                 <Modal onClose={toggleModal}>
-                    <form >
-                        <label>Name:</label>
-                        <label>Goals:</label>
-                        <label>Interests:</label>
-                        <label>Profile URL:</label>
-                        <button type="submit" className="modal-save-button">Save Changes</button>
-                    </form>
+                    <RoutineExerciseForm 
+                    className="custom-form-styling"
+                    exercises={exercises}
+                    onSubmit={handleSubmitExercise}
+                    />
                 </Modal>
                 )}
         </div>

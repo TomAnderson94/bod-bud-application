@@ -116,6 +116,7 @@ function ProfilePage() {
             if (response.isSuccess) {
                 setRoutines([...routines, newRoutine]);
                 setLoadingMessage(''); 
+                setModalOpen(false);
             } else {
                 setLoadingMessage('Routine could not be recorded: ' + response.message);
             }
