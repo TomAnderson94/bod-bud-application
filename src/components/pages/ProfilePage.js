@@ -4,8 +4,8 @@ import Modal from "../UI/Modal.js";
 import './ProfilePage.css';
 import RoutineForm from "../entities/RoutineForm.js";
 import RoutineList from "../entities/RoutineList.js";
-import RoutineDetails from "../entities/RoutineDetails.js";
 import { useParams, useNavigate } from "react-router-dom";
+import WeightProgressChart from "../entities/WeightProgressChart.js";
 
 function ProfilePage() {
     // Initialisation ----------------------------------------
@@ -14,6 +14,9 @@ function ProfilePage() {
     const endpoint = `/profiles/${profileID}`;
     const routinesEndpoint = `/routines`;
     const routineExercisesEndpoint = `/routineexercises/1`;
+    const userExercisesEndpoint = '/userexercises';
+    const exercisesEndpoint = '/exercises';
+
 
     const navigate = useNavigate();
 
@@ -26,14 +29,15 @@ function ProfilePage() {
     const [showRoutineForm, setShowRoutineForm] = useState(false);
     const [routineExercises, setRoutineExercises] = useState([]);
     const [routines, setRoutines] = useState([]);
-    const [showDetailsModal, setShowDetailsModal] = useState(false);
     const [selectedRoutine, setSelectedRoutine] = useState(null);
+    const [userExercises, setUserExercises] = useState([]);
+    const [exercises, setExercises] = useState([]);
 
+    // Methods -----------------------------------------------
     const fetchProfile = async (endpoint) => {
         try {
             const response = await API.get(endpoint);
             if (response.isSuccess && response.result.length > 0) {
-                // Assuming the first result is the profile
                 setProfile(response.result[0]);
                 console.log("profiles GET result: ", response.result); // Log the response
                 setLoadingMessage('');
@@ -63,7 +67,6 @@ function ProfilePage() {
         try {
             const response = await API.get(`/routines/1`);
             if (response.isSuccess && response.result.length > 0) {
-                // Assuming the first result is the routine
                 setRoutines(response.result);
                 console.log("routines GET result: ", response.result);
                 setLoadingMessage('');
@@ -72,6 +75,38 @@ function ProfilePage() {
             }
         } catch (error) {
             setLoadingMessage("An error occurred while fetching routines data.")
+        }
+    };
+
+    const fetchUserExercises = async (userExercisesEndpoint) => {
+        try {
+          const response = await API.get(userExercisesEndpoint);
+          if (response.isSuccess) {
+            response.result.forEach((e) => {
+                e.editing = false;
+            })
+            setUserExercises(response.result);
+            console.log("Received exercises:", response.result);
+          } else {
+            setLoadingMessage(response.message);
+          }
+        } catch (err) {
+          setLoadingMessage(err.message || 'An error occurred while fetching exercises');
+        }
+      };
+
+      const fetchExercises = async (exercisesEndpoint) => {
+        try {
+            const response = await API.get(exercisesEndpoint);
+            if (response.isSuccess && response.result.length > 0) {
+                setExercises(response.result);
+                console.log("exercises GET result: ", response.result); // Log the response
+                setLoadingMessage('');
+            } else {
+                setLoadingMessage(response.message || 'Failed to load exercises.');
+            }
+        } catch (error) {
+            setLoadingMessage("An error occurred while fetching exercises data.")
         }
     };
 
@@ -87,10 +122,17 @@ function ProfilePage() {
         fetchRoutines();
     }, [routinesEndpoint]);
 
+    useEffect(() => {
+        fetchUserExercises(userExercisesEndpoint);
+    }, [userExercisesEndpoint]);
+
+    useEffect(() => {
+        fetchExercises(exercisesEndpoint);
+    }, [exercisesEndpoint]);
 
 
-    // Methods -----------------------------------------------
     const toggleModal = () => setModalOpen(!modalOpen);
+
 
     // Handlers ------------------------------------------------
     const handleFormSubmit = async (event) => {
@@ -183,7 +225,6 @@ function ProfilePage() {
                 setLoadingMessage('');
                 console.log('routine deleted successfully'); 
 
-
             } else {
                 setLoadingMessage('Routine could not be deleted: ' + response.message);
             }
@@ -192,6 +233,8 @@ function ProfilePage() {
             setLoadingMessage('An error occurred while deleting the routine.');
         }
     };
+
+    const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeTypeID === 3);
 
     // View --------------------------------------------------
     return (
@@ -248,6 +291,16 @@ function ProfilePage() {
                     onCancel={() => setShowRoutineForm(false)} />
                 </Modal>
             )}
+            {userExercises && (
+                <div>
+                    <h2>Progress Chart</h2>
+                    <WeightProgressChart 
+                    userExercises={userExercises} 
+                    exercises={filteredExercises}/>
+                
+                </div>
+            )}
+           
         </div>
     );
 }

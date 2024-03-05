@@ -10,6 +10,7 @@ function CardioItem({ cardioExercise, exerciseName, exercises, onUpdate, onDelet
 
     const handleEdit = () => {
         setEditedExercise({ ...cardioExercise, editing: true });
+        console.log("editing: ", cardioExercise);
     };
 
     const handleCancel = () => {

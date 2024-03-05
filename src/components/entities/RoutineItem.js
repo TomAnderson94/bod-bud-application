@@ -15,7 +15,8 @@ function RoutineItem({ routine, onItemClick, onUpdate, onDelete, handleRoutineSe
 
     const handleEdit = () => {
         setEditedRoutine({ ...routine, editing: true });
-        console.log("editing: ", routine.RoutineID)
+        console.log("editing: ", routine)
+        console.log("editing ID: ", routine.RoutineID)
 
     };
 

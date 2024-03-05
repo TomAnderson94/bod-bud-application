@@ -11,11 +11,28 @@ function RoutineDetails({ routine, routineExercises, exercises, onAddExercise, o
       setEditedRoutineExercise({ ...routineExercises });
   }, [routineExercises]);
 
-  const handleEdit = (index) => {
+  /*const handleEdit = (index) => {
       const routineExercisesToEdit = routineExercises[index];
       setEditedRoutineExercise({ ...routineExercisesToEdit, editing: true });
       console.log("editing: ", routineExercises.RoutineExerciseID)
-  };
+  };*/
+
+  const handleEdit = () => {
+    setEditedRoutineExercise({ ...routineExercises, editing: true });
+    console.log("editing: ", routineExercises);
+};
+
+/*const handleEdit = (index) => {
+  const updatedRoutineExercises = [...editedRoutineExercise];
+  console.log(updatedRoutineExercises);
+  updatedRoutineExercises[index] = { ...updatedRoutineExercises[index], editing: true };
+  setEditedRoutineExercise(updatedRoutineExercises);
+  console.log("editing: ", routineExercises);
+  console.log("editing: ", updatedRoutineExercises);
+
+
+};*/
+
 
   const handleCancel = () => {
       setEditedRoutineExercise({ ...routineExercises, editing: false });
