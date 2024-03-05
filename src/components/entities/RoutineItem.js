@@ -3,12 +3,9 @@ import { useState, useEffect } from 'react';
 import './RoutineItem.css';
 
 function RoutineItem({ routine, onItemClick, onUpdate, onDelete, handleRoutineSelect }) {
+    
+    
     const [editedRoutine, setEditedRoutine] = useState({...routine});
-    const [showDetailsModal, setShowDetailsModal] = useState(false);
-    const [routineExercises, setRoutineExercises] = useState([]);
-    const [loadingExercises, setLoadingExercises] = useState(false);
-
-
 
 
 
@@ -18,6 +15,8 @@ function RoutineItem({ routine, onItemClick, onUpdate, onDelete, handleRoutineSe
 
     const handleEdit = () => {
         setEditedRoutine({ ...routine, editing: true });
+        console.log("editing: ", routine.RoutineID)
+
     };
 
     const handleCancel = () => {
@@ -37,32 +36,21 @@ function RoutineItem({ routine, onItemClick, onUpdate, onDelete, handleRoutineSe
     };
 
 
-       /* try {
-            setLoadingExercises(true);
-            const response = await API.get(`/routineexercises/${routine.RoutinesID}`);
-            if (response.isSuccess) {
-                setRoutineExercises(response.result);
-                console.log("item click : ", response.result);
-                setShowDetailsModal(true);
-            } else {
-                console.error('Failed to fetch routine exercises:', response.message);
-            }
-        } catch (error) {
-            console.error('An error occurred while fetching routine exercises:', error);
-        } finally {
-            setLoadingExercises(false);
-        }
-    };*/
-
     return (
-        <div>
+        <div className="routine-item">
             {!editedRoutine.editing ? (
-                <div className="routine-item" onClick={() => onItemClick(routine)}>
-                    <h3>- {editedRoutine.RoutineName} -</h3>
-                    <div className="description-wrapper">
-                        <p>{editedRoutine.RoutineDescription}</p>              
+                <>
+                    <div onClick={() => onItemClick(routine)}>
+                        <h3>- {editedRoutine.RoutineName} -</h3>
+                        <div className="description-wrapper">
+                            <p>{editedRoutine.RoutineDescription}</p>              
+                        </div>
                     </div>
-                </div>
+                    <div className="routine-actions">
+                        <button onClick={handleEdit} className="modify-button">Edit Routine</button>
+                        <button onClick={() => onDelete(routine)} className="delete-button">Delete Routine</button>
+                    </div>
+                </>
 
             ) : (
                 <div className="routine-item">
@@ -84,7 +72,6 @@ function RoutineItem({ routine, onItemClick, onUpdate, onDelete, handleRoutineSe
                         />
                     </div>
         
-                    <button onClick={() => setShowDetailsModal(true)} className="modify-button">Show Details</button>
                     <button onClick={handleUpdate} className="modify-button">Update</button>
                     <button onClick={handleCancel} className="delete-button">Cancel</button>
                 </div>

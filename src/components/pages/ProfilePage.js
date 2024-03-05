@@ -116,7 +116,7 @@ function ProfilePage() {
             if (response.isSuccess) {
                 setRoutines([...routines, newRoutine]);
                 setLoadingMessage(''); 
-                setModalOpen(false);
+                setShowRoutineForm(false)
             } else {
                 setLoadingMessage('Routine could not be recorded: ' + response.message);
             }
@@ -166,6 +166,33 @@ function ProfilePage() {
         setSelectedRoutine(routine);
     };
 
+    const deleteRoutine = async (routineToDelete) => {
+        console.log("body = ", routineToDelete); 
+        console.log("user ID = ", routineToDelete.UserID); 
+        console.log("routine ID = ", routineToDelete.RoutineID); 
+
+        if (!window.confirm("Are you sure you want to delete this routine and all of its exercises?")) return;
+
+        setLoadingMessage('Deleting routine...');
+        try {
+            const response = await API.delete(`/routines/${routineToDelete.RoutineID}/${routineToDelete.UserID}`);
+            if (response.isSuccess) {
+                setRoutines(routines.filter(routine => 
+                    routine.RoutineID !== routineToDelete.RoutineID
+                ));
+                setLoadingMessage('');
+                console.log('routine deleted successfully'); 
+
+
+            } else {
+                setLoadingMessage('Routine could not be deleted: ' + response.message);
+            }
+        } catch (err) {
+            console.error('An error occurred while deleting the routine:', err);
+            setLoadingMessage('An error occurred while deleting the routine.');
+        }
+    };
+
     // View --------------------------------------------------
     return (
         <div className="profile-page">
@@ -193,7 +220,8 @@ function ProfilePage() {
                     onItemClick={handleRoutineClick} 
                     onSubmit={addRoutine} 
                     onUpdate={handleRoutineUpdate}
-                    handleRoutineSelect={handleRoutineSelect}                    
+                    handleRoutineSelect={handleRoutineSelect}  
+                    onDelete={deleteRoutine}                  
                     />
                 </div>
             )}

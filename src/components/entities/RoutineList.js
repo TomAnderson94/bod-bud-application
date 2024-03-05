@@ -1,7 +1,7 @@
 import React from 'react';
 import RoutineItem from './RoutineItem';
 
-function RoutineList({ routines, onItemClick, onSubmit, onUpdate }) {
+function RoutineList({ routines, onItemClick, onSubmit, onUpdate, onDelete }) {
 
     if (!Array.isArray(routines) || routines.length === 0) {
         return <div>No routines available</div>;
@@ -15,6 +15,7 @@ function RoutineList({ routines, onItemClick, onSubmit, onUpdate }) {
                     onItemClick={onItemClick}
                     onSubmit={onSubmit}
                     onUpdate={onUpdate}
+                    onDelete={onDelete}
                     />
             ))}
         </div>
