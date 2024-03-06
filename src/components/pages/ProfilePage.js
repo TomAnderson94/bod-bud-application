@@ -242,16 +242,16 @@ function ProfilePage() {
             <h1>My Profile</h1>
             {loadingMessage && <p>{loadingMessage}</p>}
             {profile && (
-                <div className="profile-details">
-                    <p><br /><img src={profile.ProfileURL} alt="Profile" /></p>
-                    <p><strong>Name:</strong> {profile.ProfileName}</p>
-                    <p><strong>Goals:</strong> {profile.ProfileGoals}</p>
-                    <p><strong>Interests:</strong> {profile.ProfileInterests}</p>
-                    <div>
-                        <button onClick={toggleModal} className="edit-button"> Edit Personal Details</button>
-                    </div>
-                    <div>
-                        <button onClick={() => setShowRoutineForm(true)} className="record-button">Create Custom Routine</button>
+                <div className="profile-details-container">
+                    <div className="profile-details">
+                        <p><br /><img src={profile.ProfileURL} alt="Profile" /></p>
+                        <p><strong>Name:</strong> {profile.ProfileName}</p>
+                        <p><strong>Goals:</strong> {profile.ProfileGoals}</p>
+                        <p><strong>Interests:</strong> {profile.ProfileInterests}</p>
+                        <div className="button-container">
+                            <button onClick={toggleModal} className="edit-button"> Edit Personal Details</button>
+                            <button onClick={() => setShowRoutineForm(true)} className="record-button">Create Custom Routine</button>
+                        </div>
                     </div>
                 </div>
             )}

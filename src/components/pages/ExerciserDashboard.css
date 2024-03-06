@@ -1,5 +1,19 @@
 
 .exerciser-dashboard {
-    background-color: #002147; 
-     
+    color: #002147;
+}
+
+.exerciser-dashboard h1{
+    padding:30px;
+    color: #002147;
+    margin-bottom: 10px;
+}
+
+.exerciser-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #002147;
+    padding: 40px; 
 }

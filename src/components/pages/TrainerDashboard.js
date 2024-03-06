@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import API from "../api/API";
 import SearchBar from "../entities/SearchBar";
+import './TrainerDashboard.css';
 
 function TrainerDashboard() {
 
@@ -53,14 +54,14 @@ function TrainerDashboard() {
     // View --------------------------------------------------
     return (
     <div className="trainer-dashboard">
-    <h1>Trainer</h1>
+    <h1>Trainer Dashboard</h1>
     <SearchBar onSearch={handleSearch} />
         {!profiles
             ? (<p>{loadingMessage}</p>)
             : profiles.length === 0
                 ? (<p> No clients found</p>)
 
-                : (<div className="card-container">
+                : (<div className="trainer-card-container">
                     {profiles.map((profile) => (
                     <Card 
                     key={profile.ProfileID}

@@ -1,7 +1,16 @@
+.trainer-dashboard h1{
+  padding:10px;
+  color: #002147;
+  margin-bottom: 0px;
+}
 
-.trainer-dashboard {
-    background-color: #002147; 
-     
+.trainer-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: #002147;
+  padding: 40px; 
 }
 .profile-link {
     text-decoration: none;

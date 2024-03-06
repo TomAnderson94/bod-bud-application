@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Card from "../UI/Card.js";
+import './ExerciserDashboard.css';
 
 import API from '../api/API.js';
 
@@ -52,14 +53,13 @@ function ExerciserDashboard() {
     // View --------------------------------------------------
     return (
       <div className="exerciser-dashboard">
-        <h1>Exerciser</h1>
-        {
-          !exerciseTypes
+        <h1>Exerciser Dashboard</h1>
+        {!exerciseTypes
             ? (<p>{loadingMessage}</p>)
             : exerciseTypes.length === 0
               ? (<p> No Exercise Types found</p>)
 
-              : (<div className="card-container">
+              : (<div className="exerciser-card-container">
                   {exerciseTypes.map((exerciseType) => (
                     <Card 
                       key={exerciseType.ExerciseTypeID}
