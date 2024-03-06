@@ -16,25 +16,7 @@ function StrengthTraining() {
     const [loadingMessage, setLoadingMessage] = useState('Loading exercises...');
     const [showForm, setShowForm] = useState(false);
     const [editingExercise, setEditingExercise] = useState(null); // State for exercise record being edited
-
-    // Fetch available exercises
-    useEffect(() => {
-        const fetchExercises = async () => {
-            try {
-                const response = await API.get(exerciseEndpoint);
-                console.log(response);
-                response.isSuccess
-                ? setExercises(response.result)         
-                : 
-                setLoadingMessage('Failed to load exercises: ' + response.message)
-            } catch (err) {
-                setLoadingMessage('An error occurred while fetching exercises: ' + err.message);
-            }
-            
-        };
-        fetchExercises();
-    }, [exerciseEndpoint]);
-
+    const [selectedExerciseName, setSelectedExerciseName] = useState(null);
 
 
     // Methods -----------------------------------------------
@@ -54,6 +36,23 @@ function StrengthTraining() {
           setLoadingMessage(err.message || 'An error occurred while fetching exercises');
         }
       };
+
+      useEffect(() => {
+        const fetchExercises = async () => {
+            try {
+                const response = await API.get(exerciseEndpoint);
+                console.log(response);
+                response.isSuccess
+                ? setExercises(response.result)         
+                : 
+                setLoadingMessage('Failed to load exercises: ' + response.message)
+            } catch (err) {
+                setLoadingMessage('An error occurred while fetching exercises: ' + err.message);
+            }
+            
+        };
+        fetchExercises();
+    }, [exerciseEndpoint]);
 
 
     // Handlers ------------------------------------------------
@@ -203,7 +202,18 @@ function StrengthTraining() {
 
     // Filter exercises to show only exercise type 3
     const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeTypeID === 3);
+   
+    // Sort exercises by their name
+    const sortByExerciseName = selectedExerciseName 
+    ? userExercises.filter(userExercise => {
+        const exercise = exercises.find(exercise => exercise.ExerciseName === selectedExerciseName);
+        return exercise && userExercise.ExerciseExerciseID === exercise.ExerciseID;
+    }) : userExercises;
+    console.log("name is :", sortByExerciseName);
 
+    const handleSortChange = (e) => {
+        setSelectedExerciseName(e.target.value);
+    }
 
     // View --------------------------------------------------
     return (
@@ -213,8 +223,15 @@ function StrengthTraining() {
             {!showForm && (
                 <button className="record-button" onClick={handleAdd}>Record New Exercise</button>
                 
-            )}
-            
+            )}  
+            <div className='dropdown-container'>
+                <select onChange={handleSortChange} value={selectedExerciseName}>
+                    <option value="">Select All Exercises</option>
+                    {filteredExercises.map(exercise => (
+                        <option key={exercise.ExerciseID} value={exercise.ExerciseName}>{exercise.ExerciseName}</option>
+                    ))}
+                </select>   
+            </div>         
             {showForm && (
                 <ExerciseForm onSubmit={addExercise} exercises={filteredExercises} onCancel={handleCancel}/>
             )}
@@ -224,7 +241,7 @@ function StrengthTraining() {
                 : userExercises.length === 0
                     ? (<p> No Exercises found</p>)
                     : (<ExerciseList 
-                        userExercises={userExercises}
+                        userExercises={sortByExerciseName}
                         exercises={exercises}
                         onUpdate={updateExercise}
                         onDelete={deleteExercise}

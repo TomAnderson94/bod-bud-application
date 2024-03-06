@@ -8,7 +8,7 @@
     .record-button {
       padding: 10px 20px;
       border: none;
-      margin-top: 10px;
+      margin-top: 15px;
       background-color: #002147;
       color: white;
       border: 2px solid white;
@@ -16,9 +16,29 @@
       border-radius: 4px;
       white-space: nowrap; /* Prevents the text inside the button from wrapping */
     }
+    .dropdown-container {
+      display:flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .dropdown-container select {
+      background-color:#002147;
+      padding: 10px 20px;
+      border: 2px solid white;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+      margin-top: 8px;
+    }
 
     .record-button:hover {
       background-color: #024083;
+    }
+
+    .dropdown-container select:hover {
+      background-color: #3a0283;
+
     }
 
 }
