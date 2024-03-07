@@ -8,7 +8,7 @@ import './CardioExercise.css';
 
 function CardioExercise() {
 
-    const endpoint = `/cardioExercises/1`;
+    const endpoint = `/cardioExercises`;
     const exerciseEndpoint = `/exercises`;
 
     const [cardioExercises, setCardioExercises] = useState([]);
@@ -86,6 +86,7 @@ function CardioExercise() {
                 // Add the new exercise to the list of user exercises
                 setCardioExercises([...cardioExercises, addedExercise]);
                 setLoadingMessage(''); 
+                setShowForm(false);
             } else {
                 // If response does not have data, log error and update loading message
                 setLoadingMessage('Exercise could not be recorded: ' + response.message);

@@ -250,13 +250,13 @@ function ProfilePage() {
                         <p><strong>Interests:</strong> {profile.ProfileInterests}</p>
                         <div className="button-container">
                             <button onClick={toggleModal} className="edit-button"> Edit Personal Details</button>
-                            <button onClick={() => setShowRoutineForm(true)} className="record-button">Create Custom Routine</button>
+                            <button onClick={() => setShowRoutineForm(true)} className="routine-record-button">Create Custom Routine</button>
                         </div>
                     </div>
                 </div>
             )}
             {routines && (
-                <div>
+                <div className="routine-details-container">
                     <h2>My Routines</h2>
                     <RoutineList 
                     routines={routines} 

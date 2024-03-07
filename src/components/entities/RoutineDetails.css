@@ -46,6 +46,17 @@
 
 .routine-exercise-item {
     word-wrap: margin 0;
+    padding: 10px;
+    margin-top: 10px; /* Space between each record */
+    border-bottom: 1px solid #ccc; /* Just a bottom border for a cleaner look */
+    max-width: 200px;
+    min-width: 200px;
+    border: 1px solid #ddd;
+    border: 10px;
+    box-shadow: 8px 8px 8px rgba(14, 13, 13, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;    
+    margin-top: 20px;   
 }
 
 .routine-exercise-item p.additional-info {

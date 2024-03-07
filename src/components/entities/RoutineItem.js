@@ -54,7 +54,7 @@ function RoutineItem({ routine, onItemClick, onUpdate, onDelete, handleRoutineSe
                 </>
 
             ) : (
-                <div className="routine-item">
+                <>
                     <div className="form-field">
                         <input
                             type="text"
@@ -75,7 +75,7 @@ function RoutineItem({ routine, onItemClick, onUpdate, onDelete, handleRoutineSe
         
                     <button onClick={handleUpdate} className="modify-button">Update</button>
                     <button onClick={handleCancel} className="delete-button">Cancel</button>
-                </div>
+                </>
             )}
         </div>
     );

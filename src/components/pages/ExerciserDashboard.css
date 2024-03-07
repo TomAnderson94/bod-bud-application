@@ -7,6 +7,12 @@
     padding:30px;
     color: #002147;
     margin-bottom: 10px;
+    border: 0.5px solid #ddd;
+    border-radius: 2px;
+    box-shadow: 0px 4px 0px rgba(3, 19, 112, 0.1);
+    max-height: 70px;   
+    border-width: 0px; 
+    max-width: 360px;
 }
 
 .exerciser-card-container {
@@ -16,4 +22,7 @@
     align-items: flex-start;
     background-color: #002147;
     padding: 40px; 
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    box-shadow: 8px 8px 8px rgba(39, 37, 37, 0.1);
 }

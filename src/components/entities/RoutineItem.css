@@ -1,12 +1,16 @@
 .routine-item {
-    display: flex;
-    /*flex-direction: row; /* stack items vertically */
-    /*align-items: center; /* Aligns items to start of container */
-    flex-wrap: wrap;
     padding: 10px;
     margin-top: 10px; /* Space between each record */
     border-bottom: 1px solid #ccc; /* Just a bottom border for a cleaner look */
-    max-width: 300px;
+    max-width: 420px;
+    min-width: 420px;
+    border: 1px solid #ddd;
+    border: 10px;
+    box-shadow: 8px 8px 8px rgba(255, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;    
+    margin-top: 20px;
+    transition: box-shadow 0.3s ease; /* Adding transition for box-shadow */
   }
 
   .routine-item h3 {
@@ -49,13 +53,17 @@
   .delete-button:hover {
     background-color: #880303;
   }
+
+  .routine-item:hover {
+    box-shadow: 10px 10px 10px rgba(255, 0, 0, 0.288); /* Box-shadow changes on hover */
+
+  }
   
 
     /* Responsive layout for smaller screens */
     @media (max-width: 768px) {
         .routine-item {
-          flex-direction: row;
-          /*align-items: flex-start; /* Aligns items to the start of the flex container */
+            max-width: 100%;
         }
         
       }

@@ -1,5 +1,6 @@
 import React from 'react';
 import RoutineItem from './RoutineItem';
+import './RoutineList.css';
 
 function RoutineList({ routines, onItemClick, onSubmit, onUpdate, onDelete }) {
 

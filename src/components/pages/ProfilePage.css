@@ -16,6 +16,16 @@
     margin-top: 20px;
   }
 
+  .routine-details-container {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    border: 10px;
+    box-shadow: 8px 8px 8px rgba(0, 25, 250, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;    
+    margin-top: 20px;
+  }
+
   .profile-page h2 {
     margin-bottom: 10px;
     color: #002147;
@@ -50,7 +60,7 @@
     margin-top: 20px;
     margin-right: 20px;
   }
-  .record-button {
+  .routine-record-button {
     cursor: pointer;
     padding: 8px 15px;
     background-color: #002147;
@@ -61,7 +71,7 @@
     margin-top: 10px;
     margin-left: 20px;
   }
-  .record-button:hover {
+  .routine-record-button:hover {
     background-color: #024083;
   }
   .edit-button:hover {
@@ -76,5 +86,9 @@
     border: none;
     border-radius: 5px;
     margin-bottom: 20px;
+  }
+
+  .modal-save-button:hover {
+    background-color: #024083;
   }
   

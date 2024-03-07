@@ -20,7 +20,7 @@
         background-color: #002147; /* Dark blue background for the form */
         padding: 20px;
         border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow for 3D effect */
+        box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5); /* Shadow for 3D effect */
         width: 300px; /* Adjust width as needed */
     }
     
