@@ -9,6 +9,15 @@
 
 .stretching-exercise-container h1{
     padding-bottom: 10px;
+    color: white;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 0.5px solid #ddd;
+    border-radius: 2px;
+    box-shadow: 0px 4px 0px rgba(16, 36, 134, 0.1);
+    max-height: 55px;   
+    border-width: 0px; 
+    max-width: 230px;
 }
 
 
@@ -16,24 +25,24 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    justify-content: space-between; /* This will space out the child elements evenly */
-    align-items: center; /* This will align the child elements vertically */
-  }
+    justify-content: space-between; 
+    align-items: center; 
+}
   
-  .form-field {
+.form-field {
     flex: 1; /* Each field will take equal space */
-    min-width: 120px; /* This prevents the fields from becoming too narrow */
-  }
+    min-width: 120px; 
+}
   
-  .form-field input,
-  .form-field label {
+.form-field input,
+.form-field label {
     display: block;
     width: 103%;
     margin-bottom: 5px;
     padding: 10px;
-  }
-  
-  .stretch-submit-button {
+}
+
+.stretch-submit-button {
     padding: 10px 20px;
     border: none;
     width: 100%;
@@ -42,9 +51,10 @@
     border: 2px solid white;
     cursor: pointer;
     border-radius: 4px;
-    white-space: nowrap; /* Prevents the text inside the button from wrapping */
-  }
-  .stretch-cancel-button {
+    white-space: nowrap; 
+}
+
+.stretch-cancel-button {
     padding: 5px 10px;
     margin-top: 5px;
     width: 100%;
@@ -55,42 +65,41 @@
     cursor: pointer;
     border-radius: 4px;
     white-space: nowrap; /* Prevents the text inside the button from wrapping */
-  }
-  
-  .stretch-submit-button:hover {
+}
+
+.stretch-submit-button:hover {
     background-color: #ffffff;
     color: #002147;
-  }
+}
 
-  .stretch-cancel-button:hover {
+.stretch-cancel-button:hover {
     background-color: #ffffff;
     color: #002147;
+}
 
-  }
-  
-  @media (max-width: 768px) { /* Adjust the breakpoint as needed */
+@media (max-width: 768px) { 
     .cardio-form-container {
-      flex-direction: column;
+        flex-direction: column;
     }
-  
+
     .form-field,
-    .submit-button {
-      width: 100%; /* On smaller screens, the fields take the full width */
-      max-width: 100%; /* Ensuring the fields don't exceed the width of their container */
+    .stretch-submit-button {
+        width: 100%; /* On smaller screens, the fields take the full width */
+        max-width: 100%; /* Ensuring the fields don't exceed the width of their container */
     }
-    .cancel-button {
-      width: 100%; /* On smaller screens, the fields take the full width */
-      max-width: 100%; /* Ensuring the fields don't exceed the width of their container */
+    .stretch-cancel-button {
+        width: 100%; 
+        max-width: 100%; 
     }
-  
-    .submit-button {
-      margin-top: 10px; /* Adds space between the last field and the button */
+
+    .stretch-submit-button {
+        margin-top: 10px; 
     }
-    .cancel-button {
-      margin-top: 10px; /* Adds space between the last field and the button */
+    .stretch-cancel-button {
+        margin-top: 10px; 
     }
-  }
-  
+}
+
 
 .stretch-record-button {
     padding: 10px 20px;
@@ -102,12 +111,10 @@
     cursor: pointer;
     border-radius: 4px;
     white-space: nowrap; /* Prevents the text inside the button from wrapping */
-  }
+}
 
 .stretch-record-button:hover {
     background-color: #ffffff;
     color: #002147;
     border: 2px solid #002147;
-
-  }
-
+}
