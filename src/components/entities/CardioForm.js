@@ -73,7 +73,7 @@ function CardioForm({ onSubmit, onCancel, exercises }) {
                 />
             </div>
             <div className="form-field">
-                <button type="submit" className="submit-button">Record Cardio</button>
+                <button type="submit" className="cardio-submit-button">Record Cardio</button>
                 <button className="cancel-button" onClick={onCancel}>Cancel</button>
             </div>
         </form>

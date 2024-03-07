@@ -21,7 +21,7 @@
     padding: 10px;
   }
   
-  .submit-button {
+  .cardio-submit-button {
     padding: 10px 20px;
     border: none;
     width: 100%;
@@ -45,7 +45,7 @@
     white-space: nowrap; /* Prevents the text inside the button from wrapping */
   }
   
-  .submit-button:hover {
+  .cardio-submit-button:hover {
     background-color: #024083;
   }
 

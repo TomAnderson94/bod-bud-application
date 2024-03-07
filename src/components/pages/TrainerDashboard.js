@@ -11,6 +11,7 @@ function TrainerDashboard() {
     const profilesEndpoint = '/profiles';
     const navigate = useNavigate();
 
+    // State -------------------------------------------------
     const [loadingMessage, setLoadingMessage] = useState('Loading records...');
     const [profiles, setProfiles] = useState([]);
 

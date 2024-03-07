@@ -3,16 +3,40 @@ import { useState, useEffect } from 'react';
 import StretchingForm from '../entities/StretchingForm';
 import API from '../api/API';
 import './StretchingExercises.css';
+import GenericForm from '../UI/GenericForm';
 
 function StretchingExercises() {
     
     const endpoint = `/stretchingExercises/1`;
 
+    // State -------------------------------------------------
     const [stretchingExercises, setStretchingExercises] = useState([]);
     const [loadingMessage, setLoadingMessage] = useState('Loading exercises...');
     const [showForm, setShowForm] = useState(false);
     const [editingExercise, setEditingExercise] = useState(null);
 
+    // Constructing Stretch Data for the generic form
+    const constructStretchingData = (formData) => {
+        return {
+            UserID: 1,
+            StretchingBodyPart: formData.StretchingBodyPart,
+            Duration: parseInt(formData.Duration),
+            Sets: parseInt(formData.Sets),
+            AdditionalInfo: formData.AdditionalInfo || '',
+            Date: formData.Date            
+        };
+    };
+    
+    // Stretching form fields for the generic form
+    const formFields = [
+        { name: 'StretchingBodyPart', type: 'text', placeholder: 'Body Part', required: true },
+        { name: 'Duration', type: 'number', placeholder: 'Duration(seconds)', required: true },
+        { name: 'Sets', type: 'number', placeholder: 'Sets', required: true },
+        { name: 'AdditionalInfo', type: 'text', placeholder: 'Additional Info', required: false },
+        { name: 'Date', type: 'date', placeholder: 'Date', required: true },
+    ];    
+    
+    
     const apiCall = async (endpoint) => {
         try {
             const response = await API.get(endpoint);
@@ -134,10 +158,19 @@ function StretchingExercises() {
             <p>We're flexible... are you?</p>
 
             {!showForm && (
-                <button className="rehab-record-button" onClick={handleAdd}>Record New Exercise</button>
+                <button className="stretch-record-button" onClick={handleAdd}>Record New Exercise</button>
             )}
             {showForm && (
-                <StretchingForm onSubmit={addExercise} onCancel={handleCancel} />
+                <GenericForm 
+                formFields={formFields} 
+                onSubmit={addExercise} 
+                onCancel={handleCancel}
+                formClassName={"stretch-form-container"}
+                fieldClassName={"form-field"}
+                submitButtonClassName={"stretch-submit-button"}
+                cancelButtonClassName={"stretch-cancel-button"}
+                constructData={constructStretchingData}
+                />
             )}
             {!stretchingExercises ? (
                 <p>{loadingMessage}</p>
