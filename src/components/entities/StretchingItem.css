@@ -1,21 +1,21 @@
 .stretch-item {
     display: flex;
-    justify-content: space-between; /* Distributes space evenly between items */
-    align-items: center; /* Aligns items vertically */
+    justify-content: space-between; 
+    align-items: center; 
     padding: 8px;
-    margin-top: 10px; /* Space between each record */
+    margin-top: 10px; 
     border-bottom: 1px solid #002147; /* Just a bottom border for a cleaner look */
   }
 
   .stretch-attribute {
-    margin: 0px 5px; /* Add space between each attribute */
+    margin: 0px 5px;
     white-space: nowrap; /* Keeps content on a single line */
     text-align: left;
     flex: 1;    
   }
 
   .stretch-attribute-additional-info {
-    margin: 0px 5px; /* Add space between each attribute */
+    margin: 0px 5px; 
     flex-wrap: wrap;
     text-align: left;
     flex: 1;   
@@ -68,6 +68,6 @@
     @media (max-width: 768px) {
         .stretch-item {
           flex-direction: column;
-          align-items: flex-start; /* Aligns items to the start of the flex container */
+          align-items: flex-start; 
         }
       }

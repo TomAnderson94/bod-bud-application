@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import './StretchingForm.css';
 
 function StretchingForm({ onSubmit, onCancel }) {
+
+    // State -------------------------------------------------
     const [stretchingBodyPart, setstretchingBodyPart] = useState("");
     const [duration, setDuration] = useState("");
     const [sets, setSets] = useState("");
     const [additionalInfo, setAdditionalInfo] = useState("");
     const [date, setDate] = useState("");
 
+
+    // Handlers ----------------------------------------------
     const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit({
@@ -20,6 +24,7 @@ function StretchingForm({ onSubmit, onCancel }) {
         });
     };
 
+    // View --------------------------------------------------
     return (
         <form onSubmit={handleSubmit} className="stretch-form-container">
             <div className='form-field'>

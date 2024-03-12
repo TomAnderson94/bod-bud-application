@@ -3,9 +3,11 @@ import CardioItem from './CardioItem';
 
 function CardioList({ cardioExercises, exercises, onUpdate, onDelete, onExerciseNameChange, onCancelEdit }) {
    
+    // Handlers -------------------------------------------------
     // Filter exercise names to include only the relevant names for the page
     const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeTypeID === 1);
    
+    // View -----------------------------------------------------
     return (
         <div className='cardio-list-container'>
             {Array.isArray(cardioExercises) && cardioExercises.map((cardioExercise) => {

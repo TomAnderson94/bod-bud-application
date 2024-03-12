@@ -3,10 +3,12 @@ import ExerciseItem from "./ExerciseItem";
 
 function ExerciseList({ userExercises, exercises, onUpdate, onDelete, onExerciseNameChange, onWeightChange, onRepsChange, onSetsChange, onCancelEdit }) {
   
+    // Handlers ----------------------------------------------
     // Filter exercise names to include only the relevant names for the page
     const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeTypeID === 3);
   
-  
+
+    // View --------------------------------------------------
     return (
       <div className='records-container'>
         {Array.isArray(userExercises) && userExercises.map((userExercise) => {

@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import './CardioForm.css';
 
 function CardioForm({ onSubmit, onCancel, exercises }) {
+
+    // State -------------------------------------------------
     const [exerciseExerciseID, setExerciseExerciseID] = useState("");
     const [duration, setDuration] = useState("");
     const [distance, setDistance] = useState("");
     const [additionalInfo, setAdditionalInfo] = useState("");
     const [date, setDate] = useState("");
 
+
+    // Handlers ----------------------------------------------
     const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit({
@@ -20,6 +24,7 @@ function CardioForm({ onSubmit, onCancel, exercises }) {
         });
     };
 
+    // View --------------------------------------------------
     return (
         <form onSubmit={handleSubmit} className="cardio-form-container">
             <div className='form-field'>

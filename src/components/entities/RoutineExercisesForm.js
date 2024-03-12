@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 function RoutineExerciseForm({ exercises, onSubmit }) {
+
+    // State -------------------------------------------------
     const [routinesID, setRoutinesID] = useState('');
     const [exerciseID, setExerciseID] = useState('');
     const [order, setOrder] = useState('');
@@ -11,6 +13,8 @@ function RoutineExerciseForm({ exercises, onSubmit }) {
     const [customDistance, setCustomDistance] = useState('');
     const [customAdditionalInfo, setCustomAdditionalInfo] = useState('');
 
+
+    // Handlers ----------------------------------------------
     const handleFormSubmit = (e) => {
         e.preventDefault();
 
@@ -38,6 +42,7 @@ function RoutineExerciseForm({ exercises, onSubmit }) {
         setCustomAdditionalInfo('');
     };
 
+    // View --------------------------------------------------
     return (
         <div className="routine-exercise-form">
             <h3>Add Exercise to Routine</h3>

@@ -2,6 +2,8 @@ import React from 'react';
 import StretchingItem from './StretchingItem.js';
 
 function StretchingList({ stretchingExercises, onUpdate, onDelete, onExerciseNameChange, onCancelEdit }) {
+
+    // View --------------------------------------------------
     return (
         <div className='stretch-list-container'>
             {Array.isArray(stretchingExercises) && stretchingExercises.map((stretchingExercise) => {

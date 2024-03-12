@@ -2,8 +2,15 @@ import React, { useState, useEffect } from 'react';
 import Chart from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
 
+
 function WeightProgressChart({ userExercises, exercises }) {
+
+  // State -------------------------------------------------
+
   const [chart, setChart] = useState(null);
+
+
+  // Methods -----------------------------------------------
 
   useEffect(() => {
     if (userExercises.length > 0) {

@@ -11,7 +11,7 @@
 }
 
 .routine-form-container .form-field {
-  flex: 0 0 calc(33.33% - 10px); /* Each input takes up 33.33% of the container width with margin */
+  flex: 0 0 calc(33.33% - 10px); /* Each input takes up 33.33% (a third) of the container width with margin */
   margin-right: 10px; /* Add spacing between inputs */
   margin-bottom: 10px; /* Add spacing between rows */
 }
@@ -39,6 +39,3 @@
 .routine-form-container button:hover {
   background-color: #0056b3;
 }
-
-
-

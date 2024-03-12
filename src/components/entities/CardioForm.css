@@ -3,13 +3,13 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    justify-content: space-between; /* This will space out the child elements evenly */
-    align-items: center; /* This will align the child elements vertically */
+    justify-content: space-between;
+    align-items: center; 
   }
   
   .form-field {
-    flex: 1; /* Each field will take equal space */
-    min-width: 120px; /* This prevents the fields from becoming too narrow */
+    flex: 1; 
+    min-width: 120px;
   }
   
   .form-field select,
@@ -30,7 +30,7 @@
     border: 2px solid white;
     cursor: pointer;
     border-radius: 4px;
-    white-space: nowrap; /* Prevents the text inside the button from wrapping */
+    white-space: nowrap; 
   }
   .cancel-button {
     padding: 5px 10px;
@@ -42,7 +42,7 @@
     border: 2px solid white;
     cursor: pointer;
     border-radius: 4px;
-    white-space: nowrap; /* Prevents the text inside the button from wrapping */
+    white-space: nowrap;
   }
   
   .cardio-submit-button:hover {
@@ -53,26 +53,26 @@
     background-color: #024083;
   }
   
-  @media (max-width: 768px) { /* Adjust the breakpoint as needed */
+  @media (max-width: 768px) { 
     .cardio-form-container {
       flex-direction: column;
     }
   
     .form-field,
     .submit-button {
-      width: 100%; /* On smaller screens, the fields take the full width */
-      max-width: 100%; /* Ensuring the fields don't exceed the width of their container */
+      width: 100%; 
+      max-width: 100%; 
     }
     .cancel-button {
-      width: 100%; /* On smaller screens, the fields take the full width */
-      max-width: 100%; /* Ensuring the fields don't exceed the width of their container */
+      width: 100%; 
+      max-width: 100%; 
     }
   
     .submit-button {
-      margin-top: 10px; /* Adds space between the last field and the button */
+      margin-top: 10px; 
     }
     .cancel-button {
-      margin-top: 10px; /* Adds space between the last field and the button */
+      margin-top: 10px; 
     }
   }
   

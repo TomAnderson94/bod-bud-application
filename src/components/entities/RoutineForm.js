@@ -3,6 +3,8 @@ import './RoutineForm.css';
 import RoutineExerciseForm from './RoutineExercisesForm';
 
 function RoutineForm({ onSubmit, onCancel, exercises }) {
+
+    // State -------------------------------------------------
     const [routineName, setRoutineName] = useState("");
     const [routineDescription, setRoutineDescription] = useState("");
     
@@ -32,7 +34,7 @@ function RoutineForm({ onSubmit, onCancel, exercises }) {
     };
 */
 
-
+    // Handlers ----------------------------------------------
     const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit({
@@ -63,6 +65,8 @@ function RoutineForm({ onSubmit, onCancel, exercises }) {
         setRoutineExercises(updatedExercises);
     }; */
 
+
+    // View --------------------------------------------------
     return (
         <form onSubmit={handleSubmit} className="routine-form-container">
             <div className='form-field'>

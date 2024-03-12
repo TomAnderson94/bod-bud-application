@@ -4,15 +4,15 @@ import './RoutineItem.css';
 
 function RoutineItem({ routine, onItemClick, onUpdate, onDelete, handleRoutineSelect }) {
     
-    
+    // State -------------------------------------------------
     const [editedRoutine, setEditedRoutine] = useState({...routine});
 
-
-
+    // Methods -----------------------------------------------
     useEffect(() => {
         setEditedRoutine({ ...routine });
     }, [routine]);
 
+  // Handlers ------------------------------------------------
     const handleEdit = () => {
         setEditedRoutine({ ...routine, editing: true });
         console.log("editing: ", routine)
@@ -36,7 +36,7 @@ function RoutineItem({ routine, onItemClick, onUpdate, onDelete, handleRoutineSe
         setEditedRoutine({ ...editedRoutine, RoutineDescription: e.target.value });
     };
 
-
+    // View --------------------------------------------------
     return (
         <div className="routine-item">
             {!editedRoutine.editing ? (

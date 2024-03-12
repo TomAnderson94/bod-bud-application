@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react';
 import './StretchingItem.css';
 
 function StretchingItem({ stretchingExercise, onUpdate, onDelete, formattedDate }) {
+
+    // State -------------------------------------------------
     const [editedExercise, setEditedExercise] = useState({ ...stretchingExercise });
 
+    // Methods -----------------------------------------------
     useEffect(() => {
         setEditedExercise({ ...stretchingExercise });
     }, [stretchingExercise]);
 
+
+    // Handlers ----------------------------------------------
     const handleEdit = () => {
         setEditedExercise({ ...stretchingExercise, editing: true });
     };
@@ -36,6 +41,7 @@ function StretchingItem({ stretchingExercise, onUpdate, onDelete, formattedDate 
         setEditedExercise({ ...editedExercise, AdditionalInfo: e.target.value });
     }; 
 
+    // View --------------------------------------------------
     return (
         <div>
             {!editedExercise.editing ? (

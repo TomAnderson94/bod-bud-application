@@ -1,8 +1,11 @@
 import API_URL from './apiURL.js';
 
 
-
+// Initialisation ----------------------------------------
 export const API = {};
+
+// Methods -----------------------------------------------
+
 API.get = (endpoint) => callFetch(endpoint, 'GET', null);
 API.post = (endpoint, data) => callFetch(endpoint, 'POST', data);
 API.put = (endpoint, data) => callFetch(endpoint, 'PUT', data);

@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react';
 import './CardioItem.css';
 
 function CardioItem({ cardioExercise, exerciseName, exercises, onUpdate, onDelete, formattedDate }) {
+
+    // State -------------------------------------------------
     const [editedExercise, setEditedExercise] = useState({ ...cardioExercise });
 
+    // Methods -----------------------------------------------
     useEffect(() => {
         setEditedExercise({ ...cardioExercise });
     }, [cardioExercise]);
 
+    // Handlers ----------------------------------------------
     const handleEdit = () => {
         setEditedExercise({ ...cardioExercise, editing: true });
         console.log("editing: ", cardioExercise);
@@ -33,6 +37,7 @@ function CardioItem({ cardioExercise, exerciseName, exercises, onUpdate, onDelet
         setEditedExercise({ ...editedExercise, AdditionalInfo: e.target.value });
     }; 
 
+    // View --------------------------------------------------
     return (
         <div>
             {!editedExercise.editing ? (

@@ -1,7 +1,7 @@
 .routine-item {
     padding: 10px;
-    margin-top: 10px; /* Space between each record */
-    border-bottom: 1px solid #ccc; /* Just a bottom border for a cleaner look */
+    margin-top: 10px; 
+    border-bottom: 1px solid #ccc; 
     max-width: 420px;
     min-width: 420px;
     border: 1px solid #ddd;
@@ -32,7 +32,7 @@
     border: 2px solid white;
     cursor: pointer;
     border-radius: 4px;
-    white-space: nowrap; /* Prevents the text inside the button from wrapping */
+    white-space: nowrap; 
   }
   .delete-button {
     padding: 5px 10px;
@@ -43,7 +43,7 @@
     border: 2px solid white;
     cursor: pointer;
     border-radius: 4px;
-    white-space: nowrap; /* Prevents the text inside the button from wrapping */
+    white-space: nowrap; 
   }
 
   .modify-button:hover {
@@ -56,14 +56,11 @@
 
   .routine-item:hover {
     box-shadow: 10px 10px 10px rgba(255, 0, 0, 0.288); /* Box-shadow changes on hover */
-
   }
   
-
     /* Responsive layout for smaller screens */
     @media (max-width: 768px) {
         .routine-item {
             max-width: 100%;
         }
-        
-      }
+    }

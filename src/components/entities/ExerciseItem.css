@@ -1,15 +1,15 @@
 .record-item {
     display: flex;
-    justify-content: space-between; /* Distributes space evenly between items */
-    align-items: center; /* Aligns items vertically */
+    justify-content: space-between; 
+    align-items: center; 
     padding: 10px;
-    margin-top: 10px; /* Space between each record */
-    border-bottom: 1px solid #ccc; /* Just a bottom border for a cleaner look */
+    margin-top: 10px; 
+    border-bottom: 1px solid #ccc; 
   }
 
   .record-attribute {
-    margin: 0 5px; /* Add space between each attribute */
-    white-space: nowrap; /* Keeps content on a single line */
+    margin: 0 5px; 
+    white-space: nowrap;
     width: 100px;
   }
 
@@ -31,7 +31,7 @@
     border: 2px solid white;
     cursor: pointer;
     border-radius: 4px;
-    white-space: nowrap; /* Prevents the text inside the button from wrapping */
+    white-space: nowrap; 
   }
   .delete-button {
     padding: 5px 10px;
@@ -42,7 +42,7 @@
     border: 2px solid white;
     cursor: pointer;
     border-radius: 4px;
-    white-space: nowrap; /* Prevents the text inside the button from wrapping */
+    white-space: nowrap; 
   }
 
   .modify-button:hover {
@@ -58,7 +58,8 @@
     @media (max-width: 768px) {
         .record-item {
           flex-direction: column;
-          align-items: flex-start; /* Aligns items to the start of the flex container */
+          align-items: flex-start; 
         }
         
       }
+      

@@ -10,6 +10,7 @@ function Login() {
     const [password, setPassword] = useState(''); 
     const navigate = useNavigate();
 
+    // Handlers ----------------------------------------------
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -25,6 +26,7 @@ function Login() {
         }
     };
 
+    // View --------------------------------------------------
    return (
     <div className ="login-container">
         <h1>Login</h1>

@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import './SearchBar.css';
 
 function SearchBar({ onSearch }) {
+  
+  // State -------------------------------------------------
   const [searchQuery, setSearchQuery] = useState("");
 
+  // Handlers ----------------------------------------------
   const handleSearch = () => {
     onSearch(searchQuery);
   };
 
+  // View --------------------------------------------------
   return (
     <div className="search-bar-container">
       <input

@@ -47,8 +47,8 @@
 .routine-exercise-item {
     word-wrap: margin 0;
     padding: 10px;
-    margin-top: 10px; /* Space between each record */
-    border-bottom: 1px solid #ccc; /* Just a bottom border for a cleaner look */
+    margin-top: 10px; 
+    border-bottom: 1px solid #ccc; 
     max-width: 200px;
     min-width: 200px;
     border: 1px solid #ddd;
@@ -98,4 +98,3 @@
 .routine-details-delete-button:hover {
     background-color: rgb(204, 3, 3);
 }
-

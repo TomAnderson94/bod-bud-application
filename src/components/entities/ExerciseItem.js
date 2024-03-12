@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import './ExerciseItem.css';
-//import ExerciseForm from "./ExerciseForm";
-
 
 function ExerciseItem({ userExercise, exerciseName, exercises, formattedDate, onUpdate, onDelete }) {
+
+    // State -------------------------------------------------
     const [editedExercise, setEditedExercise] = useState({ ...userExercise });
 
+    // Methods -----------------------------------------------
     useEffect(() => {
         setEditedExercise({ ...userExercise });
     }, [userExercise]);
 
+
+    // Handlers ----------------------------------------------
     const handleWeightChange = (e) => {
         setEditedExercise({ ...editedExercise, Weight: parseFloat(e.target.value) });
     };
@@ -35,6 +38,7 @@ function ExerciseItem({ userExercise, exerciseName, exercises, formattedDate, on
         onUpdate({...editedExercise, editing: false });
     };
 
+    // View --------------------------------------------------
     return (
         <div>
             {!editedExercise.editing ? (

@@ -4,6 +4,7 @@ import './RoutineList.css';
 
 function RoutineList({ routines, onItemClick, onSubmit, onUpdate, onDelete }) {
 
+  // View --------------------------------------------------
     if (!Array.isArray(routines) || routines.length === 0) {
         return <div>No routines available</div>;
     }

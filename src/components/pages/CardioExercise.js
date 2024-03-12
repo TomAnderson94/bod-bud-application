@@ -57,7 +57,7 @@ function CardioExercise() {
         apiCall(endpoint);
     }, [endpoint]);
 
-    // Handlers ------------------------------------------------
+    // Handlers ----------------------------------------------
     const handleAdd = () => setShowForm(true);
     const handleCancel = () => setShowForm(false);
     
