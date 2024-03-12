@@ -5,6 +5,7 @@ import API from '../api/API';
 import './StrengthTraining.css';
 
 function StrengthTraining() {
+
     // Initialisation ----------------------------------------
     const endpoint = `/userExercises`;
     const exerciseEndpoint = `/exercises`;
@@ -35,7 +36,11 @@ function StrengthTraining() {
         } catch (err) {
           setLoadingMessage(err.message || 'An error occurred while fetching exercises');
         }
-      };
+    };
+
+    useEffect(() => { 
+        apiCall(endpoint) 
+    }, [endpoint]);
 
       useEffect(() => {
         const fetchExercises = async () => {
@@ -55,11 +60,10 @@ function StrengthTraining() {
     }, [exerciseEndpoint]);
 
 
-    // Handlers ------------------------------------------------
+    // Handlers ----------------------------------------------
     const handleAdd = () => setShowForm(true);
     const handleCancel = () => setShowForm(false);
     
-
 
     const addExercise = async (newExercise) => {
         setLoadingMessage('Adding exercise...');
@@ -126,12 +130,6 @@ function StrengthTraining() {
         }
     };
 
-    const handleUpdate = (updatedExercise) => {
-        setUserExercises(userExercises.map(exercise =>
-            exercise.UserExerciseID === updatedExercise.UserExerciseID ? updatedExercise : exercise
-        ));
-    };
-
 
     const deleteExercise = async (exerciseToDelete) => {
         console.log('delete check: ', exerciseToDelete);
@@ -166,29 +164,12 @@ function StrengthTraining() {
         setUserExercises(newUserExercises);
     }
 
-    // Methods for handling edit changes
-
+    // Method for handling edit changes
     const handleExerciseChange = (updatedExercise) => {
         setUserExercises(userExercises.map(exercise =>
             exercise.UserExerciseID === updatedExercise.UserExerciseID ? updatedExercise : exercise
             ));
     };
-/*
-    const handleWeightChange = (e) => {
-        const updatedExercise = { ...userExercises, Weight: e.target.value };
-        onWeightChange(updatedExercise);
-    };  
-    
-    const handleRepsChange = (e) => {
-        const updatedExercise = { ...userExercises, Reps: parseInt(e.target.value) };
-        onRepsChange(updatedExercise);
-    };
-
-    const handleSetsChange = (e) => {
-        const updatedExercise = { ...userExercises, Sets: parseInt(e.target.value) };
-        onSetsChange(updatedExercise);
-    };   
-   */
 
     const cancelEdit = () => {
         setEditingExercise(null);
@@ -196,9 +177,6 @@ function StrengthTraining() {
             return { ...ex, editing: false };
         }));
     };
-
-    useEffect(() => { apiCall(endpoint) }, [endpoint]);
-
 
     // Filter exercises to show only exercise type 3
     const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeTypeID === 3);

@@ -7,7 +7,7 @@ function Rehabilitation() {
         <h1>Rehabilitation</h1>
         <p>Help Yourself</p>
         </div>
-        )
+        );
 }
 
 export default Rehabilitation;

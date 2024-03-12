@@ -1,8 +1,6 @@
 .stretching-exercise-container {
     background-color: #7ed2ec; 
-
-    /*colors: baby blue: #90cce7; sky blue: #86deee;*/ 
-    color: #ffffff;
+    color: #ffffff; /*other colours: baby blue: #90cce7; sky blue: #86deee;*/
     min-height: 100vh; 
     padding: 20px; 
 }
@@ -19,7 +17,6 @@
     border-width: 0px; 
     max-width: 230px;
 }
-
 
 .stretch-form-container {
     display: flex;

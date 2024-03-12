@@ -1,4 +1,3 @@
-// GenericForm.js
 import React, { useState } from 'react';
 
 function GenericForm({ formFields, onSubmit, onCancel, formClassName, fieldClassName, submitButtonClassName, cancelButtonClassName, constructData  }) {

@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Card from "../UI/Card.js";
 import './ExerciserDashboard.css';
-
 import API from '../api/API.js';
 
 function ExerciserDashboard() {
@@ -14,7 +13,19 @@ function ExerciserDashboard() {
     const [loadingMessage, setLoadingMessage] = useState('Loading records...');
     const navigate = useNavigate();
 
+    // Methods -----------------------------------------------
+    const apiCall = async (endpoint) => {
+        const response = await API.get(endpoint);
+        console.log(response); // Log the response
 
+        response.isSuccess
+          ? setExerciseTypes(response.result)
+          : setLoadingMessage(response.message) 
+    };
+
+    useEffect(() => { 
+      apiCall(endpoint) 
+    }, [endpoint]);
 
     // Handlers ----------------------------------------------
     const handleExerciseTypeClick = (exerciseType) => {
@@ -36,19 +47,6 @@ function ExerciserDashboard() {
           navigate('/404');
       }
     };
-
-    // Methods -----------------------------------------------
-    const apiCall = async (endpoint) => {
-        const response = await API.get(endpoint);
-        console.log(response); // Log the response
-
-        response.isSuccess
-          ? setExerciseTypes(response.result)
-          : setLoadingMessage(response.message) 
-    };
-
-    useEffect(() => { apiCall(endpoint) }, [endpoint]);
-
 
     // View --------------------------------------------------
     return (

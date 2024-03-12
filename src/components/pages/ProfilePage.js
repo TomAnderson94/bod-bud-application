@@ -8,8 +8,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import WeightProgressChart from "../entities/WeightProgressChart.js";
 
 function ProfilePage() {
+
     // Initialisation ----------------------------------------
-   // const userID = 1; // Hardcoded for demonstration purposes
     const { profileID } = useParams();
     const endpoint = `/profiles/${profileID}`;
     const routinesEndpoint = `/routines`;
@@ -17,10 +17,7 @@ function ProfilePage() {
     const userExercisesEndpoint = '/userexercises';
     const exercisesEndpoint = '/exercises';
 
-
     const navigate = useNavigate();
-
-
 
     // State -------------------------------------------------
     const [profile, setProfile] = useState(null);
@@ -39,7 +36,7 @@ function ProfilePage() {
             const response = await API.get(endpoint);
             if (response.isSuccess && response.result.length > 0) {
                 setProfile(response.result[0]);
-                console.log("profiles GET result: ", response.result); // Log the response
+                console.log("profiles GET result: ", response.result); // console log the response
                 setLoadingMessage('');
             } else {
                 setLoadingMessage(response.message || 'Failed to load profile.');
@@ -100,7 +97,7 @@ function ProfilePage() {
             const response = await API.get(exercisesEndpoint);
             if (response.isSuccess && response.result.length > 0) {
                 setExercises(response.result);
-                console.log("exercises GET result: ", response.result); // Log the response
+                console.log("exercises GET result: ", response.result); // console log the response
                 setLoadingMessage('');
             } else {
                 setLoadingMessage(response.message || 'Failed to load exercises.');
@@ -134,7 +131,7 @@ function ProfilePage() {
     const toggleModal = () => setModalOpen(!modalOpen);
 
 
-    // Handlers ------------------------------------------------
+    // Handlers ----------------------------------------------
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         const response = await API.put(endpoint, profile);
@@ -150,7 +147,7 @@ function ProfilePage() {
         setLoadingMessage('Adding routine...');
         try {
             const response = await API.post(routinesEndpoint, newRoutine);
-            console.log("response = ", response); // Log the response
+            console.log("response = ", response); // console log the response
             console.log("newRoutine = ", newRoutine); 
             console.log("current routine list = ", routines); 
             console.log("selected routine ID = ", newRoutine.ExerciseExerciseID); 

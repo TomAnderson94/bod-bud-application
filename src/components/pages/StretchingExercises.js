@@ -7,13 +7,8 @@ import GenericForm from '../UI/GenericForm';
 
 function StretchingExercises() {
     
+    // Initialisation ----------------------------------------
     const endpoint = `/stretchingExercises/1`;
-
-    // State -------------------------------------------------
-    const [stretchingExercises, setStretchingExercises] = useState([]);
-    const [loadingMessage, setLoadingMessage] = useState('Loading exercises...');
-    const [showForm, setShowForm] = useState(false);
-    const [editingExercise, setEditingExercise] = useState(null);
 
     // Constructing Stretch Data for the generic form
     const constructStretchingData = (formData) => {
@@ -35,8 +30,15 @@ function StretchingExercises() {
         { name: 'AdditionalInfo', type: 'text', placeholder: 'Additional Info', required: false },
         { name: 'Date', type: 'date', placeholder: 'Date', required: true },
     ];    
+
+    // State -------------------------------------------------
+    const [stretchingExercises, setStretchingExercises] = useState([]);
+    const [loadingMessage, setLoadingMessage] = useState('Loading exercises...');
+    const [showForm, setShowForm] = useState(false);
+    const [editingExercise, setEditingExercise] = useState(null);
+
     
-    
+    // Methods -----------------------------------------------
     const apiCall = async (endpoint) => {
         try {
             const response = await API.get(endpoint);
@@ -55,7 +57,11 @@ function StretchingExercises() {
         }
     };
 
-    // Handlers ------------------------------------------------
+    useEffect(() => {
+        apiCall(endpoint);
+    }, [endpoint]);    
+
+    // Handlers ----------------------------------------------
     const handleAdd = () => setShowForm(true);
     const handleCancel = () => setShowForm(false);
     
@@ -148,10 +154,7 @@ function StretchingExercises() {
 
     };
 
-    useEffect(() => {
-        apiCall(endpoint);
-    }, [endpoint]);
-
+    // View --------------------------------------------------
     return (
         <div className="stretching-exercise-container">
             <h1>StretchZone</h1>

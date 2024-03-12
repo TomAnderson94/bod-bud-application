@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Header() {
 
+    // View --------------------------------------------------
     return (
         <header>
             <Link to="/">
@@ -16,7 +17,7 @@ function Header() {
             </div>
         </header>
 
-    )
+    );
 }
 
 export default Header;

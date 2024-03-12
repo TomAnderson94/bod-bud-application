@@ -6,13 +6,15 @@ import Modal from "../UI/Modal.js";
 import RoutineExerciseForm from "../entities/RoutineExercisesForm.js";
 
 function RoutineDetailsPage() {
+
+    // Initialisation ----------------------------------------
     const { routineID, userID, routinesID } = useParams();
     console.log("routineID: ",routineID, "+ userID: ", userID, "+ routinesID: ", routinesID)
     const routineEndpoint = `/routines/${routineID}/${userID}`;
     const routineExercisesEndpoint = `/routineexercises/${routineID}`;
     const exercisesEndpoint ='/exercises';
 
-
+    // State -------------------------------------------------
     const [routine, setRoutine] = useState(null);
     const [routineExercises, setRoutineExercises] = useState([]);
     const [exercises, setExercises] = useState([]);
@@ -29,14 +31,13 @@ function RoutineDetailsPage() {
         CustomAdditionalInfo: '',
      });
 
-     const navigate = useNavigate();
+    const navigate = useNavigate();
 
-
+    // Methods -----------------------------------------------
     const fetchRoutine = async () => {
         try {
             const response = await API.get(routineEndpoint);
             if (response.isSuccess && response.result.length > 0) {
-                // Assuming the first result is the routine
                 setRoutine(response.result[0]);
                 console.log("routine id GET result: ", response.result);
                 setLoadingMessage('');
@@ -52,7 +53,6 @@ function RoutineDetailsPage() {
         try {
             const response = await API.get(routineExercisesEndpoint);
             if (response.isSuccess && response.result.length > 0) {
-                // Assuming the first result is the routine
                 setRoutineExercises(response.result);
                 console.log("routine exercise id GET result: ", response.result);
                 setLoadingMessage('');
@@ -92,6 +92,8 @@ function RoutineDetailsPage() {
 
     const toggleModal = () => setModalOpen(!modalOpen);
 
+
+    // Handlers ----------------------------------------------
     const handleAddExercise = () => {
         toggleModal();
     };
@@ -100,16 +102,16 @@ function RoutineDetailsPage() {
         setModalOpen(false);
     };
 
-     const handleInputChange = (e) => {
+    const handleInputChange = (e) => {
         const { name, value } = e.target;
         setNewRoutineExercise({ ...newRoutineExercise, [name]: value }); 
-     };
+    };
 
-     const handleBack = () => {
+    const handleBack = () => {
         navigate(`/myprofile/${routine.UserID}`)
-     }
+    };
 
-     const handleSubmitExercise = async (newRoutineExercise) => {
+    const handleSubmitExercise = async (newRoutineExercise) => {
         setLoadingMessage('Adding routine exercise...');
         try {
             newRoutineExercise.RoutinesID = routineID;
@@ -135,9 +137,9 @@ function RoutineDetailsPage() {
             console.log('An error occurred while adding the routine exercise', err);
             setLoadingMessage('An error occurred while adding the routine exercise.');
         }
-     };
+    };
 
-     const handleRoutineExerciseUpdate = async (updatedRoutineExercise) => {
+    const handleRoutineExerciseUpdate = async (updatedRoutineExercise) => {
         setLoadingMessage('Updating routine exercise...');
         try {
             const response = await API.put(`/routineexercises/${updatedRoutineExercise.RoutineExerciseID}/${updatedRoutineExercise.RoutinesID}`, updatedRoutineExercise);
@@ -155,7 +157,6 @@ function RoutineDetailsPage() {
             setLoadingMessage('An error occurred while updating the routine exercise.');
         }
     };
-
 
     const deleteRoutine = async (routineToDelete) => {
         console.log("body = ", routineToDelete); 
@@ -185,17 +186,12 @@ function RoutineDetailsPage() {
         }
     };
 
-    // Handlers ------------------------------------------------
-
     // View --------------------------------------------------
-
     if (!routine) {
         return <div>{loadingMessage}</div>;
     }
-
     return (
         <div>
-
             <RoutineDetails
             routine={routine}
             routineExercises={routineExercises}

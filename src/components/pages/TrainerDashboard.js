@@ -37,6 +37,8 @@ function TrainerDashboard() {
         fetchProfile(profilesEndpoint);
     }, [profilesEndpoint]); 
 
+
+    // Handlers ----------------------------------------------
     const handleProfileClick = (profileID) => {
         navigate(`/myprofile/${profileID}`);
         console.log("endpoint id: ", `/myprofile/${profileID}`);

@@ -4,6 +4,8 @@ import './LoginPage.css';
 
 
 function Login() {
+
+    // State -------------------------------------------------
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState(''); 
     const navigate = useNavigate();

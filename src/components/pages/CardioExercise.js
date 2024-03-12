@@ -5,19 +5,20 @@ import API from '../api/API';
 import './CardioExercise.css';
 
 
-
 function CardioExercise() {
-
+    
+    // Initialisation ----------------------------------------
     const endpoint = `/cardioExercises`;
     const exerciseEndpoint = `/exercises`;
 
+    // State -------------------------------------------------
     const [cardioExercises, setCardioExercises] = useState([]);
     const [exercises, setExercises] = useState([]);
     const [loadingMessage, setLoadingMessage] = useState('Loading exercises...');
     const [showForm, setShowForm] = useState(false);
     const [editingExercise, setEditingExercise] = useState(null);
 
-
+    // Methods -----------------------------------------------
     useEffect(() => {
         const fetchExercises = async () => {
             try {
@@ -34,7 +35,6 @@ function CardioExercise() {
         };
         fetchExercises();
     }, [exerciseEndpoint]);
-
 
     const apiCall = async (endpoint) => {
         try {
@@ -53,12 +53,14 @@ function CardioExercise() {
         }
     };
 
+    useEffect(() => {
+        apiCall(endpoint);
+    }, [endpoint]);
+
     // Handlers ------------------------------------------------
     const handleAdd = () => setShowForm(true);
     const handleCancel = () => setShowForm(false);
     
-
-
     const addExercise = async (newExercise) => {
         setLoadingMessage('Adding exercise...');
         try {
@@ -175,12 +177,9 @@ function CardioExercise() {
 
     };
 
-    useEffect(() => {
-        apiCall(endpoint);
-    }, [endpoint]);
-
     const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeTypeID === 1);
 
+    // View --------------------------------------------------
     return (
         <div className="cardio-exercise-container">
             <h1>Cardio Exercise</h1>
