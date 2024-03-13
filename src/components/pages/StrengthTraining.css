@@ -15,6 +15,7 @@
     border: 2px solid white;
     cursor: pointer;
     border-radius: 4px;
+    margin-left: 5px;
     white-space: nowrap; /* Prevents the text inside the button from wrapping */
   }
 
@@ -66,6 +67,8 @@
       color: white;
       cursor: pointer;
       margin-top: 10px;
+      margin-left: 5px;
+
     }
 
     .record-button:hover {
