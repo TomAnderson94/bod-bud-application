@@ -182,7 +182,10 @@ function CardioExercise() {
     // View --------------------------------------------------
     return (
         <div className="cardio-exercise-container">
+            <div className='cardio-header-container'>
             <h1>Cardio Exercise</h1>
+            <img src="https://loremflickr.com/320/240/cardio" alt="cardio" className="cardio-header-image"/>
+            </div>
             <p>Run away from your problems... but keep running</p>
 
             {!showForm && (

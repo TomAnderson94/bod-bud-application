@@ -196,8 +196,11 @@ function StrengthTraining() {
     // View --------------------------------------------------
     return (
         <div className="strength-training-container">
+            <div className='strength-header-container'>
             <h1>Strength Training</h1>
-
+            <img src='https://loremflickr.com/320/240/strengthtraining' alt ='strength' className='strength-header-image' />
+            </div>
+            <p>Stronger body = Stronger mind </p>
             {!showForm && (
                 <button className="record-button" onClick={handleAdd}>Record New Exercise</button>
                 

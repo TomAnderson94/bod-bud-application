@@ -6,9 +6,8 @@
 }
 
 .stretching-exercise-container h1{
-    padding-bottom: 10px;
     color: white;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     padding: 15px;
     border: 0.5px solid #ddd;
     border-radius: 2px;
@@ -16,6 +15,27 @@
     max-height: 55px;   
     border-width: 0px; 
     max-width: 230px;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-image {
+    max-width: 100%;
+    height: auto;
+    margin-left: auto;
+    border: 1% solid #7ed2ec;
+    box-shadow: 3px 8px 10px rgba(255, 255, 255, 0.911);
+    border-radius: 2px;
+    margin-top: 20px;
+}
+
+.stretching-exercise-container p {
+    margin-bottom: 30px;
+    padding: 8px;
 }
 
 .stretch-form-container {

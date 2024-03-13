@@ -31,6 +31,27 @@
     max-width: 300px;
   }
 
+  .strength-header-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .strength-header-image {
+    max-width: 100%;
+    height: auto;
+    margin-left: auto;
+    border: 1% solid #002147;
+    box-shadow: 3px 8px 10px rgba(255, 255, 255, 0.911);
+    border-radius: 2px;
+    margin-top: 20px;
+  }
+
+  .strength-training-container p {
+    margin-bottom: 30px;
+    padding: 8px;
+}
+
     .dropdown-container {
       display:flex;
       align-items: center;
@@ -44,7 +65,7 @@
       border-radius: 4px;
       color: white;
       cursor: pointer;
-      margin-top: 8px;
+      margin-top: 10px;
     }
 
     .record-button:hover {

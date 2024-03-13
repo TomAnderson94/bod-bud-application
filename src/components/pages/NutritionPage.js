@@ -36,7 +36,10 @@ function NutritionPage() {
     // View ----------------------------------------------
     return (
         <div className="nutrition-container">
+            <div className="header-container">
             <h1>Nutrition</h1>
+            <img src='https://loremflickr.com/320/240/healthyfood' alt='nutrition' className='nutrition-header-image' />
+            </div>
             <h2>Input your weight, height and age to calculate your Nutrition factor</h2>
             <div className="input-container">
                 <label htmlFor="weight">Weight (kg):</label>

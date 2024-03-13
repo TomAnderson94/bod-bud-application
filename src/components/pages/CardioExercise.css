@@ -17,6 +17,28 @@
   max-width: 280px;
 }
 
+.cardio-header-container {
+  display: flex;
+  align-items:center;
+  margin-bottom: 20px;
+}
+
+.cardio-header-image {
+  max-width: 100%;
+  height: auto;
+  margin-left: auto;
+  border: 1% solid #002147;
+  box-shadow: 3px 8px 10px rgba(255, 255, 255, 0.911);
+  border-radius: 2px;
+  margin-top: 20px;
+
+}
+
+.cardio-exercise-container p {
+  margin-bottom: 30px;
+  padding: 8px;
+}
+
 .record-button {
   padding: 10px 20px;
   border: none;
