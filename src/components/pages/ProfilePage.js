@@ -150,7 +150,7 @@ function ProfilePage() {
             console.log("response = ", response); // console log the response
             console.log("newRoutine = ", newRoutine); 
             console.log("current routine list = ", routines); 
-            console.log("selected routine ID = ", newRoutine.ExerciseExerciseID); 
+            console.log("selected routine ID = ", newRoutine.ExerciseID); 
 
             if (response.isSuccess) {
                 setRoutines([...routines, newRoutine]);
@@ -231,7 +231,7 @@ function ProfilePage() {
         }
     };
 
-    const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeTypeID === 3);
+    const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeID === 3);
 
     // View --------------------------------------------------
     return (

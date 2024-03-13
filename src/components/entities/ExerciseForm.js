@@ -5,7 +5,7 @@ function ExerciseForm({ onSubmit, onCancel, exercises }) {
 // Initialisation -------------------------------------------
 
 // State ----------------------------------------------------
-const [exerciseExerciseID, setExerciseExerciseID] = useState("");
+const [exerciseID, setExerciseID] = useState("");
 const [weight, setWeight] = useState("");
 const [reps, setReps] = useState("");
 const [sets, setSets] = useState("");
@@ -15,8 +15,8 @@ const [date, setDate] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit({ 
-        UserUserID: 1,
-        ExerciseExerciseID: exerciseExerciseID,
+        UserID: 1,
+        ExerciseID: exerciseID,
         Weight: parseFloat(weight),
         Reps: parseInt(reps),
         Sets: parseInt(sets),
@@ -31,8 +31,8 @@ const [date, setDate] = useState("");
       <div className='form-field'>
         <select
           id="exercise"
-          value={exerciseExerciseID}
-          onChange={(e) => setExerciseExerciseID(e.target.value)}
+          value={exerciseID}
+          onChange={(e) => setExerciseID(e.target.value)}
           required
         >
             <option value="">Select Exercise</option>

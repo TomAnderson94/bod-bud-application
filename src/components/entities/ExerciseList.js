@@ -5,7 +5,7 @@ function ExerciseList({ userExercises, exercises, onUpdate, onDelete, onExercise
   
     // Handlers ----------------------------------------------
     // Filter exercise names to include only the relevant names for the page
-    const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeTypeID === 3);
+    const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeID === 3);
   
 
     // View --------------------------------------------------
@@ -13,7 +13,7 @@ function ExerciseList({ userExercises, exercises, onUpdate, onDelete, onExercise
       <div className='records-container'>
         {Array.isArray(userExercises) && userExercises.map((userExercise) => {
           // Find the matching exercise name
-          const exerciseName = filteredExercises.find(exercise => exercise.ExerciseID === parseInt(userExercise.ExerciseExerciseID))?.ExerciseName || 'Exercise not found';
+          const exerciseName = filteredExercises.find(exercise => exercise.ExerciseID === parseInt(userExercise.ExerciseID))?.ExerciseName || 'Exercise not found';
           const date = new Date(userExercise.Date);
           const formattedDate = date.toLocaleDateString();
 

@@ -4,7 +4,7 @@ import './CardioForm.css';
 function CardioForm({ onSubmit, onCancel, exercises }) {
 
     // State -------------------------------------------------
-    const [exerciseExerciseID, setExerciseExerciseID] = useState("");
+    const [exerciseID, setExerciseID] = useState("");
     const [duration, setDuration] = useState("");
     const [distance, setDistance] = useState("");
     const [additionalInfo, setAdditionalInfo] = useState("");
@@ -16,7 +16,7 @@ function CardioForm({ onSubmit, onCancel, exercises }) {
         e.preventDefault();
         onSubmit({
             UserID: 1,
-            ExerciseExerciseID: exerciseExerciseID,
+            ExerciseID: exerciseID,
             Duration: parseInt(duration),
             Distance: parseFloat(distance),
             AdditionalInfo: additionalInfo,
@@ -30,8 +30,8 @@ function CardioForm({ onSubmit, onCancel, exercises }) {
             <div className='form-field'>
                 <select
                     id="exercise"
-                    value={exerciseExerciseID}
-                    onChange={(e) => setExerciseExerciseID(e.target.value)}
+                    value={exerciseID}
+                    onChange={(e) => setExerciseID(e.target.value)}
                     required
                 >
                     <option value="">Select Exercise</option>

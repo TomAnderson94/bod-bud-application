@@ -55,8 +55,8 @@ function CardioItem({ cardioExercise, exerciseName, exercises, onUpdate, onDelet
                     <div className='form-field'>
                         <select
                             id="exercise"
-                            value={editedExercise.ExerciseExerciseID}
-                            onChange={(e) => setEditedExercise({ ...editedExercise, ExerciseExerciseID: e.target.value })}
+                            value={editedExercise.ExerciseID}
+                            onChange={(e) => setEditedExercise({ ...editedExercise, ExerciseID: e.target.value })}
                         >
                             <option value="">Select Exercise</option>
                             {exercises.map((exercise) => (

@@ -69,13 +69,13 @@ function CardioExercise() {
             console.log("newExercise = ", newExercise); 
 
             console.log("current exercise list = ", exercises); 
-            console.log("selected exercise ID = ", newExercise.ExerciseExerciseID); 
+            console.log("selected exercise ID = ", newExercise.ExerciseID); 
 
 
             if (response.isSuccess) {
 
                 // Find the exercise name from the exercises list
-                const exerciseName = exercises.find(exercise => exercise.ExerciseID === parseInt(newExercise.ExerciseExerciseID))?.ExerciseName || 'Exercise not found';
+                const exerciseName = exercises.find(exercise => exercise.ExerciseID === parseInt(newExercise.ExerciseID))?.ExerciseName || 'Exercise not found';
                 console.log("Found exercise name = ", exerciseName); 
 
                 // Construct the new exercise with the necessary data
@@ -104,7 +104,7 @@ function CardioExercise() {
         setEditingExercise(exerciseToUpdate)
         setLoadingMessage('Updating exercise...');
         console.log('update ID check: ', exerciseToUpdate.ID);
-        console.log('update Exercise Name check: ', exerciseToUpdate.ExerciseExerciseID);
+        console.log('update Exercise Name check: ', exerciseToUpdate.ExerciseID);
         console.log('before API call: ', exerciseToUpdate);
 
         exerciseToUpdate.editing = true;
@@ -155,7 +155,7 @@ function CardioExercise() {
             if (cardioExercise.ID === cardioExercisesId) {
                 return {
                     ...cardioExercise,
-                    ExerciseExerciseID: e.target.value
+                    ExerciseID: e.target.value
                 };
             }
             return cardioExercise;
@@ -177,7 +177,7 @@ function CardioExercise() {
 
     };
 
-    const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeTypeID === 1);
+    const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeID === 1);
 
     // View --------------------------------------------------
     return (

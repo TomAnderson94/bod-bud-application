@@ -18,7 +18,7 @@ function WeightProgressChart({ userExercises, exercises }) {
       console.log("user exercises are : ", userExercises);
       console.log("exercises are : ", exercises);
 
-      const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeTypeID === 3);
+      const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeID === 3);
       console.log("filtered exercises are : ", filteredExercises);
 
 
@@ -30,7 +30,7 @@ function WeightProgressChart({ userExercises, exercises }) {
 
       // Group user exercises by exercise name
       const groupedExercises = userExercises.reduce((acc, exercise) => {
-        const exerciseName = exerciseNames[exercise.ExerciseExerciseID] || 'Exercise not found';
+        const exerciseName = exerciseNames[exercise.ExerciseID] || 'Exercise not found';
         if (!acc[exerciseName]) {
           acc[exerciseName] = [];
         }

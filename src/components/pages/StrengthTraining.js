@@ -73,13 +73,13 @@ function StrengthTraining() {
             console.log("newExercise = ", newExercise); 
 
             console.log("current exercise list = ", exercises); 
-            console.log("selected exercise ID = ", newExercise.ExerciseExerciseID); 
+            console.log("selected exercise ID = ", newExercise.ExerciseID); 
 
 
             if (response.isSuccess) {
 
                 // Find the exercise name from the exercises list
-                const exerciseName = exercises.find(exercise => exercise.ExerciseID === parseInt(newExercise.ExerciseExerciseID))?.ExerciseName || 'Exercise not found';
+                const exerciseName = exercises.find(exercise => exercise.ExerciseID === parseInt(newExercise.ExerciseID))?.ExerciseName || 'Exercise not found';
                 console.log("Found exercise name = ", exerciseName); 
 
                 // Construct the new exercise with the necessary data
@@ -106,7 +106,7 @@ function StrengthTraining() {
         setEditingExercise(exerciseToUpdate)
         setLoadingMessage('Updating exercise...');
         console.log('update userExerciseID check: ', exerciseToUpdate.UserExerciseID);
-        console.log('update Exercise Name check: ', exerciseToUpdate.ExerciseExerciseID);
+        console.log('update Exercise Name check: ', exerciseToUpdate.ExerciseID);
         console.log('before API call: ', exerciseToUpdate);
 
         exerciseToUpdate.editing = true;
@@ -156,7 +156,7 @@ function StrengthTraining() {
     const updateExerciseName = (e, userExerciseId) => {
         let newUserExercises = userExercises.map(userExercise => {
             if (userExercise.UserExerciseID === userExerciseId) {
-                userExercise.ExerciseExerciseID = e.target.value
+                userExercise.ExerciseID = e.target.value
             }
 
             return userExercise
@@ -179,13 +179,13 @@ function StrengthTraining() {
     };
 
     // Filter exercises to show only exercise type 3
-    const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeTypeID === 3);
+    const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeID === 3);
    
     // Sort exercises by their name
     const sortByExerciseName = selectedExerciseName 
     ? userExercises.filter(userExercise => {
         const exercise = exercises.find(exercise => exercise.ExerciseName === selectedExerciseName);
-        return exercise && userExercise.ExerciseExerciseID === exercise.ExerciseID;
+        return exercise && userExercise.ExerciseID === exercise.ExerciseID;
     }) : userExercises;
     console.log("name is :", sortByExerciseName);
 
