@@ -6,6 +6,7 @@ import RoutineForm from "../entities/RoutineForm.js";
 import RoutineList from "../entities/RoutineList.js";
 import { useParams, useNavigate } from "react-router-dom";
 import WeightProgressChart from "../entities/WeightProgressChart.js";
+import CardioList from "../entities/CardioList.js";
 
 function ProfilePage() {
 
@@ -16,6 +17,7 @@ function ProfilePage() {
     const routineExercisesEndpoint = `/routineexercises/1`;
     const userExercisesEndpoint = '/userexercises';
     const exercisesEndpoint = '/exercises';
+    const cardioExerciseEndpoint = '/cardioexercises';
 
     const navigate = useNavigate();
 
@@ -29,6 +31,8 @@ function ProfilePage() {
     const [selectedRoutine, setSelectedRoutine] = useState(null);
     const [userExercises, setUserExercises] = useState([]);
     const [exercises, setExercises] = useState([]);
+    const [cardioExercises, setCardioExercises] = useState([]);
+    const [sortByTime, setSortByTime] = useState(false);
 
     // Methods -----------------------------------------------
     const fetchProfile = async (endpoint) => {
@@ -107,6 +111,19 @@ function ProfilePage() {
         }
     };
 
+    const fetchCardioExercises = async (cardioExercises) => {
+        try {
+            const response = await API.get(cardioExerciseEndpoint);
+            if (response.isSuccess && response.result.length > 0) {
+                setCardioExercises(response.result);
+            } else {
+                setLoadingMessage(response.message);
+            }
+        } catch (error) {
+            setLoadingMessage("An error occurred fetching cardio exercises");
+        }    
+    };
+
     useEffect(() => {
         fetchProfile(endpoint);
     }, [endpoint]); 
@@ -126,6 +143,10 @@ function ProfilePage() {
     useEffect(() => {
         fetchExercises(exercisesEndpoint);
     }, [exercisesEndpoint]);
+
+    useEffect(() => {
+        fetchCardioExercises(cardioExerciseEndpoint);
+    }, [cardioExerciseEndpoint]);
 
 
     const toggleModal = () => setModalOpen(!modalOpen);
@@ -183,6 +204,24 @@ function ProfilePage() {
             setLoadingMessage('An error occurred while updating the routine.');
         }
     };
+    const handleCardioExerciseUpdate = async (updatedCardio) => {
+        setLoadingMessage('Updating exercise...');
+        try {
+            const response = await API.put(`/cardioexercises/${updatedCardio.CardioExerciseID}/1`, updatedCardio);
+            if (response.isSuccess && response.result) {
+                const updatedCardioExercise = cardioExercises.map(cardioExercise => 
+                    cardioExercise.CardioExerciseID === updatedCardio.CardioExerciseID ? updatedCardio : cardioExercise
+                );
+                setCardioExercises(updatedCardioExercise);
+                setLoadingMessage('');
+            } else {
+                setLoadingMessage('Exercise could not be updated: ' + response.message);
+            }
+        } catch (err) {
+            console.error('An error occurred while updating the exercise:', err);
+            setLoadingMessage('An error occurred while updating the exercise.');
+        }
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -231,7 +270,45 @@ function ProfilePage() {
         }
     };
 
+    const deleteCardioExercise = async (cardioToDelete) => {
+        console.log("body = ", cardioToDelete); 
+        console.log("user ID = ", cardioToDelete.UserID); 
+        console.log("exercise ID = ", cardioToDelete.CardioExerciseID); 
+
+        if (!window.confirm("Are you sure you want to delete this exercise and all of its exercises?")) return;
+
+        setLoadingMessage('Deleting exercise...');
+        try {
+            const response = await API.delete(`/cardioexercises/${cardioToDelete}/1`);
+            if (response.isSuccess) {
+                setCardioExercises(cardioExercises.filter(cardioExercise => 
+                    cardioExercise.CardioExerciseID !== cardioToDelete.CardioExerciseID
+                ));
+                setLoadingMessage('');
+                console.log('exercise deleted successfully'); 
+
+            } else {
+                setLoadingMessage('Exercise could not be deleted: ' + response.message);
+            }
+        } catch (err) {
+            console.error('An error occurred while deleting the exercise:', err);
+            setLoadingMessage('An error occurred while deleting the exercise.');
+        }
+    };
+
     const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeID === 3);
+
+    const toggleSortByTime = () => {
+        setSortByTime(!sortByTime);
+    };
+
+    const filteredCardioExercises = () => {
+        if (sortByTime) {
+            const sortedExercises = [...cardioExercises];
+            return sortedExercises.sort((a, b) => a.Duration - b.Duration);
+        }
+        return cardioExercises;
+    };
 
     // View --------------------------------------------------
     return (
@@ -294,8 +371,20 @@ function ProfilePage() {
                     <WeightProgressChart 
                     userExercises={userExercises} 
                     exercises={filteredExercises}/>
-                
+                    <h2>Fitness Times</h2>
+                    <div className="fitness-details-container">
+                    <button onClick={toggleSortByTime} className="time-button">
+                        {sortByTime ? 'See All' : 'Fastest Times'}
+                    </button>
+                    <CardioList
+                    cardioExercises={filteredCardioExercises()} 
+                    exercises={exercises}
+                    onUpdate={handleCardioExerciseUpdate}
+                    onDelete={deleteCardioExercise}
+                    />
+                    </div>
                 </div>
+                
             )}
            
         </div>

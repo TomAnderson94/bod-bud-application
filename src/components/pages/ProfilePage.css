@@ -34,6 +34,16 @@
     margin-top: 20px;
   }
 
+  .fitness-details-container {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    border: 10px;
+    box-shadow: 8px 8px 8px rgba(107, 2, 2, 0.1);
+    padding: 15px;
+    margin-bottom: 20px;    
+    margin-top: 10px;
+  }
+
   .profile-page h2 {
     margin-bottom: 10px;
     color: #002147;
@@ -82,6 +92,7 @@
     margin-top: 10px;
     margin-left: 20px;
   }
+
   .routine-record-button:hover {
     background-color: #024083;
   }
@@ -103,3 +114,18 @@
     background-color: #024083;
   }
   
+  .time-button {
+    cursor: pointer;
+    padding: 8px 15px;
+    background-color: #470000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-right: 20px;
+  }
+
+  .time-button:hover {
+    background-color: rgb(161, 3, 3);
+  }

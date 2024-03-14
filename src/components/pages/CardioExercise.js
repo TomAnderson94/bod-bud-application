@@ -81,7 +81,7 @@ function CardioExercise() {
                 // Construct the new exercise with the necessary data
                 const addedExercise = {
                     ...newExercise,
-                    ID: response.result.id,
+                    CardioExerciseID: response.result.CardioExerciseID,
                     ExerciseName: exerciseName,
                     formattedDate: new Date(newExercise.Date).toLocaleDateString()
                 };
@@ -103,17 +103,17 @@ function CardioExercise() {
     const updateExercise = async (exerciseToUpdate) => {
         setEditingExercise(exerciseToUpdate)
         setLoadingMessage('Updating exercise...');
-        console.log('update ID check: ', exerciseToUpdate.ID);
+        console.log('update ID check: ', exerciseToUpdate.CardioExerciseID);
         console.log('update Exercise Name check: ', exerciseToUpdate.ExerciseID);
         console.log('before API call: ', exerciseToUpdate);
 
         exerciseToUpdate.editing = true;
 
         try {
-            const response = await API.put(`/cardioExercises/${exerciseToUpdate.ID}/${exerciseToUpdate.UserID}`, exerciseToUpdate);
+            const response = await API.put(`/cardioExercises/${exerciseToUpdate.CardioExerciseID}/${exerciseToUpdate.UserID}`, exerciseToUpdate);
             if (response.isSuccess && response.result) {
                 const updatedExercises = cardioExercises.map(exercise => 
-                    exercise.ID === exerciseToUpdate.ID ?  {...exercise, ...exerciseToUpdate, editing: false} : exercise
+                    exercise.CardioExerciseID === exerciseToUpdate.CardioExerciseID ?  {...exercise, ...exerciseToUpdate, editing: false} : exercise
                 );
                 setCardioExercises(updatedExercises);
         console.log('Updated cardioExercises: ', updatedExercises);
@@ -138,7 +138,7 @@ function CardioExercise() {
             const response = await API.delete(`/cardioExercises/${exerciseToDelete}/1`);
             if (response.isSuccess) {
                 setCardioExercises(cardioExercises.filter(exercise => 
-                    exercise.ID !== exerciseToDelete
+                    exercise.CardioExerciseID !== exerciseToDelete
                 ));
                 setLoadingMessage('');
             } else {
@@ -152,7 +152,7 @@ function CardioExercise() {
 
     const updateExerciseName = (e, cardioExercisesId) => {
         const newCardioExercises = cardioExercises.map(cardioExercise => {
-            if (cardioExercise.ID === cardioExercisesId) {
+            if (cardioExercise.CardioExerciseID === cardioExercisesId) {
                 return {
                     ...cardioExercise,
                     ExerciseID: e.target.value
@@ -166,7 +166,7 @@ function CardioExercise() {
     // Methods for handling edit changes
     const handleExerciseChange = (updatedExercise) => {
         setCardioExercises(cardioExercises.map(exercise =>
-            exercise.ID === updatedExercise.ID ? updatedExercise : exercise                ));
+            exercise.CardioExerciseID === updatedExercise.CardioExerciseID ? updatedExercise : exercise                ));
     };
 
     const cancelEdit = () => {
