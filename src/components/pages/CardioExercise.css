@@ -3,6 +3,8 @@
     color: white; 
     min-height: 100vh; 
     padding: 20px; 
+    background: linear-gradient(to right, #002147, #1b3758);
+
 }
 
 .cardio-exercise-container h1 {

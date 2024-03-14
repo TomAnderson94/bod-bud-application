@@ -33,7 +33,8 @@ function ProfilePage() {
     const [exercises, setExercises] = useState([]);
     const [cardioExercises, setCardioExercises] = useState([]);
     const [sortByTime, setSortByTime] = useState(false);
-
+    const [sortByDistance, setSortByDistance] =useState(false)
+;
     // Methods -----------------------------------------------
     const fetchProfile = async (endpoint) => {
         try {
@@ -302,10 +303,22 @@ function ProfilePage() {
         setSortByTime(!sortByTime);
     };
 
+    const toggleSortByDistance = () => {
+        setSortByDistance(!sortByDistance);
+    };
+
     const filteredCardioExercises = () => {
         if (sortByTime) {
             const sortedExercises = [...cardioExercises];
             return sortedExercises.sort((a, b) => a.Duration - b.Duration);
+        }
+        return cardioExercises;
+    };
+
+    const filteredDistanceCardioExercises = () => {
+        if (sortByDistance) {
+            const sortedExercises = [...cardioExercises];
+            return sortedExercises.sort((a, b) => b.Distance - a.Distance);
         }
         return cardioExercises;
     };
@@ -371,13 +384,16 @@ function ProfilePage() {
                     <WeightProgressChart 
                     userExercises={userExercises} 
                     exercises={filteredExercises}/>
-                    <h2>Fitness Times</h2>
                     <div className="fitness-details-container">
+                    <h2>Fitness Times</h2>
                     <button onClick={toggleSortByTime} className="time-button">
-                        {sortByTime ? 'See All' : 'Fastest Times'}
+                        {sortByTime ? 'See All' : 'Fastest Time'}
+                    </button>
+                    <button onClick={toggleSortByDistance} className="time-button">
+                        {sortByDistance ? 'See All' : 'Longest Distance'}
                     </button>
                     <CardioList
-                    cardioExercises={filteredCardioExercises()} 
+                    cardioExercises={sortByDistance ? filteredDistanceCardioExercises() : filteredCardioExercises()} 
                     exercises={exercises}
                     onUpdate={handleCardioExerciseUpdate}
                     onDelete={deleteCardioExercise}

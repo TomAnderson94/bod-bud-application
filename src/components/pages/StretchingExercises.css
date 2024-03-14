@@ -3,6 +3,8 @@
     color: #ffffff; /*other colours: baby blue: #90cce7; sky blue: #86deee;*/
     min-height: 100vh; 
     padding: 20px; 
+    background: linear-gradient(to right, #7ed2ec, #afe2f1);
+
 }
 
 .stretching-exercise-container h1{

@@ -200,7 +200,7 @@ function StrengthTraining() {
             <h1>Strength Training</h1>
             <img src='https://loremflickr.com/320/240/strengthtraining' alt ='strength' className='strength-header-image' />
             </div>
-            <p>Stronger body = Stronger mind </p>
+            <p>A stronger body leads to a stronger mind </p>
             {!showForm && (
                 <button className="record-button" onClick={handleAdd}>Record New Exercise</button>
                 
