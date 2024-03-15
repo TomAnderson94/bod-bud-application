@@ -9,7 +9,7 @@ function RoutineDetailsPage() {
 
     // Initialisation ----------------------------------------
     const { routineID, userID, routinesID } = useParams();
-    console.log("routineID: ",routineID, "+ userID: ", userID, "+ routinesID: ", routinesID)
+    console.log("routineID: ", routineID, "+ userID: ", userID, "+ routinesID: ", routinesID)
     const routineEndpoint = `/routines/${routineID}/${userID}`;
     const routineExercisesEndpoint = `/routineexercises/${routineID}`;
     const exercisesEndpoint ='/exercises';
@@ -80,11 +80,11 @@ function RoutineDetailsPage() {
 
     useEffect(() => {
         fetchRoutine();
-    }, [routineID]);
+    }, [routineEndpoint]);
 
     useEffect(() => {
         fetchRoutineExercises();
-    }, [routinesID]);
+    }, [routineExercisesEndpoint]);
 
     useEffect(() => {
         fetchExercises();

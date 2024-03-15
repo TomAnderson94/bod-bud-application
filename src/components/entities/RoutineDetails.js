@@ -5,13 +5,10 @@ import { useState, useEffect } from 'react';
 function RoutineDetails({ routine, routineExercises, exercises, onAddExercise, onDelete, onClose, onUpdate }) {
 
     // State -------------------------------------------------
-    const [editedRoutineExercise, setEditedRoutineExercise] = useState({...routineExercises});
+    const [editedRoutineExercise, setEditedRoutineExercise] = useState(null);
+    console.log("routine exerc: ", routineExercises);
 
     // Methods -----------------------------------------------
-    useEffect(() => {
-        setEditedRoutineExercise({ ...routineExercises });
-    }, [routineExercises]);
-
     /*const handleEdit = (index) => {
         const routineExercisesToEdit = routineExercises[index];
         setEditedRoutineExercise({ ...routineExercisesToEdit, editing: true });
@@ -19,9 +16,9 @@ function RoutineDetails({ routine, routineExercises, exercises, onAddExercise, o
     };*/
 
     // Handlers ----------------------------------------------
-    const handleEdit = () => {
-        setEditedRoutineExercise({ ...routineExercises, editing: true });
-        console.log("editing: ", routineExercises);
+    const handleEdit = (exercise) => {
+        console.log(exercise)
+        setEditedRoutineExercise(exercise);
     };
 
     /*const handleEdit = (index) => {
@@ -72,12 +69,13 @@ function RoutineDetails({ routine, routineExercises, exercises, onAddExercise, o
                 <ul>
                     {routineExercises.map((exercise, index) => {
                     const exerciseName = exercises.find(item => item.ExerciseID === exercise.ExerciseID)?.ExerciseName || 'Exercise not found';
-                    
+                    console.log(editedRoutineExercise)
+                    console.log(exercise)
                     return (
                         <li key={index} className='routine-exercise-item'>
-                        {!editedRoutineExercise.editing ? (
+                        {editedRoutineExercise === null || editedRoutineExercise.RoutineExerciseID !== exercise.RoutineExerciseID ? (
                             <>
-                                <p>{exercise.Order}) {exerciseName}</p>
+                                <p>{exercise.Order} {exerciseName}</p>
                                 <p>{exercise.CustomWeight} kg</p>
                                 <p>{exercise.CustomReps} reps</p>
                                 <p>{exercise.CustomSets} sets</p>
@@ -85,7 +83,7 @@ function RoutineDetails({ routine, routineExercises, exercises, onAddExercise, o
                                 <p>{exercise.CustomDistance} km</p>
                                 <p className='additional-info'>Additional Info: {exercise.CustomAdditionalInfo}</p>
                                 <div className='exercise-actions'>
-                                    <button onClick={() => handleEdit(index)} className='modify-button'>Edit</button>
+                                    <button onClick={() => handleEdit(exercise)} className='modify-button'>Edit</button>
                                     <button onClick={() => onDelete(routineExercises)} className='delete-button'>Delete</button>
                                 </div>
                             </>

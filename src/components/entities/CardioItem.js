@@ -5,6 +5,8 @@ function CardioItem({ cardioExercise, exerciseName, exercises, onUpdate, onDelet
 
     // State -------------------------------------------------
     const [editedExercise, setEditedExercise] = useState({ ...cardioExercise });
+    console.log("cardio exerc: ", cardioExercise);
+
 
     // Methods -----------------------------------------------
     useEffect(() => {
