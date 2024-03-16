@@ -6,11 +6,12 @@ function Header() {
     // View --------------------------------------------------
     return (
         <header>
+                <h1 className='title'>Bod</h1>            
             <Link to="/">
-                <img src= "https://img.icons8.com/ios-filled/50/000000/conference-call.png" alt="Icon showing group" />
+            <img width="50" height="50" src="https://img.icons8.com/ios/50/flex-biceps.png" alt="flex-biceps" />
             </Link>
             <Link to="/">
-                <h1>BodBud</h1>
+                <h1>Bud</h1>
             </Link>
             <div className="login">
                 <p>Welcome Tom!</p>
@@ -19,5 +20,9 @@ function Header() {
 
     );
 }
+// https://icons8.com/icon/ZKIz38iQL8IV/muscle
+// single arm flex icon: "https://img.icons8.com/windows/32/flex-biceps.png"
+// <img width="50" height="50" src="https://img.icons8.com/ios/50/flex-biceps.png" alt="flex-biceps"/>
+// https://icons8.com/icon/7318/muscle
 
 export default Header;

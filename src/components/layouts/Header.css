@@ -17,6 +17,13 @@ header a h1 {
     color: White;
     margin-left: 10px;
     font-size: 200%;
+    margin-top: 10px;
+}
+.title {
+    color: White;
+    margin-left: 10px;
+    font-size: 200%;
+    margin-top: 10px;
 }
 
 header a:hover,
