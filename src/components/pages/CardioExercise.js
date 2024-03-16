@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import CardioForm from '../entities/CardioForm';
 import API from '../api/API';
 import './CardioExercise.css';
+import GenericForm from '../UI/GenericForm';
 
 
 function CardioExercise() {
@@ -179,6 +180,25 @@ function CardioExercise() {
 
     const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeID === 1);
 
+    const constructCardioData = (formData) => {
+        return {
+            UserID: 1,
+            ExerciseID: parseInt(formData.ExerciseID),
+            Duration: parseFloat(formData.Duration),
+            Distance: parseFloat(formData.Distance),
+            AdditionalInfo: formData.AdditionalInfo || '',
+            Date: formData.Date            
+        };
+    };
+
+    const formFields = [
+        { name: 'ExerciseID', type: 'select', placeholder: 'Select Exercise', required: true, options: filteredExercises.map(exercise => ({ value: exercise.ExerciseID, label: exercise.ExerciseName })) },
+        { name: 'Duration', type: 'number', placeholder: 'Duration(minutes)', required: true },
+        { name: 'Distance', type: 'number', placeholder: 'Distance(km)', required: true },
+        { name: 'AdditionalInfo', type: 'text', placeholder: 'Additional Info', required: false },
+        { name: 'Date', type: 'date', placeholder: 'Date', required: true },
+    ];
+
     // View --------------------------------------------------
     return (
         <div className="cardio-exercise-container">
@@ -192,7 +212,16 @@ function CardioExercise() {
                 <button className="record-button" onClick={handleAdd}>Record New Exercise</button>
             )}
             {showForm && (
-                <CardioForm onSubmit={addExercise} exercises={filteredExercises} onCancel={handleCancel} />
+                <GenericForm 
+                formFields={formFields} 
+                onSubmit={addExercise} 
+                onCancel={handleCancel}
+                formClassName={"cardio-form-container"}
+                fieldClassName={"form-field"}
+                submitButtonClassName={"cardio-submit-button"}
+                cancelButtonClassName={"cancel-button"}
+                constructData={constructCardioData}
+                />
             )}
             {!cardioExercises ? (
                 <p>{loadingMessage}</p>
