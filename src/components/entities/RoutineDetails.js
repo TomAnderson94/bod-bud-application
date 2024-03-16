@@ -86,13 +86,13 @@ function RoutineDetails({ routine, routineExercises, exercises, onAddExercise, o
                         <li key={index} className='routine-exercise-item'>
                         {editedRoutineExercise === null || editedRoutineExercise.RoutineExerciseID !== exercise.RoutineExerciseID ? (
                             <>
-                                <p>{exercise.Order} {exerciseName}</p>
+                                <p>{exercise.Order}) {exerciseName}</p>
                                 <p>{exercise.CustomWeight} kg</p>
                                 <p>{exercise.CustomReps} reps</p>
                                 <p>{exercise.CustomSets} sets</p>
                                 <p>{exercise.CustomDuration} minutes</p>
                                 <p>{exercise.CustomDistance} km</p>
-                                <p className='additional-info'>Additional Info: {exercise.CustomAdditionalInfo}</p>
+                                <p className='additional-info'>Additional Info: <br /> {exercise.CustomAdditionalInfo}</p>
                                 <div className='exercise-actions'>
                                     <button onClick={() => handleEdit(exercise)} className='modify-button'>Edit</button>
                                     <button onClick={() => onDeleteExercise(exercise)} className='delete-button'>Delete</button>

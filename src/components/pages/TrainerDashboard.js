@@ -5,15 +5,19 @@ import { useState, useEffect } from "react";
 import API from "../api/API";
 import SearchBar from "../entities/SearchBar";
 import './TrainerDashboard.css';
+import RoutineList from "../entities/RoutineList";
 
 function TrainerDashboard() {
 
+
     const profilesEndpoint = '/profiles';
+    const routinesEndpoint ='/routines/1';
     const navigate = useNavigate();
 
     // State -------------------------------------------------
     const [loadingMessage, setLoadingMessage] = useState('Loading records...');
     const [profiles, setProfiles] = useState([]);
+    const [routines, setRoutines] = useState([]);
 
 
     // Methods -----------------------------------------------
@@ -33,10 +37,28 @@ function TrainerDashboard() {
         }
     };
 
+    const fetchRoutines = async () => {
+        try {
+            const response = await API.get(`/routines/1`);
+            if (response.isSuccess && response.result.length > 0) {
+                setRoutines(response.result);
+                console.log("routines GET result: ", response.result);
+                setLoadingMessage('');
+            } else {
+                setLoadingMessage(response.message || 'Failed to load routines.');
+            }
+        } catch (error) {
+            setLoadingMessage("An error occurred while fetching routines data.")
+        }
+    };
+
     useEffect(() => {
         fetchProfile(profilesEndpoint);
     }, [profilesEndpoint]); 
 
+    useEffect(() => {
+        fetchRoutines(routinesEndpoint);
+    }, [routinesEndpoint]); 
 
     // Handlers ----------------------------------------------
     const handleProfileClick = (profileID) => {
@@ -66,15 +88,26 @@ function TrainerDashboard() {
 
                 : (<div className="trainer-card-container">
                     {profiles.map((profile) => (
-                    <Card 
-                    key={profile.ProfileID}
-                    title={profile.ProfileName}
-                    imageURL={profile.ProfileURL}
-                    onClick={() => handleProfileClick(profile.ProfileID)}
-                    />
+                        <Card 
+                            key={profile.ProfileID}
+                            title={profile.ProfileName}
+                            imageURL={profile.ProfileURL}
+                            onClick={() => handleProfileClick(profile.ProfileID)}
+                        />
                     ))}
-                    </div>
+                  </div>
                 )}
+                <div className="custom-plans">
+
+                    {routines && (
+                    <div className="routine-details-container">
+                    <h2>Custom Plans</h2>                        
+                    <RoutineList 
+                        routines={routines}                
+                        />
+                    </div>
+                )}                    
+                </div>
         </div>
     );
 }
