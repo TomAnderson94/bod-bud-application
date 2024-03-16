@@ -8,11 +8,12 @@ import RoutineExerciseForm from "../entities/RoutineExercisesForm.js";
 function RoutineDetailsPage() {
 
     // Initialisation ----------------------------------------
-    const { routineID, userID, routinesID } = useParams();
-    console.log("routineID: ", routineID, "+ userID: ", userID, "+ routinesID: ", routinesID)
+    const { routineID, userID } = useParams();
+    console.log("routineID: ", routineID, "+ userID: ", userID);
     const routineEndpoint = `/routines/${routineID}/${userID}`;
     const routineExercisesEndpoint = `/routineexercises/${routineID}`;
     const exercisesEndpoint ='/exercises';
+
 
     // State -------------------------------------------------
     const [routine, setRoutine] = useState(null);
@@ -20,16 +21,6 @@ function RoutineDetailsPage() {
     const [exercises, setExercises] = useState([]);
     const [loadingMessage, setLoadingMessage] = useState('Loading routine details...');
     const [modalOpen, setModalOpen] = useState(false);
-    const [newRoutineExercise, setNewRoutineExercise] = useState({
-        ExerciseID: '',
-        Order: '',
-        CustomWeight: '',
-        CustomReps: '',
-        CustomSets: '',
-        CusomDuration: '',
-        CustomDistance: '',
-        CustomAdditionalInfo: '',
-     });
 
     const navigate = useNavigate();
 
@@ -98,15 +89,6 @@ function RoutineDetailsPage() {
         toggleModal();
     };
 
-    const handleModalClose = () => {
-        setModalOpen(false);
-    };
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewRoutineExercise({ ...newRoutineExercise, [name]: value }); 
-    };
-
     const handleBack = () => {
         navigate(`/myprofile/${routine.UserID}`)
     };
@@ -119,15 +101,15 @@ function RoutineDetailsPage() {
             console.log("response = ", response); // Log the response
             console.log("newRoutineExercise = ", newRoutineExercise); 
 
-            console.log("current routine exercise id = ", newRoutineExercise.RoutineExerciseID); 
             console.log("current routines id = ", newRoutineExercise.RoutinesID); 
-
+            console.log("current weight = ", newRoutineExercise.CustomWeight); 
             console.log("order = ", newRoutineExercise.Order); 
             console.log("selected exercise ID = ", newRoutineExercise.ExerciseID); 
 
             
             if (response.isSuccess) {
                 setRoutineExercises([...routineExercises, newRoutineExercise]);
+                fetchRoutineExercises();
                 setLoadingMessage('');
                 setModalOpen(false);
             } else {
@@ -141,13 +123,17 @@ function RoutineDetailsPage() {
 
     const handleRoutineExerciseUpdate = async (updatedRoutineExercise) => {
         setLoadingMessage('Updating routine exercise...');
+        console.log("updated routine exercise: ", updatedRoutineExercise);
+
         try {
             const response = await API.put(`/routineexercises/${updatedRoutineExercise.RoutineExerciseID}/${updatedRoutineExercise.RoutinesID}`, updatedRoutineExercise);
             if (response.isSuccess && response.result) {
-                const updatedRoutineExercise = routineExercises.map(routineExercise => 
+                const updatedExercise = routineExercises.map(routineExercise => 
                     routineExercise.RoutineExerciseID === updatedRoutineExercise.RoutineExerciseID ? updatedRoutineExercise : routineExercise
                 );
-                setRoutineExercises(updatedRoutineExercise);
+                setRoutineExercises(updatedExercise);
+                fetchRoutineExercises();
+                console.log("updated exercise: ", updatedExercise);
                 setLoadingMessage('');
             } else {
                 setLoadingMessage('Routine exercise could not be updated: ' + response.message);
@@ -186,6 +172,33 @@ function RoutineDetailsPage() {
         }
     };
 
+    const deleteRoutineExercise = async (routineExerciseToDelete) => {
+        console.log("body = ", routineExerciseToDelete); 
+        console.log("user ID = ", routineExerciseToDelete.RoutinesID); 
+        console.log("routine exercise ID = ", routineExerciseToDelete.RoutineExerciseID); 
+
+        if (!window.confirm("Are you sure you want to delete this routine exercise?")) return;
+
+        setLoadingMessage('Deleting routine exercise...');
+        try {
+            const response = await API.delete(`/routineexercises/${routineExerciseToDelete.RoutineExerciseID}/${routineExerciseToDelete.RoutinesID}`);
+            if (response.isSuccess) {
+                setRoutineExercises(routineExercises.filter(routine => 
+                    routine.RoutineExerciseID !== routineExerciseToDelete.RoutineExerciseID
+                ));
+                setLoadingMessage('');
+                console.log('routine deleted successfully'); 
+
+
+            } else {
+                setLoadingMessage('Routine exercise could not be deleted: ' + response.message);
+            }
+        } catch (err) {
+            console.error('An error occurred while deleting the routine exercise:', err);
+            setLoadingMessage('An error occurred while deleting the routine exercise.');
+        }
+    };
+
     // View --------------------------------------------------
     if (!routine) {
         return <div>{loadingMessage}</div>;
@@ -198,6 +211,7 @@ function RoutineDetailsPage() {
             exercises={exercises}
             onAddExercise={handleAddExercise}
             onDelete={deleteRoutine}
+            onDeleteExercise={deleteRoutineExercise}
             onUpdate={handleRoutineExerciseUpdate}
             onClose={handleBack}
             />

@@ -1,34 +1,26 @@
 import React from 'react';
 import './RoutineDetails.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-function RoutineDetails({ routine, routineExercises, exercises, onAddExercise, onDelete, onClose, onUpdate }) {
+function RoutineDetails({ routine, routineExercises, exercises, onAddExercise, onDelete, onDeleteExercise, onClose, onUpdate }) {
 
     // State -------------------------------------------------
     const [editedRoutineExercise, setEditedRoutineExercise] = useState(null);
-    console.log("routine exerc: ", routineExercises);
-
-    // Methods -----------------------------------------------
-    /*const handleEdit = (index) => {
-        const routineExercisesToEdit = routineExercises[index];
-        setEditedRoutineExercise({ ...routineExercisesToEdit, editing: true });
-        console.log("editing: ", routineExercises.RoutineExerciseID)
-    };*/
 
     // Handlers ----------------------------------------------
     const handleEdit = (exercise) => {
-        console.log(exercise)
-        setEditedRoutineExercise(exercise);
+        console.log("exercise to edit: ", exercise)
+        setEditedRoutineExercise({ 
+            ...exercise,
+            Order: exercise.Order || 0,
+            CustomWeight: exercise.CustomWeight || 0,
+            CustomReps: exercise.CustomReps || 0,
+            CustomSets: exercise.CustomSets || 0,
+            CustomDuration: exercise.CustomDuration || 0,
+            CustomDistance: exercise.CustomDistance || 0,
+            CustomAdditionalInfo: exercise.CustomAdditionalInfo || ''            
+         });
     };
-
-    /*const handleEdit = (index) => {
-    const updatedRoutineExercises = [...editedRoutineExercise];
-    console.log(updatedRoutineExercises);
-    updatedRoutineExercises[index] = { ...updatedRoutineExercises[index], editing: true };
-    setEditedRoutineExercise(updatedRoutineExercises);
-    console.log("editing: ", routineExercises);
-    console.log("editing: ", updatedRoutineExercises);
-    };*/
 
     const handleCancel = () => {
         setEditedRoutineExercise({ ...routineExercises, editing: false });
@@ -36,23 +28,44 @@ function RoutineDetails({ routine, routineExercises, exercises, onAddExercise, o
 
     const handleUpdate = () => {
         onUpdate({ ...editedRoutineExercise, editing: false });
+        setEditedRoutineExercise(null);
     };
 
-    const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setEditedRoutineExercise(prevState => ({
-        ...prevState,
-        [name]: value
-    }));
+    const handleOrderChange = (e) => {
+        setEditedRoutineExercise({ ...editedRoutineExercise, Order: parseInt(e.target.value) });
+    };   
+    
+    const handleExerciseIDChange = (e) => {
+        const exerciseID = e.target.value;
+        setEditedRoutineExercise(prevState => ({
+            ...prevState,
+            ExerciseID: exerciseID
+        }));
+    };
+
+    const handleWeightChange = (e) => {
+        setEditedRoutineExercise({ ...editedRoutineExercise, CustomWeight: parseFloat(e.target.value) });
     };
 
     const handleRepsChange = (e) => {
-        setEditedRoutineExercise({ ...editedRoutineExercise, CustomReps: e.target.value });
+        setEditedRoutineExercise({ ...editedRoutineExercise, CustomReps: parseInt(e.target.value) });
     };
 
-    const handleDescriptionChange = (e) => {
-        setEditedRoutineExercise({ ...editedRoutineExercise, RoutineDescription: e.target.value });
+    const handleSetsChange = (e) => {
+        setEditedRoutineExercise({ ...editedRoutineExercise, CustomSets: parseInt(e.target.value) });
     };
+
+    const handleDurationChange = (e) => {
+        setEditedRoutineExercise({ ...editedRoutineExercise, CustomDuration: parseFloat(e.target.value) });
+    };
+
+    const handleDistanceChange = (e) => {
+        setEditedRoutineExercise({ ...editedRoutineExercise, CustomDistance: parseFloat(e.target.value) });
+    };
+
+    const handleAdditionalInfoChange = (e) => {
+        setEditedRoutineExercise({ ...editedRoutineExercise, CustomAdditionalInfo: e.target.value });
+    }; 
 
 
     // View --------------------------------------------------
@@ -69,8 +82,6 @@ function RoutineDetails({ routine, routineExercises, exercises, onAddExercise, o
                 <ul>
                     {routineExercises.map((exercise, index) => {
                     const exerciseName = exercises.find(item => item.ExerciseID === exercise.ExerciseID)?.ExerciseName || 'Exercise not found';
-                    console.log(editedRoutineExercise)
-                    console.log(exercise)
                     return (
                         <li key={index} className='routine-exercise-item'>
                         {editedRoutineExercise === null || editedRoutineExercise.RoutineExerciseID !== exercise.RoutineExerciseID ? (
@@ -84,16 +95,24 @@ function RoutineDetails({ routine, routineExercises, exercises, onAddExercise, o
                                 <p className='additional-info'>Additional Info: {exercise.CustomAdditionalInfo}</p>
                                 <div className='exercise-actions'>
                                     <button onClick={() => handleEdit(exercise)} className='modify-button'>Edit</button>
-                                    <button onClick={() => onDelete(routineExercises)} className='delete-button'>Delete</button>
+                                    <button onClick={() => onDeleteExercise(exercise)} className='delete-button'>Delete</button>
                                 </div>
                             </>
                         ) : (
                             <div>
                                 <div className='form-field'>
+                                    <input 
+                                        type='number' 
+                                        placeholder='Order' 
+                                        value={editedRoutineExercise.Order} 
+                                        onChange={handleOrderChange} 
+                                    />
+                                </div>
+                                <div className='form-field'>
                                     <select
                                         id="exercise"
                                         value={editedRoutineExercise.ExerciseID}
-                                        onChange={(e) => setEditedRoutineExercise({ ...editedRoutineExercise, ExerciseID: e.target.value })}
+                                        onChange={handleExerciseIDChange}
                                     >
                                         <option value="">Select Exercise</option>
                                         {exercises.map((exercise) => (
@@ -108,7 +127,8 @@ function RoutineDetails({ routine, routineExercises, exercises, onAddExercise, o
                                     type='number' 
                                     placeholder='Custom Weight' 
                                     value={editedRoutineExercise.CustomWeight} 
-                                    onChange={handleInputChange} 
+                                    step={0.5}
+                                    onChange={handleWeightChange} 
                                     />
                                 </div>
                                 <div className='form-field'>
@@ -116,7 +136,7 @@ function RoutineDetails({ routine, routineExercises, exercises, onAddExercise, o
                                     type='number' 
                                     placeholder='Custom Reps' 
                                     value={editedRoutineExercise.CustomReps} 
-                                    onChange={handleInputChange} 
+                                    onChange={handleRepsChange} 
                                     />
                                 </div>
                                 <div className='form-field'>
@@ -124,7 +144,7 @@ function RoutineDetails({ routine, routineExercises, exercises, onAddExercise, o
                                     type='number' 
                                     placeholder='Custom Sets' 
                                     value={editedRoutineExercise.CustomSets} 
-                                    onChange={handleInputChange} />
+                                    onChange={handleSetsChange} />
                                 </div>
                                 <div className='form-field'>
                                     <input 
@@ -132,7 +152,7 @@ function RoutineDetails({ routine, routineExercises, exercises, onAddExercise, o
                                     name='CustomDuration' 
                                     placeholder='Custom Duration' 
                                     value={editedRoutineExercise.CustomDuration} 
-                                    onChange={handleInputChange} />
+                                    onChange={handleDurationChange} />
                                 </div>
                                 <div className='form-field'>
                                     <input 
@@ -140,7 +160,7 @@ function RoutineDetails({ routine, routineExercises, exercises, onAddExercise, o
                                     name='CustomDistance' 
                                     placeholder='Custom Distance' 
                                     value={editedRoutineExercise.CustomDistance} 
-                                    onChange={handleInputChange} />
+                                    onChange={handleDistanceChange} />
                                 </div>
                                 <div className='form-field'>
                                     <input 
@@ -148,7 +168,7 @@ function RoutineDetails({ routine, routineExercises, exercises, onAddExercise, o
                                     name='CustomAdditionalInfo' 
                                     placeholder='Custom Additional Info' 
                                     value={editedRoutineExercise.CustomAdditionalInfo} 
-                                    onChange={handleInputChange} />
+                                    onChange={handleAdditionalInfoChange} />
                                 </div>
                                 <button onClick={handleUpdate} className='modify-button'>Update</button>
                                 <button onClick={handleCancel} className='cancel-button'>Cancel</button>

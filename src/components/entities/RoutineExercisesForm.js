@@ -22,10 +22,10 @@ function RoutineExerciseForm({ exercises, onSubmit }) {
             RoutinesID: routinesID,                
             ExerciseID: exerciseID,
             Order: parseInt(order),
-            CustomWeight: parseInt(customWeight),
+            CustomWeight: parseFloat(customWeight),
             CustomReps: parseInt(customReps),
             CustomSets: parseInt(customSets),
-            CustomDuration: parseInt(customDuration),
+            CustomDuration: parseFloat(customDuration),
             CustomDistance: parseFloat(customDistance),
             CustomAdditionalInfo:customAdditionalInfo
         };
@@ -90,6 +90,7 @@ function RoutineExerciseForm({ exercises, onSubmit }) {
                         type="number"
                         id="customWeight"
                         value={customWeight}
+                        step={0.5}
                         onChange={(e) => setCustomWeight(e.target.value)}
                     />
                 </div>

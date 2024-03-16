@@ -28,7 +28,7 @@ function CardioItem({ cardioExercise, exerciseName, exercises, onUpdate, onDelet
     };
 
     const handleDurationChange = (e) => {
-        setEditedExercise({ ...editedExercise, Duration: parseInt(e.target.value) });
+        setEditedExercise({ ...editedExercise, Duration: parseFloat(e.target.value) });
     };
 
     const handleDistanceChange = (e) => {
