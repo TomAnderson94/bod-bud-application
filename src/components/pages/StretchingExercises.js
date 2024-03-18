@@ -1,6 +1,5 @@
 import StretchingList from '../entities/StretchingList';
 import { useState, useEffect } from 'react';
-import StretchingForm from '../entities/StretchingForm';
 import API from '../api/API';
 import './StretchingExercises.css';
 import GenericForm from '../UI/GenericForm';

@@ -14,7 +14,7 @@ function WeightProgressChart({ userExercises, exercises }) {
 
   useEffect(() => {
     if (userExercises.length > 0) {
-      const ctx = document.getElementById('weightChart');
+      const canvas = document.getElementById('weightChart');
       console.log("user exercises are : ", userExercises);
       console.log("exercises are : ", exercises);
 
@@ -53,7 +53,7 @@ function WeightProgressChart({ userExercises, exercises }) {
         chart.destroy();
         }
 
-      const weightChart = new Chart(ctx, {
+      const weightChart = new Chart(canvas, {
         type: 'line',
         data: {
           datasets: datasets

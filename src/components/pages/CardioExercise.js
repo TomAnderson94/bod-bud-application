@@ -1,6 +1,5 @@
 import CardioList from '../entities/CardioList';
 import { useState, useEffect } from 'react';
-import CardioForm from '../entities/CardioForm';
 import API from '../api/API';
 import './CardioExercise.css';
 import GenericForm from '../UI/GenericForm';
@@ -89,7 +88,6 @@ function CardioExercise() {
                 // Add the new exercise to the list of user exercises
                 setCardioExercises([...cardioExercises, addedExercise]);
                 setLoadingMessage(''); 
-                setShowForm(false);
             } else {
                 // If response does not have data, log error and update loading message
                 setLoadingMessage('Exercise could not be recorded: ' + response.message);
