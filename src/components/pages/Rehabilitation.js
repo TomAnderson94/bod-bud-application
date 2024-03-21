@@ -8,12 +8,12 @@ function Rehabilitation() {
     // Initialisation ---------------------------------------
     const navigate = useNavigate();
 
-    // State ---------------------------------------------
+    // State ------------------------------------------------
     const [injury, setInjury] = useState("");
     const [recoveryTime, setRecoveryTime] =useState("");
     const [message, setMessage] = useState("");
 
-    // Handlers ----------------------------------------------
+    // Handlers ---------------------------------------------
     const handleOnClick = () => {
         navigate('/nutrition'); 
     };
@@ -33,7 +33,7 @@ function Rehabilitation() {
     };
 
 
-    // View --------------------------------------------------
+    // View -------------------------------------------------
     return (
         <div className="rehab-container">
         <h1>Rehabilitation</h1>

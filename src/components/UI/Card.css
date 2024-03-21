@@ -8,20 +8,17 @@
     width: 100%;
   }
   
-
   .card {
     width: calc(25% - 16px); 
     border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 4px 4px 4px rgba(61, 152, 238, 0.966);
-    padding: 0px;
     background-color: #fff;
     margin: 8px;
     text-align: center;
     display: inline-block; /* Ensure each card appears on the same line */
     vertical-align: top; /* Align cards to the top of the container */
     transition: box-shadow 0.3s ease; /* Add transition for box-shadow */
-
   }
   
   .card h2 {
@@ -39,18 +36,35 @@
 
   .card:hover {
     box-shadow: 9px 9px 9px rgb(61, 152, 238); /* Box-shadow changes on hover */
+  }
 
+  @media (max-width: 1200px) {
+    .card {
+      flex-basis: calc(33.33% - 16px);
+      max-width: calc(33.33% - 16px);
+    }
+    .card img {
+      width:190px;
+    }
   }
 
   @media (max-width: 768px) {
     .card {
-      flex: 1 0 calc(50% - 32px);
+      flex-basis: calc(50% - 16px); 
+      max-width: calc(50% - 16px); 
+    }
+    .card img {
+      width: 190px;
     }
   }
   
   @media (max-width: 480px) {
     .card {
-      flex: 1 0 calc(100% - 32px);
+      flex-basis: calc(100% - 16px); 
+      max-width: calc(100% - 16px);
+    }
+    .card img {
+      width: 190px;
     }
   }
   

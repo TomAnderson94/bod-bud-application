@@ -1,24 +1,31 @@
 import React, { useState } from 'react';
 
+// ** Form Template has been referenced and adapted from the following online source:
+// ** Forms, React, Meta Platforms, Inc. v18.2.0. Available at: https://legacy.reactjs.org/docs/forms.html
+
+
 function GenericForm({ formFields, onSubmit, onCancel, formClassName, fieldClassName, submitButtonClassName, cancelButtonClassName, constructData  }) {
+   
+    // State -------------------------------------------------
     const [formData, setFormData] = useState({});
 
+
+    // Handlers ----------------------------------------------
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevFormData) => ({
              ...prevFormData, [name]: value === '' ? null : value,
-            }));
+             })
+        );
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         const constructedData = constructData(formData);   
-
         onSubmit(constructedData);
-
     };
 
+    // View --------------------------------------------------
     return (
         <form onSubmit={handleSubmit} className={formClassName}>
             {formFields.map((field) => (
@@ -30,7 +37,7 @@ function GenericForm({ formFields, onSubmit, onCancel, formClassName, fieldClass
                             onChange={handleChange}
                             required={field.required}
                         >
-                            <option value="">{field.placeholder}</option>
+                            <option value=''>{field.placeholder}</option>
                             {field.options.map((option) => (
                                 <option key={option.value} value={option.value}>
                                     {option.label}
@@ -50,8 +57,8 @@ function GenericForm({ formFields, onSubmit, onCancel, formClassName, fieldClass
                 </div>
             ))}
             <div className={fieldClassName}>
-                <button type="submit" className={submitButtonClassName}>Submit</button>
-                <button type="button" onClick={onCancel} className={cancelButtonClassName}>Cancel</button>
+                <button type='submit' className={submitButtonClassName}>Submit</button>
+                <button type='cancel' onClick={onCancel} className={cancelButtonClassName}>Cancel</button>
             </div>
         </form>
     );

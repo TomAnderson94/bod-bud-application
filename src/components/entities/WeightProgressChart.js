@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Chart from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
 
+// ** Chart Template has been referenced and adapted from the following online source:
+// ** Raj, A. (2024) Using React Chart To Create Interactive Graphs, Zipy. Available at: https://www.zipy.ai/blog/using-react-chart-js
 
 function WeightProgressChart({ userExercises, exercises }) {
 

@@ -9,7 +9,7 @@ import RoutineList from "../entities/RoutineList";
 
 function TrainerDashboard() {
 
-
+    // Initialisation ----------------------------------------
     const profilesEndpoint = '/profiles';
     const routinesEndpoint ='/routines/1';
     const navigate = useNavigate();
