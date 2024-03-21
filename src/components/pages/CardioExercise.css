@@ -97,6 +97,26 @@
   color: #002147;
 }
 
+@media (max-width: 1200px) {
+  .cardio-exercise-container {
+      flex-direction: column;
+  }
+  .cardio-header-image {
+      max-width: 100%;
+      height: auto;
+      margin-right: auto;
+  }
+}
 
+@media (max-width: 768px) { 
+  .cardo-exercise-container {
+      flex-direction: column;
+  }
+  .cardio-header-image {
+      max-width: 100%;
+      height: 150px;
+      margin-right: auto;
+  }
+}
 
   
