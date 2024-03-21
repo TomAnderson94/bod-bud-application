@@ -145,8 +145,8 @@ function StretchingExercises() {
     return (
         <div className='stretching-exercise-container'>
             <div className='header-container'>
-            <h1>StretchZone</h1> 
-            <img src='https://loremflickr.com/320/240/stretching' alt='stretching' className='header-image'/> 
+                <h1>StretchZone</h1> 
+                <img src='https://loremflickr.com/320/240/stretching' alt='stretching' className='header-image'/> 
             </div>
             <p>We're flexible... are you?</p>
                 

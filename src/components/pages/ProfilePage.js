@@ -41,7 +41,7 @@ function ProfilePage() {
             const response = await API.get(endpoint);
             if (response.isSuccess && response.result.length > 0) {
                 setProfile(response.result[0]);
-                console.log('profiles GET result: ', response.result); // console log the response
+                console.log('specific profile GET result: ', response.result);
                 setLoadingMessage('');
             } else {
                 setLoadingMessage(response.message || 'Failed to load profile.');
@@ -102,7 +102,7 @@ function ProfilePage() {
             const response = await API.get(exercisesEndpoint);
             if (response.isSuccess && response.result.length > 0) {
                 setExercises(response.result);
-                console.log('exercises GET result: ', response.result); // console log the response
+                console.log('exercises GET result: ', response.result);
                 setLoadingMessage('');
             } else {
                 setLoadingMessage(response.message || 'Failed to load exercises.');
@@ -112,7 +112,7 @@ function ProfilePage() {
         }
     };
 
-    const fetchCardioExercises = async (cardioExercises) => {
+    const fetchCardioExercises = async () => {
         try {
             const response = await API.get(cardioExerciseEndpoint);
             if (response.isSuccess && response.result.length > 0) {
@@ -146,12 +146,10 @@ function ProfilePage() {
     }, [exercisesEndpoint]);
 
     useEffect(() => {
-        fetchCardioExercises(cardioExerciseEndpoint);
+        fetchCardioExercises();
     }, [cardioExerciseEndpoint]);
 
-
     const toggleModal = () => setModalOpen(!modalOpen);
-
 
     // Handlers ----------------------------------------------
     const handleFormSubmit = async (event) => {
@@ -169,10 +167,9 @@ function ProfilePage() {
         setLoadingMessage('Adding routine...');
         try {
             const response = await API.post(routinesEndpoint, newRoutine);
-            console.log('response = ', response); // console log the response
-            console.log('newRoutine = ', newRoutine); 
-            console.log('current routine list = ', routines); 
-            console.log('selected routine ID = ', newRoutine.ExerciseID); 
+            console.log('response: ', response); 
+            console.log('new routine: ', newRoutine); 
+            console.log('new routine list: ', routines); 
 
             if (response.isSuccess) {
                 setRoutines([...routines, newRoutine]);
@@ -205,6 +202,7 @@ function ProfilePage() {
             setLoadingMessage('An error occurred while updating the routine.');
         }
     };
+
     const handleCardioExerciseUpdate = async (updatedCardio) => {
         setLoadingMessage('Updating exercise...');
         try {
@@ -261,7 +259,6 @@ function ProfilePage() {
                 ));
                 setLoadingMessage('');
                 console.log('routine deleted successfully'); 
-
             } else {
                 setLoadingMessage('Routine could not be deleted: ' + response.message);
             }
@@ -287,7 +284,6 @@ function ProfilePage() {
                 ));
                 setLoadingMessage('');
                 console.log('exercise deleted successfully'); 
-
             } else {
                 setLoadingMessage('Exercise could not be deleted: ' + response.message);
             }

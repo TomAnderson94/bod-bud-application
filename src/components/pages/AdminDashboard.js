@@ -1,5 +1,4 @@
 
-
 function AdminDashboard() {
 
     // View --------------------------------------------------
@@ -9,6 +8,6 @@ function AdminDashboard() {
         <p>Add, Edit, Delete Data</p>
         </>
     );
-}
+};
 
 export default AdminDashboard;

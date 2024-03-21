@@ -8,27 +8,25 @@ import 'chartjs-adapter-date-fns';
 function WeightProgressChart({ userExercises, exercises }) {
 
   // State -------------------------------------------------
-
   const [chart, setChart] = useState(null);
 
 
   // Methods -----------------------------------------------
-
   useEffect(() => {
     if (userExercises.length > 0) {
       const canvas = document.getElementById('weightChart');
-      console.log("user exercises are : ", userExercises);
-      console.log("exercises are : ", exercises);
+      console.log('user exercises are : ', userExercises);
+      console.log('exercises are : ', exercises);
 
       const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeID === 3);
-      console.log("filtered exercises are : ", filteredExercises);
+      console.log('filtered exercises are : ', filteredExercises);
 
 
       const exerciseNames = filteredExercises.reduce((acc, exercise) => {
         acc[exercise.ExerciseID] = exercise.ExerciseName;
         return acc;
       }, {});
-      console.log("exerciseNames are : ", exerciseNames);
+      console.log('exerciseNames are : ', exerciseNames);
 
       // Group user exercises by exercise name
       const groupedExercises = userExercises.reduce((acc, exercise) => {
@@ -86,7 +84,7 @@ function WeightProgressChart({ userExercises, exercises }) {
     }
   }, [userExercises]);
 
-  return <canvas id="weightChart" />;
+  return <canvas id='weightChart' />;
 }
 
 export default WeightProgressChart;

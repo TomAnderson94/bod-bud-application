@@ -1,5 +1,4 @@
 
-
 function ContactUs() {
     return (
         <h1>No Friends</h1>

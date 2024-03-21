@@ -35,10 +35,10 @@ function Rehabilitation() {
     // View -------------------------------------------------
     return (
         <div className='rehab-container'>
-        <h1>Rehabilitation</h1>
-        <p>Help Yourself</p>
-        <button className='nutrition-button' onClick={handleOnClick}>Nutrition</button>
-        <div className='rehab-input-container'>
+            <h1>Rehabilitation</h1>
+            <p>Help Yourself</p>
+            <button className='nutrition-button' onClick={handleOnClick}>Nutrition</button>
+            <div className='rehab-input-container'>
                 <label htmlFor='Injury'> Injury:</label>
                 <input
                     type='text'

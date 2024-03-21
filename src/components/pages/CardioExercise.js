@@ -16,7 +16,6 @@ function CardioExercise() {
     const [exercises, setExercises] = useState([]);
     const [loadingMessage, setLoadingMessage] = useState('Loading exercises...');
     const [showForm, setShowForm] = useState(false);
-    const [editingExercise, setEditingExercise] = useState(null);
 
     // Methods -----------------------------------------------
     useEffect(() => {
@@ -25,7 +24,7 @@ function CardioExercise() {
                 const response = await API.get(exerciseEndpoint);
                 if (response.isSuccess) {
                     setExercises(response.result);
-                    console.log("response.result: ", response.result);
+                    console.log('All exercise names: ', response.result);
                 } else {
                     setLoadingMessage('Failed to load exercises: ' + response.message);
                 }
@@ -44,7 +43,7 @@ function CardioExercise() {
                     e.editing = false;
                 });
                 setCardioExercises(response.result);
-                console.log("Received cardio exercises:", response.result);
+                console.log('Received cardio exercises:', response.result);
             } else {
                 setLoadingMessage(response.message);
             }
@@ -65,46 +64,39 @@ function CardioExercise() {
         setLoadingMessage('Adding exercise...');
         try {
             const response = await API.post('/cardioExercises', newExercise);
-            console.log("response = ", response); // Log the response
-            console.log("newExercise = ", newExercise); 
-
-            console.log("current exercise list = ", exercises); 
-            console.log("selected exercise ID = ", newExercise.ExerciseID); 
-
+            console.log('response = ', response);
+            console.log('new cardio exercise = ', newExercise); 
+            console.log('selected exercise ID = ', newExercise.ExerciseID); 
 
             if (response.isSuccess) {
 
                 // Find the exercise name from the exercises list
                 const exerciseName = exercises.find(exercise => exercise.ExerciseID === parseInt(newExercise.ExerciseID))?.ExerciseName || 'Exercise not found';
-                console.log("Found exercise name = ", exerciseName); 
+                console.log('Found exercise name = ', exerciseName); 
 
                 // Construct the new exercise with the necessary data
                 const addedExercise = {
                     ...newExercise,
-                    CardioExerciseID: response.result.CardioExerciseID,
                     ExerciseName: exerciseName,
                     formattedDate: new Date(newExercise.Date).toLocaleDateString()
                 };
+                console.log('new exercise: ', addedExercise);
                 // Add the new exercise to the list of user exercises
                 setCardioExercises([...cardioExercises, addedExercise]);
                 setLoadingMessage(''); 
             } else {
-                // If response does not have data, log error and update loading message
                 setLoadingMessage('Exercise could not be recorded: ' + response.message);
             }
         } catch (err) {
-            // Log error and update loading message
             console.error('An error occurred while saving the exercise:', err);
             setLoadingMessage('An error occurred while saving the exercise.');
         }
     };
     
     const updateExercise = async (exerciseToUpdate) => {
-        setEditingExercise(exerciseToUpdate)
         setLoadingMessage('Updating exercise...');
         console.log('update ID check: ', exerciseToUpdate.CardioExerciseID);
         console.log('update Exercise Name check: ', exerciseToUpdate.ExerciseID);
-        console.log('before API call: ', exerciseToUpdate);
 
         exerciseToUpdate.editing = true;
 
@@ -115,7 +107,7 @@ function CardioExercise() {
                     exercise.CardioExerciseID === exerciseToUpdate.CardioExerciseID ?  {...exercise, ...exerciseToUpdate, editing: false} : exercise
                 );
                 setCardioExercises(updatedExercises);
-        console.log('Updated cardioExercises: ', updatedExercises);
+                console.log('Updated cardioExercises: ', updatedExercises);
 
                 setLoadingMessage('');
             } else {
@@ -128,9 +120,9 @@ function CardioExercise() {
     };
 
     const deleteExercise = async (exerciseToDelete) => {
-        console.log("unique ID = ", exerciseToDelete); 
+        console.log('unique ID = ', exerciseToDelete); 
 
-        if (!window.confirm("Are you sure you want to delete this exercise?")) return;
+        if (!window.confirm('Are you sure you want to delete this exercise?')) return;
 
         setLoadingMessage('Deleting exercise...');
         try {
@@ -165,11 +157,11 @@ function CardioExercise() {
     // Methods for handling edit changes
     const handleExerciseChange = (updatedExercise) => {
         setCardioExercises(cardioExercises.map(exercise =>
-            exercise.CardioExerciseID === updatedExercise.CardioExerciseID ? updatedExercise : exercise                ));
+            exercise.CardioExerciseID === updatedExercise.CardioExerciseID ? updatedExercise : exercise                
+            ));
     };
 
     const cancelEdit = () => {
-        setEditingExercise(null);
         setCardioExercises(cardioExercises.map(ex => {
             return { ...ex, editing: false };
         }));
@@ -199,25 +191,25 @@ function CardioExercise() {
 
     // View --------------------------------------------------
     return (
-        <div className="cardio-exercise-container">
+        <div className='cardio-exercise-container'>
             <div className='cardio-header-container'>
-            <h1>Cardio Exercise</h1>
-            <img src="https://loremflickr.com/320/240/cardio" alt="cardio" className="cardio-header-image"/>
+                <h1>Cardio Exercise</h1>
+                <img src='https://loremflickr.com/320/240/cardio' alt='cardio' className='cardio-header-image'/>
             </div>
             <p>Run away from your problems... but keep running</p>
 
             {!showForm && (
-                <button className="record-button" onClick={handleAdd}>Record New Exercise</button>
+                <button className='record-button' onClick={handleAdd}>Record New Exercise</button>
             )}
             {showForm && (
                 <GenericForm 
                 formFields={formFields} 
                 onSubmit={addExercise} 
                 onCancel={handleCancel}
-                formClassName={"cardio-form-container"}
-                fieldClassName={"form-field"}
-                submitButtonClassName={"cardio-submit-button"}
-                cancelButtonClassName={"cancel-button"}
+                formClassName={'cardio-form-container'}
+                fieldClassName={'form-field'}
+                submitButtonClassName={'cardio-submit-button'}
+                cancelButtonClassName={'cancel-button'}
                 constructData={constructCardioData}
                 />
             )}
@@ -239,7 +231,7 @@ function CardioExercise() {
                 />
             )}
         </div>
-        )
+    )
 }
 
 export default CardioExercise;

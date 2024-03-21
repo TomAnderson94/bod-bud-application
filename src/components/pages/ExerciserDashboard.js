@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import Card from "../UI/Card.js";
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import Card from '../UI/Card.js';
 import './ExerciserDashboard.css';
 import API from '../api/API.js';
 
@@ -16,8 +16,8 @@ function ExerciserDashboard() {
     // Methods -----------------------------------------------
     const apiCall = async (endpoint) => {
         const response = await API.get(endpoint);
-        console.log(response); // Log the response
-
+        console.log("response: ", response); 
+        console.log("received exercise types: ", response.result);
         response.isSuccess
           ? setExerciseTypes(response.result)
           : setLoadingMessage(response.message) 
@@ -29,7 +29,7 @@ function ExerciserDashboard() {
 
     // Handlers ----------------------------------------------
     const handleExerciseTypeClick = (exerciseType) => {
-      console.log("clicked exercise type: ", exerciseType.ExerciseTypeName);
+      console.log('clicked exercise type: ', exerciseType.ExerciseTypeName);
       switch (exerciseType.ExerciseTypeName) {
         case 'Cardio Exercise':
           navigate('/cardioexercise');
@@ -50,14 +50,14 @@ function ExerciserDashboard() {
 
     // View --------------------------------------------------
     return (
-      <div className="exerciser-dashboard">
+      <div className='exerciser-dashboard'>
         <h1>Exerciser Dashboard</h1>
         {!exerciseTypes
             ? (<p>{loadingMessage}</p>)
             : exerciseTypes.length === 0
               ? (<p> No Exercise Types found</p>)
 
-              : (<div className="exerciser-card-container">
+              : (<div className='exerciser-card-container'>
                   {exerciseTypes.map((exerciseType) => (
                     <Card 
                       key={exerciseType.ExerciseTypeID}
@@ -65,9 +65,10 @@ function ExerciserDashboard() {
                       imageURL={exerciseType.ExerciseTypeURL}
                       onClick={() => handleExerciseTypeClick(exerciseType)}
                     />
-              ))}
-              </div>
-        )}
+                  ))}
+                </div>
+                )
+          }
       </div>
     );
 }

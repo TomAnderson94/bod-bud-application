@@ -77,35 +77,34 @@ function TrainerDashboard() {
 
     // View --------------------------------------------------
     return (
-    <div className='trainer-dashboard'>
-    <h1>Trainer Dashboard</h1>
-    <SearchBar onSearch={handleSearch} />
-        {!profiles
-            ? (<p>{loadingMessage}</p>)
-            : profiles.length === 0
-                ? (<p> No clients found</p>)
-
-                : (<div className='trainer-card-container'>
-                    {profiles.map((profile) => (
-                        <Card 
-                            key={profile.ProfileID}
-                            title={profile.ProfileName}
-                            imageURL={profile.ProfileURL}
-                            onClick={() => handleProfileClick(profile.ProfileID)}
-                        />
-                    ))}
-                  </div>
-                )}
-                <div className='custom-plans'>
-                    {routines && (
-                    <div className='routine-details-container'>
-                    <h2>Custom Plans</h2>                        
-                    <RoutineList 
-                        routines={routines}                
-                        />
+        <div className='trainer-dashboard'>
+            <h1>Trainer Dashboard</h1>
+            <SearchBar onSearch={handleSearch} />
+            {!profiles
+                ? (<p>{loadingMessage}</p>)
+                : profiles.length === 0
+                    ? (<p> No clients found</p>)
+                    : (<div className='trainer-card-container'>
+                        {profiles.map((profile) => (
+                            <Card 
+                                key={profile.ProfileID}
+                                title={profile.ProfileName}
+                                imageURL={profile.ProfileURL}
+                                onClick={() => handleProfileClick(profile.ProfileID)}
+                            />
+                        ))}
                     </div>
-                )}                    
-                </div>
+                    )}
+                    <div className='custom-plans'>
+                        {routines && (
+                        <div className='routine-details-container'>
+                            <h2>Custom Plans</h2>                        
+                            <RoutineList 
+                                routines={routines}                
+                                />
+                        </div>
+                        )}                    
+                    </div>
         </div>
     );
 }

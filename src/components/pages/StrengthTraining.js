@@ -186,8 +186,8 @@ function StrengthTraining() {
     return (
         <div className='strength-training-container'>
             <div className='strength-header-container'>
-            <h1>Strength Training</h1>
-            <img src='https://loremflickr.com/320/240/strengthtraining' alt ='strength' className='strength-header-image' />
+                <h1>Strength Training</h1>
+                <img src='https://loremflickr.com/320/240/strengthtraining' alt ='strength' className='strength-header-image' />
             </div>
             <p>A stronger body leads to a stronger mind </p>
             {!showForm && (
@@ -210,18 +210,20 @@ function StrengthTraining() {
                 ? (<p>{loadingMessage}</p>)
                 : userExercises.length === 0
                     ? (<p> No Exercises found</p>)
-                    : (<ExerciseList 
-                        userExercises={sortByExerciseName}
-                        exercises={exercises}
-                        onUpdate={updateExercise}
-                        onDelete={deleteExercise}
-                        onExerciseNameChange={updateExerciseName}
-                        onWeightChange={handleExerciseChange}
-                        onRepsChange={handleExerciseChange}
-                        onSetsChange={handleExerciseChange}
-                        onCancelEdit={cancelEdit}
+                    : (
+                        <ExerciseList 
+                            userExercises={sortByExerciseName}
+                            exercises={exercises}
+                            onUpdate={updateExercise}
+                            onDelete={deleteExercise}
+                            onExerciseNameChange={updateExerciseName}
+                            onWeightChange={handleExerciseChange}
+                            onRepsChange={handleExerciseChange}
+                            onSetsChange={handleExerciseChange}
+                            onCancelEdit={cancelEdit}
 
-                    />)
+                        />
+                    )
             }
         </div>
     );}

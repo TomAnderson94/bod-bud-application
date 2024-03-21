@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 
-
 function Login() {
 
     // State -------------------------------------------------
@@ -28,22 +27,22 @@ function Login() {
 
     // View --------------------------------------------------
    return (
-    <div className ="login-container">
+    <div className ='login-container'>
         <h1>Login</h1>
         <form onSubmit={handleSubmit}>
             <input
-            type="text"
-            placeholder="Username   .exerciser/.trainer/.admin"
+            type='text'
+            placeholder='Username   .exerciser/.trainer/.admin'
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             />
             <input
-            type="password"
-            placeholder="Password"
+            type='password'
+            placeholder='Password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             />
-            <button type="submit">Login</button>
+            <button type='submit'>Login</button>
         </form>
     </div>
     );

@@ -18,9 +18,9 @@
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-  }
+}
   
-  .nutrition-header-image {
+.nutrition-header-image {
     max-width: 100%;
     height: auto;
     margin-left: auto;
@@ -28,7 +28,7 @@
     box-shadow: 3px 8px 10px rgba(47, 161, 2, 0.911);
     border-radius: 2px;
     margin-top: 20px;
-  }
+}
 
 .nutrition-container h2 {
     color: #002147;
@@ -44,7 +44,6 @@
 .input-container {
     flex: 1; 
     min-width: 120px;
-
 }
 
 .input-container input {
@@ -55,6 +54,7 @@
     padding: 8px;
     border-radius: 2px;
 }
+
 .input-container label {    
     margin-bottom: 15px;
     color: #002147;
@@ -67,7 +67,6 @@
     color: white;
     cursor: crosshair;
     margin-top: 10px;
-    
 }
 
 .calculate-button:hover {
