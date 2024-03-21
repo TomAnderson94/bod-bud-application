@@ -1,5 +1,5 @@
-import React from "react";
-import ExerciseItem from "./ExerciseItem";
+import React from 'react';
+import ExerciseItem from './ExerciseItem';
 
 function ExerciseList({ userExercises, exercises, onUpdate, onDelete, onExerciseNameChange, onWeightChange, onRepsChange, onSetsChange, onCancelEdit }) {
   
@@ -36,6 +36,6 @@ function ExerciseList({ userExercises, exercises, onUpdate, onDelete, onExercise
         })}
       </div>
     );
-}
+};
 
 export default ExerciseList;

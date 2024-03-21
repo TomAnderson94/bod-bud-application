@@ -9,7 +9,7 @@ function RoutineDetails({ routine, routineExercises, exercises, onAddExercise, o
 
     // Handlers ----------------------------------------------
     const handleEdit = (exercise) => {
-        console.log("exercise to edit: ", exercise)
+        console.log('exercise to edit: ', exercise)
         setEditedRoutineExercise({ 
             ...exercise,
             Order: exercise.Order || 0,
@@ -77,7 +77,8 @@ function RoutineDetails({ routine, routineExercises, exercises, onAddExercise, o
             <div className='routine-details-header'>
                 <h2>{routine.RoutineID}. {routine.RoutineName}</h2>
                 <p>Description: {routine.RoutineDescription}</p>
-                <div className='routine-exercises'>
+            </div>
+            <div className='routine-exercises'>
                 <h3>Routine Exercises:</h3>
                 <ul>
                     {routineExercises.map((exercise, index) => {
@@ -110,11 +111,11 @@ function RoutineDetails({ routine, routineExercises, exercises, onAddExercise, o
                                 </div>
                                 <div className='form-field'>
                                     <select
-                                        id="exercise"
+                                        id='exercise'
                                         value={editedRoutineExercise.ExerciseID}
                                         onChange={handleExerciseIDChange}
                                     >
-                                        <option value="">Select Exercise</option>
+                                        <option value=''>Select Exercise</option>
                                         {exercises.map((exercise) => (
                                             <option key={exercise.ExerciseID} value={exercise.ExerciseID}>
                                                 {exercise.ExerciseName}
@@ -178,13 +179,12 @@ function RoutineDetails({ routine, routineExercises, exercises, onAddExercise, o
                     );
                 })}
                 </ul>
-                </div>
             </div>
-                <button onClick={onClose} className='routine-details-button'>Back</button>
-                <button onClick={onAddExercise} className='routine-details-button'>Add an Exercise</button>
-                <button onClick={() => onDelete(routine)} className='routine-details-delete-button'>Delete Routine</button>
+            <button onClick={onClose} className='routine-details-button'>Back</button>
+            <button onClick={onAddExercise} className='routine-details-button'>Add an Exercise</button>
+            <button onClick={() => onDelete(routine)} className='routine-details-delete-button'>Delete Routine</button>
         </div>
     );
-    }
+};
 
-    export default RoutineDetails;
+export default RoutineDetails;

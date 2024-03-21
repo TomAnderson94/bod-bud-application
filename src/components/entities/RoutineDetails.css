@@ -2,7 +2,7 @@
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .routine-details-header {
@@ -97,4 +97,14 @@
 
 .routine-details-delete-button:hover {
     background-color: rgb(204, 3, 3);
+}
+
+p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #666;
+}
+
+.routine-exercise-item:hover {
+    box-shadow: 8px 8px 8px rgba(177, 176, 176, 0.637);
 }

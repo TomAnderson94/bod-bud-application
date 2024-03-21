@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import './SearchBar.css';
 
 function SearchBar({ onSearch }) {
   
   // State -------------------------------------------------
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Handlers ----------------------------------------------
   const handleSearch = () => {
@@ -13,15 +13,15 @@ function SearchBar({ onSearch }) {
 
   // View --------------------------------------------------
   return (
-    <div className="search-bar-container">
+    <div className='search-bar-container'>
       <input
-      className="search-input"
-        type="text"
+      className='search-input'
+        type='text'
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder="Search profiles..."
+        placeholder='Search profiles...'
       />
-      <button className="search-button" onClick={handleSearch}>Search</button>
+      <button className='search-button' onClick={handleSearch}>Search</button>
     </div>
   );
 }

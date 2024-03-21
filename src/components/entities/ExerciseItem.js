@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import './ExerciseItem.css';
 
 function ExerciseItem({ userExercise, exerciseName, exercises, formattedDate, onUpdate, onDelete }) {
@@ -10,7 +10,6 @@ function ExerciseItem({ userExercise, exerciseName, exercises, formattedDate, on
     useEffect(() => {
         setEditedExercise({ ...userExercise });
     }, [userExercise]);
-
 
     // Handlers ----------------------------------------------
     const handleWeightChange = (e) => {
@@ -34,7 +33,7 @@ function ExerciseItem({ userExercise, exerciseName, exercises, formattedDate, on
     };
 
     const handleUpdate = () => {
-        console.log("handle update check: ", editedExercise)
+        console.log('handle update check: ', editedExercise)
         onUpdate({...editedExercise, editing: false });
     };
 
@@ -42,24 +41,24 @@ function ExerciseItem({ userExercise, exerciseName, exercises, formattedDate, on
     return (
         <div>
             {!editedExercise.editing ? (
-                <div className="record-item">
-                    <span className="record-attribute">{exerciseName}</span>
-                    <span className="record-attribute">{editedExercise.Weight}kg</span>
-                    <span className="record-attribute">x{editedExercise.Reps} reps</span>
-                    <span className="record-attribute">x{editedExercise.Sets} sets</span>
-                    <span className="record-attribute">{formattedDate}</span>
-                    <button onClick={handleEdit} className="modify-button">Modify Record</button>
-                    <button onClick={() => onDelete(userExercise)} className="delete-button">Delete Record</button>
+                <div className='record-item'>
+                    <span className='record-attribute'>{exerciseName}</span>
+                    <span className='record-attribute'>{editedExercise.Weight}kg</span>
+                    <span className='record-attribute'>x{editedExercise.Reps} reps</span>
+                    <span className='record-attribute'>x{editedExercise.Sets} sets</span>
+                    <span className='record-attribute'>{formattedDate}</span>
+                    <button onClick={handleEdit} className='modify-button'>Modify Record</button>
+                    <button onClick={() => onDelete(userExercise)} className='delete-button'>Delete Record</button>
                 </div>
             ) : (
-                <div className="record-item">
+                <div className='record-item'>
                     <div className='form-field'>
                         <select
-                            id="exercise"
+                            id='exercise'
                             value={editedExercise.ExerciseID}
                             onChange={(e) => setEditedExercise({ ...editedExercise, ExerciseID: e.target.value })}
                         >
-                            <option value="">Select Exercise</option>
+                            <option value=''>Select Exercise</option>
                             {exercises.map((exercise) => (
                                 <option key={exercise.ExerciseID} value={exercise.ExerciseID}>
                                     {exercise.ExerciseName}
@@ -67,37 +66,37 @@ function ExerciseItem({ userExercise, exerciseName, exercises, formattedDate, on
                             ))}
                         </select>
                     </div>
-                    <div className="form-field">
+                    <div className='form-field'>
                         <input
-                            type="number"
-                            placeholder="Weight (kg)"
+                            type='number'
+                            placeholder='Weight (kg)'
                             value={editedExercise.Weight}
                             onChange={handleWeightChange}
-                            step="0.5"
+                            step='0.5'
                         />
                     </div>
-                    <div className="form-field">
+                    <div className='form-field'>
                         <input
-                            type="number"
-                            placeholder="Reps"
+                            type='number'
+                            placeholder='Reps'
                             value={editedExercise.Reps}
                             onChange={handleRepsChange}
                         />
                     </div>
-                    <div className="form-field">
+                    <div className='form-field'>
                         <input
-                            type="number"
-                            placeholder="Sets"
+                            type='number'
+                            placeholder='Sets'
                             value={editedExercise.Sets}
                             onChange={handleSetsChange}
                         />
                     </div>
-                    <button onClick={handleUpdate} className="modify-button">Update</button>
-                    <button onClick={handleCancel} className="delete-button">Cancel</button>
+                    <button onClick={handleUpdate} className='modify-button'>Update</button>
+                    <button onClick={handleCancel} className='delete-button'>Cancel</button>
                 </div>
             )}
         </div>
     );
-}
+};
 
 export default ExerciseItem;

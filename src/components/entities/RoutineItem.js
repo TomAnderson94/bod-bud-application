@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import './RoutineItem.css';
 
-function RoutineItem({ routine, onItemClick, onUpdate, onDelete, handleRoutineSelect }) {
+function RoutineItem({ routine, onItemClick, onUpdate, onDelete }) {
     
     // State -------------------------------------------------
     const [editedRoutine, setEditedRoutine] = useState({...routine});
@@ -12,11 +12,11 @@ function RoutineItem({ routine, onItemClick, onUpdate, onDelete, handleRoutineSe
         setEditedRoutine({ ...routine });
     }, [routine]);
 
-  // Handlers ------------------------------------------------
+    // Handlers ------------------------------------------------
     const handleEdit = () => {
         setEditedRoutine({ ...routine, editing: true });
-        console.log("editing: ", routine)
-        console.log("editing ID: ", routine.RoutineID)
+        console.log('editing: ', routine)
+        console.log('editing ID: ', routine.RoutineID)
 
     };
 
@@ -38,43 +38,43 @@ function RoutineItem({ routine, onItemClick, onUpdate, onDelete, handleRoutineSe
 
     // View --------------------------------------------------
     return (
-        <div className="routine-item">
+        <div className='routine-item'>
             {!editedRoutine.editing ? (
                 <>
                     <div onClick={() => onItemClick(routine)}>
                         <h3>- {editedRoutine.RoutineName} -</h3>
-                        <div className="description-wrapper">
+                        <div className='description-wrapper'>
                             <p>{editedRoutine.RoutineDescription}</p>              
                         </div>
                     </div>
-                    <div className="routine-actions">
-                        <button onClick={handleEdit} className="modify-button">Edit Routine</button>
-                        <button onClick={() => onDelete(routine)} className="delete-button">Delete Routine</button>
+                    <div className='routine-actions'>
+                        <button onClick={handleEdit} className='modify-button'>Edit Routine</button>
+                        <button onClick={() => onDelete(routine)} className='delete-button'>Delete Routine</button>
                     </div>
                 </>
 
             ) : (
                 <>
-                    <div className="form-field">
+                    <div className='form-field'>
                         <input
-                            type="text"
-                            placeholder="Routine Name"
+                            type='text'
+                            placeholder='Routine Name'
                             value={editedRoutine.RoutineName}
                             onChange={handleNameChange}
                             required
                         />
                     </div>
-                    <div className="form-field">
+                    <div className='form-field'>
                         <input
-                            type="text"
-                            placeholder="Routine Description"
+                            type='text'
+                            placeholder='Routine Description'
                             value={editedRoutine.RoutineDescription}
                             onChange={handleDescriptionChange}
                         />
                     </div>
         
-                    <button onClick={handleUpdate} className="modify-button">Update</button>
-                    <button onClick={handleCancel} className="delete-button">Cancel</button>
+                    <button onClick={handleUpdate} className='modify-button'>Update</button>
+                    <button onClick={handleCancel} className='delete-button'>Cancel</button>
                 </>
             )}
         </div>

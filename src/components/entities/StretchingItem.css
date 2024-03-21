@@ -1,75 +1,75 @@
 .stretch-item {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    padding: 8px;
-    margin-top: 10px; 
-    border-bottom: 1px solid #002147; /* Just a bottom border for a cleaner look */
-  }
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 8px;
+  margin-top: 10px; 
+  border-bottom: 1px solid #002147; /* Just a bottom border for a cleaner look */
+}
 
-  .stretch-attribute {
-    margin: 0px 5px;
-    white-space: nowrap; /* Keeps content on a single line */
-    text-align: left;
-    flex: 1;    
-  }
+.stretch-attribute {
+  margin: 0px 5px;
+  white-space: nowrap; 
+  text-align: left;
+  flex: 1;    
+}
 
-  .stretch-attribute-additional-info {
-    margin: 0px 5px; 
-    flex-wrap: wrap;
-    text-align: left;
-    flex: 1;   
-    max-width: 200px; /* Maximum width for the attribute */
-    word-wrap: break-word;
-    overflow-wrap: break-word; /* Allow long words to break and wrap onto the next line */
-  }
+.stretch-attribute-additional-info {
+  margin: 0px 5px; 
+  flex-wrap: wrap;
+  text-align: left;
+  flex: 1;   
+  max-width: 200px; /* Maximum width for the attribute */
+  word-wrap: break-word;
+  overflow-wrap: break-word; /* Allow long words to break and wrap onto the next line */
+}
 
-  .stretch-item .form-field input {
-    width: 98%;
-    display: block;
-    margin-bottom: 5px;
-    padding: 10px;
-    flex: 1;
-  }
+.stretch-item .form-field input {
+  width: 98%;
+  display: block;
+  margin-bottom: 5px;
+  padding: 10px;
+  flex: 1;
+}
 
-  .modify-button {
-    padding: 5px 8px;
-    margin-right: 5px; 
-    border: none;
-    width: auto;
-    background-color: #002147;
-    color: white;
-    border: 2px solid white;
-    cursor: pointer;
-    border-radius: 4px;
-    white-space: nowrap; /* Prevents the text inside the button from wrapping */
-  }
-  .delete-button {
-    padding: 5px 8px;
-    width: auto;
-    border: none;
-    background-color: #002147;
-    color: white;
-    border: 2px solid white;
-    cursor: pointer;
-    border-radius: 4px;
-    white-space: nowrap; /* Prevents the text inside the button from wrapping */
-  }
+.modify-button {
+  padding: 5px 8px;
+  margin-right: 5px; 
+  border: none;
+  width: auto;
+  background-color: #002147;
+  color: white;
+  border: 2px solid white;
+  cursor: pointer;
+  border-radius: 4px;
+  white-space: nowrap; 
+}
 
-  .modify-button:hover {
-    background-color: #05502d;
-  }
+.delete-button {
+  padding: 5px 8px;
+  width: auto;
+  border: none;
+  background-color: #002147;
+  color: white;
+  border: 2px solid white;
+  cursor: pointer;
+  border-radius: 4px;
+  white-space: nowrap; 
+}
 
-  .delete-button:hover {
-    background-color: #880303;
-  }
+.modify-button:hover {
+  background-color: #05502d;
+}
 
-    /* Responsive layout for smaller screens */
-    @media (max-width: 768px) {
-        .stretch-item {
-          flex-direction: column;
-          align-items: flex-start; 
-          gap: 10px;
+.delete-button:hover {
+  background-color: #880303;
+}
 
-        }
-      }
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+  .stretch-item {
+    flex-direction: column;
+    align-items: flex-start; 
+    gap: 10px;
+    }
+}

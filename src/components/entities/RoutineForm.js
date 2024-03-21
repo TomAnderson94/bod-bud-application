@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import './RoutineForm.css';
-import RoutineExerciseForm from './RoutineExercisesForm';
 
-function RoutineForm({ onSubmit, onCancel, exercises }) {
+function RoutineForm({ onSubmit, onCancel }) {
 
     // State -------------------------------------------------
-    const [routineName, setRoutineName] = useState("");
-    const [routineDescription, setRoutineDescription] = useState("");
+    const [routineName, setRoutineName] = useState('');
+    const [routineDescription, setRoutineDescription] = useState('');
     
     // Handlers ----------------------------------------------
     const handleSubmit = (e) => {
@@ -23,31 +22,31 @@ function RoutineForm({ onSubmit, onCancel, exercises }) {
 
     // View --------------------------------------------------
     return (
-        <form onSubmit={handleSubmit} className="routine-form-container">
+        <form onSubmit={handleSubmit} className='routine-form-container'>
             <div className='form-field'>
                 <input
-                    type="text"
-                    placeholder="Routine Name"
+                    type='text'
+                    placeholder='Routine Name'
                     value={routineName}
                     onChange={(e) => setRoutineName(e.target.value)}
                     required
                 />
             </div>
-            <div className="form-field">
+            <div className='form-field'>
                 <input
-                    type="text"
-                    placeholder="Routine Description"
+                    type='text'
+                    placeholder='Routine Description'
                     value={routineDescription}
                     onChange={(e) => setRoutineDescription(e.target.value)}
                     required
                 />
             </div>
-            <div className="form-field">
-                <button type="submit" className="submit-button">Create Routine</button>
-                <button className="cancel-button" onClick={onCancel}>Cancel</button>
+            <div className='form-field'>
+                <button type='submit' className='submit-button'>Create Routine</button>
+                <button className='cancel-button' onClick={onCancel}>Cancel</button>
             </div>
         </form>
     );
-}
+};
 
 export default RoutineForm;

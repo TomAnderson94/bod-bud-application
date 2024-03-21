@@ -1,6 +1,5 @@
 import API_URL from './apiURL.js';
 
-
 // Initialisation ----------------------------------------
 export const API = {};
 
@@ -37,7 +36,6 @@ const callFetch = async (endpoint, method, dataObj) => {
         message: error.message
         };
     }
-
 };
 
 export default API;
