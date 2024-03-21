@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import API from '../api/API.js';
-import Modal from "../UI/Modal.js";
+import Modal from '../UI/Modal.js';
 import './ProfilePage.css';
-import RoutineForm from "../entities/RoutineForm.js";
-import RoutineList from "../entities/RoutineList.js";
-import { useParams, useNavigate } from "react-router-dom";
-import WeightProgressChart from "../entities/WeightProgressChart.js";
-import CardioList from "../entities/CardioList.js";
+import RoutineForm from '../entities/RoutineForm.js';
+import RoutineList from '../entities/RoutineList.js';
+import { useParams, useNavigate } from 'react-router-dom';
+import WeightProgressChart from '../entities/WeightProgressChart.js';
+import CardioList from '../entities/CardioList.js';
 
 function ProfilePage() {
 
@@ -41,13 +41,13 @@ function ProfilePage() {
             const response = await API.get(endpoint);
             if (response.isSuccess && response.result.length > 0) {
                 setProfile(response.result[0]);
-                console.log("profiles GET result: ", response.result); // console log the response
+                console.log('profiles GET result: ', response.result); // console log the response
                 setLoadingMessage('');
             } else {
                 setLoadingMessage(response.message || 'Failed to load profile.');
             }
         } catch (error) {
-            setLoadingMessage("An error occurred while fetching profile data.")
+            setLoadingMessage('An error occurred while fetching profile data.')
         }
     };
 
@@ -56,7 +56,7 @@ function ProfilePage() {
             const response = await API.get(routineExercisesEndpoint);
             if (response.isSuccess) {
                 setRoutineExercises(response.result);
-                console.log("routine exercises GET result: ", response.result);
+                console.log('routine exercises GET result: ', response.result);
             } else {
                 setLoadingMessage('Failed to load exercises: ' + response.message);
             }
@@ -70,13 +70,13 @@ function ProfilePage() {
             const response = await API.get(`/routines/1`);
             if (response.isSuccess && response.result.length > 0) {
                 setRoutines(response.result);
-                console.log("routines GET result: ", response.result);
+                console.log('routines GET result: ', response.result);
                 setLoadingMessage('');
             } else {
                 setLoadingMessage(response.message || 'Failed to load routines.');
             }
         } catch (error) {
-            setLoadingMessage("An error occurred while fetching routines data.")
+            setLoadingMessage('An error occurred while fetching routines data.')
         }
     };
 
@@ -88,7 +88,7 @@ function ProfilePage() {
                 e.editing = false;
             })
             setUserExercises(response.result);
-            console.log("Received exercises:", response.result);
+            console.log('Received exercises:', response.result);
           } else {
             setLoadingMessage(response.message);
           }
@@ -102,13 +102,13 @@ function ProfilePage() {
             const response = await API.get(exercisesEndpoint);
             if (response.isSuccess && response.result.length > 0) {
                 setExercises(response.result);
-                console.log("exercises GET result: ", response.result); // console log the response
+                console.log('exercises GET result: ', response.result); // console log the response
                 setLoadingMessage('');
             } else {
                 setLoadingMessage(response.message || 'Failed to load exercises.');
             }
         } catch (error) {
-            setLoadingMessage("An error occurred while fetching exercises data.")
+            setLoadingMessage('An error occurred while fetching exercises data.')
         }
     };
 
@@ -121,7 +121,7 @@ function ProfilePage() {
                 setLoadingMessage(response.message);
             }
         } catch (error) {
-            setLoadingMessage("An error occurred fetching cardio exercises");
+            setLoadingMessage('An error occurred fetching cardio exercises');
         }    
     };
 
@@ -169,10 +169,10 @@ function ProfilePage() {
         setLoadingMessage('Adding routine...');
         try {
             const response = await API.post(routinesEndpoint, newRoutine);
-            console.log("response = ", response); // console log the response
-            console.log("newRoutine = ", newRoutine); 
-            console.log("current routine list = ", routines); 
-            console.log("selected routine ID = ", newRoutine.ExerciseID); 
+            console.log('response = ', response); // console log the response
+            console.log('newRoutine = ', newRoutine); 
+            console.log('current routine list = ', routines); 
+            console.log('selected routine ID = ', newRoutine.ExerciseID); 
 
             if (response.isSuccess) {
                 setRoutines([...routines, newRoutine]);
@@ -234,23 +234,23 @@ function ProfilePage() {
 
     const handleRoutineClick = (routine) => {
         setSelectedRoutine(routine);
-        console.log("clicked: ", routine);
+        console.log('clicked: ', routine);
         const routineDetailsURL = `/routines/${routine.RoutineID}`;
         navigate(routineDetailsURL);
     };
 
     // Handler function to handle routine selection
     const handleRoutineSelect = (routine) => {
-        console.log("selected routine: ", routine);
+        console.log('selected routine: ', routine);
         setSelectedRoutine(routine);
     };
 
     const deleteRoutine = async (routineToDelete) => {
-        console.log("body = ", routineToDelete); 
-        console.log("user ID = ", routineToDelete.UserID); 
-        console.log("routine ID = ", routineToDelete.RoutineID); 
+        console.log('body = ', routineToDelete); 
+        console.log('user ID = ', routineToDelete.UserID); 
+        console.log('routine ID = ', routineToDelete.RoutineID); 
 
-        if (!window.confirm("Are you sure you want to delete this routine and all of its exercises?")) return;
+        if (!window.confirm('Are you sure you want to delete this routine and all of its exercises?')) return;
 
         setLoadingMessage('Deleting routine...');
         try {
@@ -272,11 +272,11 @@ function ProfilePage() {
     };
 
     const deleteCardioExercise = async (cardioToDelete) => {
-        console.log("body = ", cardioToDelete); 
-        console.log("user ID = ", cardioToDelete.UserID); 
-        console.log("exercise ID = ", cardioToDelete.CardioExerciseID); 
+        console.log('body = ', cardioToDelete); 
+        console.log('user ID = ', cardioToDelete.UserID); 
+        console.log('exercise ID = ', cardioToDelete.CardioExerciseID); 
 
-        if (!window.confirm("Are you sure you want to delete this exercise and all of its exercises?")) return;
+        if (!window.confirm('Are you sure you want to delete this exercise and all of its exercises?')) return;
 
         setLoadingMessage('Deleting exercise...');
         try {
@@ -325,25 +325,25 @@ function ProfilePage() {
 
     // View --------------------------------------------------
     return (
-        <div className="profile-page">
+        <div className='profile-page'>
             <h1>My Profile</h1>
             {loadingMessage && <p>{loadingMessage}</p>}
             {profile && (
-                <div className="profile-details-container">
-                    <div className="profile-details">
-                        <p><br /><img src={profile.ProfileURL} alt="Profile" /></p>
+                <div className='profile-details-container'>
+                    <div className='profile-details'>
+                        <p><br /><img src={profile.ProfileURL} alt='Profile' /></p>
                         <p><strong>Name:</strong> {profile.ProfileName}</p>
                         <p><strong>Goals:</strong> {profile.ProfileGoals}</p>
                         <p><strong>Interests:</strong> {profile.ProfileInterests}</p>
-                        <div className="button-container">
-                            <button onClick={toggleModal} className="edit-button"> Edit Personal Details</button>
-                            <button onClick={() => setShowRoutineForm(true)} className="routine-record-button">Create Custom Routine</button>
+                        <div className='button-container'>
+                            <button onClick={toggleModal} className='edit-button'> Edit Personal Details</button>
+                            <button onClick={() => setShowRoutineForm(true)} className='routine-record-button'>Create Custom Routine</button>
                         </div>
                     </div>
                 </div>
             )}
             {routines && (
-                <div className="routine-details-container">
+                <div className='routine-details-container'>
                     <h2>My Routines</h2>
                     <RoutineList 
                     routines={routines} 
@@ -359,14 +359,14 @@ function ProfilePage() {
                 <Modal onClose={toggleModal}>
                     <form onSubmit={handleFormSubmit}>
                         <label>Name:</label>
-                        <input name="ProfileName" value={profile.ProfileName} onChange={handleInputChange} />
+                        <input name='ProfileName' value={profile.ProfileName} onChange={handleInputChange} />
                         <label>Goals:</label>
-                        <input name="ProfileGoals" value={profile.ProfileGoals} onChange={handleInputChange} />
+                        <input name='ProfileGoals' value={profile.ProfileGoals} onChange={handleInputChange} />
                         <label>Interests:</label>
-                        <input name="ProfileInterests" value={profile.ProfileInterests} onChange={handleInputChange} />
+                        <input name='ProfileInterests' value={profile.ProfileInterests} onChange={handleInputChange} />
                         <label>Profile URL:</label>
-                        <input name="ProfileURL" value={profile.ProfileURL} onChange={handleInputChange} />
-                        <button type="submit" className="modal-save-button">Save Changes</button>
+                        <input name='ProfileURL' value={profile.ProfileURL} onChange={handleInputChange} />
+                        <button type='submit' className='modal-save-button'>Save Changes</button>
                     </form>
                 </Modal>
             )}
@@ -384,12 +384,12 @@ function ProfilePage() {
                     <WeightProgressChart 
                     userExercises={userExercises} 
                     exercises={filteredExercises}/>
-                    <div className="fitness-details-container">
+                    <div className='fitness-details-container'>
                     <h2>Fitness Times</h2>
-                    <button onClick={toggleSortByTime} className="time-button">
+                    <button onClick={toggleSortByTime} className='time-button'>
                         {sortByTime ? 'See All' : 'Fastest Time'}
                     </button>
-                    <button onClick={toggleSortByDistance} className="time-button">
+                    <button onClick={toggleSortByDistance} className='time-button'>
                         {sortByDistance ? 'See All' : 'Longest Distance'}
                     </button>
                     <CardioList

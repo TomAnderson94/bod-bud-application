@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import API from '../api/API.js';
-import RoutineDetails from "../entities/RoutineDetails.js";
-import Modal from "../UI/Modal.js";
-import RoutineExerciseForm from "../entities/RoutineExercisesForm.js";
+import RoutineDetails from '../entities/RoutineDetails.js';
+import Modal from '../UI/Modal.js';
+import RoutineExerciseForm from '../entities/RoutineExercisesForm.js';
 
 function RoutineDetailsPage() {
 
     // Initialisation ----------------------------------------
     const { routineID, userID } = useParams();
-    console.log("routineID: ", routineID, "+ userID: ", userID);
+    console.log('routineID: ', routineID, '+ userID: ', userID);
     const routineEndpoint = `/routines/${routineID}/${userID}`;
     const routineExercisesEndpoint = `/routineexercises/${routineID}`;
     const exercisesEndpoint ='/exercises';
@@ -30,13 +30,13 @@ function RoutineDetailsPage() {
             const response = await API.get(routineEndpoint);
             if (response.isSuccess && response.result.length > 0) {
                 setRoutine(response.result[0]);
-                console.log("routine id GET result: ", response.result);
+                console.log('specific routine GET result: ', response.result);
                 setLoadingMessage('');
             } else {
                 setLoadingMessage(response.message || 'Failed to load routines.');
             }
         } catch (error) {
-            setLoadingMessage("An error occurred while fetching routines data.")
+            setLoadingMessage('An error occurred while fetching routines data.')
         }
     };
 
@@ -45,13 +45,13 @@ function RoutineDetailsPage() {
             const response = await API.get(routineExercisesEndpoint);
             if (response.isSuccess && response.result.length > 0) {
                 setRoutineExercises(response.result);
-                console.log("routine exercise id GET result: ", response.result);
+                console.log('routine exercises for the specific routine: ', response.result);
                 setLoadingMessage('');
             } else {
                 setLoadingMessage(response.message || 'Failed to load routine exercises.');
             }
         } catch (error) {
-            setLoadingMessage("An error occurred while fetching routine exercises data.")
+            setLoadingMessage('An error occurred while fetching routine exercises data.')
         }
     };
 
@@ -68,7 +68,6 @@ function RoutineDetailsPage() {
         }
     };
 
-
     useEffect(() => {
         fetchRoutine();
     }, [routineEndpoint]);
@@ -82,7 +81,6 @@ function RoutineDetailsPage() {
     }, [exercisesEndpoint]);
 
     const toggleModal = () => setModalOpen(!modalOpen);
-
 
     // Handlers ----------------------------------------------
     const handleAddExercise = () => {
@@ -98,14 +96,12 @@ function RoutineDetailsPage() {
         try {
             newRoutineExercise.RoutinesID = routineID;
             const response = await API.post('/routineExercises', newRoutineExercise);
-            console.log("response = ", response); // Log the response
-            console.log("newRoutineExercise = ", newRoutineExercise); 
-
-            console.log("current routines id = ", newRoutineExercise.RoutinesID); 
-            console.log("current weight = ", newRoutineExercise.CustomWeight); 
-            console.log("order = ", newRoutineExercise.Order); 
-            console.log("selected exercise ID = ", newRoutineExercise.ExerciseID); 
-
+            console.log('response = ', response); 
+            console.log('new routine exercise = ', newRoutineExercise); 
+            console.log('current routines id = ', newRoutineExercise.RoutinesID); 
+            console.log('current weight = ', newRoutineExercise.CustomWeight); 
+            console.log('order = ', newRoutineExercise.Order); 
+            console.log('selected exercise ID = ', newRoutineExercise.ExerciseID); 
             
             if (response.isSuccess) {
                 setRoutineExercises([...routineExercises, newRoutineExercise]);
@@ -123,7 +119,7 @@ function RoutineDetailsPage() {
 
     const handleRoutineExerciseUpdate = async (updatedRoutineExercise) => {
         setLoadingMessage('Updating routine exercise...');
-        console.log("updated routine exercise: ", updatedRoutineExercise);
+        console.log('updated routine exercise: ', updatedRoutineExercise);
 
         try {
             const response = await API.put(`/routineexercises/${updatedRoutineExercise.RoutineExerciseID}/${updatedRoutineExercise.RoutinesID}`, updatedRoutineExercise);
@@ -133,7 +129,7 @@ function RoutineDetailsPage() {
                 );
                 setRoutineExercises(updatedExercise);
                 fetchRoutineExercises();
-                console.log("updated exercise: ", updatedExercise);
+                console.log('updated routine exercises: ', updatedExercise);
                 setLoadingMessage('');
             } else {
                 setLoadingMessage('Routine exercise could not be updated: ' + response.message);
@@ -145,11 +141,11 @@ function RoutineDetailsPage() {
     };
 
     const deleteRoutine = async (routineToDelete) => {
-        console.log("body = ", routineToDelete); 
-        console.log("user ID = ", routineToDelete.UserID); 
-        console.log("routine ID = ", routineToDelete.RoutineID); 
+        console.log('body = ', routineToDelete); 
+        console.log('user ID = ', routineToDelete.UserID); 
+        console.log('routine ID = ', routineToDelete.RoutineID); 
 
-        if (!window.confirm("Are you sure you want to delete this routine and all of its exercises?")) return;
+        if (!window.confirm('Are you sure you want to delete this routine and all of its exercises?')) return;
 
         setLoadingMessage('Deleting routine...');
         try {
@@ -161,8 +157,6 @@ function RoutineDetailsPage() {
                 setLoadingMessage('');
                 navigate(`/myprofile/${routineToDelete.UserID}`);
                 console.log('routine deleted successfully'); 
-
-
             } else {
                 setLoadingMessage('Routine could not be deleted: ' + response.message);
             }
@@ -173,11 +167,11 @@ function RoutineDetailsPage() {
     };
 
     const deleteRoutineExercise = async (routineExerciseToDelete) => {
-        console.log("body = ", routineExerciseToDelete); 
-        console.log("user ID = ", routineExerciseToDelete.RoutinesID); 
-        console.log("routine exercise ID = ", routineExerciseToDelete.RoutineExerciseID); 
+        console.log('body = ', routineExerciseToDelete); 
+        console.log('user ID = ', routineExerciseToDelete.RoutinesID); 
+        console.log('routine exercise ID = ', routineExerciseToDelete.RoutineExerciseID); 
 
-        if (!window.confirm("Are you sure you want to delete this routine exercise?")) return;
+        if (!window.confirm('Are you sure you want to delete this routine exercise?')) return;
 
         setLoadingMessage('Deleting routine exercise...');
         try {
@@ -187,9 +181,7 @@ function RoutineDetailsPage() {
                     routine.RoutineExerciseID !== routineExerciseToDelete.RoutineExerciseID
                 ));
                 setLoadingMessage('');
-                console.log('routine deleted successfully'); 
-
-
+                console.log('routine exercise deleted successfully'); 
             } else {
                 setLoadingMessage('Routine exercise could not be deleted: ' + response.message);
             }
@@ -218,7 +210,7 @@ function RoutineDetailsPage() {
             {modalOpen && (
                 <Modal onClose={toggleModal}>
                     <RoutineExerciseForm 
-                    className="custom-form-styling"
+                    className='custom-form-styling'
                     exercises={exercises}
                     onSubmit={handleSubmitExercise}
                     />

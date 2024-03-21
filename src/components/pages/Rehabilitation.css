@@ -28,7 +28,6 @@
     margin-top: 30px;
     margin-bottom: 30px;
     cursor:cell;
-
 }
 
 .nutrition-button:hover {
@@ -45,6 +44,7 @@
     border-radius: 2px;
     width: 400px;
 }
+
 .rehab-input-container label {    
     margin-bottom: 15px;
     color: #002147;
@@ -55,7 +55,6 @@
     font-size: large;
 }
 
-
 .rehab-calculate-button {
     padding: 30px;
     border-radius: 50%;
@@ -64,7 +63,6 @@
     cursor:cell;
     margin-top: 10px;
     font-weight: bolder
-    
 }
 
 .rehab-calculate-button:hover {

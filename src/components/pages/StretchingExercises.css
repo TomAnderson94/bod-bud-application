@@ -105,7 +105,7 @@
     border: 2px solid white;
     cursor: pointer;
     border-radius: 4px;
-    white-space: nowrap; /* Prevents the text inside the button from wrapping */
+    white-space: nowrap;
 }
 
 .stretch-record-button:hover {

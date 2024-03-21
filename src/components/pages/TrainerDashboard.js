@@ -1,11 +1,11 @@
-import React from "react";
-import Card from "../UI/Card";
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import API from "../api/API";
-import SearchBar from "../entities/SearchBar";
+import React from 'react';
+import Card from '../UI/Card';
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import API from '../api/API';
+import SearchBar from '../entities/SearchBar';
 import './TrainerDashboard.css';
-import RoutineList from "../entities/RoutineList";
+import RoutineList from '../entities/RoutineList';
 
 function TrainerDashboard() {
 
@@ -25,30 +25,29 @@ function TrainerDashboard() {
         try {
             const response = await API.get(profilesEndpoint);
             if (response.isSuccess && response.result.length > 0) {
-                // Assuming the first result is the profile
                 setProfiles(response.result);
-                console.log("profiles GET result: ", response.result); // Log the response
+                console.log('profiles GET result: ', response.result);
                 setLoadingMessage('');
             } else {
                 setLoadingMessage(response.message || 'Failed to load profile.');
             }
         } catch (error) {
-            setLoadingMessage("An error occurred while fetching profile data.")
+            setLoadingMessage('An error occurred while fetching profile data.')
         }
     };
 
     const fetchRoutines = async () => {
         try {
-            const response = await API.get(`/routines/1`);
+            const response = await API.get(routinesEndpoint);
             if (response.isSuccess && response.result.length > 0) {
                 setRoutines(response.result);
-                console.log("routines GET result: ", response.result);
+                console.log('routines GET result: ', response.result);
                 setLoadingMessage('');
             } else {
                 setLoadingMessage(response.message || 'Failed to load routines.');
             }
         } catch (error) {
-            setLoadingMessage("An error occurred while fetching routines data.")
+            setLoadingMessage('An error occurred while fetching routines data.')
         }
     };
 
@@ -57,28 +56,28 @@ function TrainerDashboard() {
     }, [profilesEndpoint]); 
 
     useEffect(() => {
-        fetchRoutines(routinesEndpoint);
+        fetchRoutines();
     }, [routinesEndpoint]); 
 
     // Handlers ----------------------------------------------
     const handleProfileClick = (profileID) => {
         navigate(`/myprofile/${profileID}`);
-        console.log("endpoint id: ", `/myprofile/${profileID}`);
+        console.log('profile endpoint id: ', `/myprofile/${profileID}`);
     };
 
     const handleSearch = (searchQuery) => {
         const matchingProfile = profiles.find(profile => profile.ProfileName.toLowerCase() === searchQuery.toLowerCase());
-        console.log("search is: ", searchQuery);
+        console.log('search is: ', searchQuery);
         if (matchingProfile) {
             navigate(`/myprofile/${matchingProfile.ProfileID}`)
         } else {
-            alert("Profile not found")
+            alert('Profile not found')
         }
     };
 
     // View --------------------------------------------------
     return (
-    <div className="trainer-dashboard">
+    <div className='trainer-dashboard'>
     <h1>Trainer Dashboard</h1>
     <SearchBar onSearch={handleSearch} />
         {!profiles
@@ -86,7 +85,7 @@ function TrainerDashboard() {
             : profiles.length === 0
                 ? (<p> No clients found</p>)
 
-                : (<div className="trainer-card-container">
+                : (<div className='trainer-card-container'>
                     {profiles.map((profile) => (
                         <Card 
                             key={profile.ProfileID}
@@ -97,10 +96,9 @@ function TrainerDashboard() {
                     ))}
                   </div>
                 )}
-                <div className="custom-plans">
-
+                <div className='custom-plans'>
                     {routines && (
-                    <div className="routine-details-container">
+                    <div className='routine-details-container'>
                     <h2>Custom Plans</h2>                        
                     <RoutineList 
                         routines={routines}                

@@ -16,7 +16,6 @@ function StrengthTraining() {
     const [exercises, setExercises] = useState([]); // Holds the list of exercises for the dropdown
     const [loadingMessage, setLoadingMessage] = useState('Loading exercises...');
     const [showForm, setShowForm] = useState(false);
-    const [editingExercise, setEditingExercise] = useState(null); // State for exercise record being edited
     const [selectedExerciseName, setSelectedExerciseName] = useState(null);
 
 
@@ -29,7 +28,7 @@ function StrengthTraining() {
                 e.editing = false;
             })
             setUserExercises(response.result);
-            console.log("Received exercises:", response.result);
+            console.log('Received exercises:', response.result);
           } else {
             setLoadingMessage(response.message);
           }
@@ -64,31 +63,28 @@ function StrengthTraining() {
     const handleAdd = () => setShowForm(true);
     const handleCancel = () => setShowForm(false);
     
-
     const addExercise = async (newExercise) => {
         setLoadingMessage('Adding exercise...');
         try {
             const response = await API.post('/userExercises', newExercise);
-            console.log("response = ", response); // Log the response
-            console.log("newExercise = ", newExercise); 
-
-            console.log("current exercise list = ", exercises); 
-            console.log("selected exercise ID = ", newExercise.ExerciseID); 
-
+            console.log('response = ', response); // Log the response
+            console.log('newExercise = ', newExercise); 
+            console.log('current exercise list = ', exercises); 
+            console.log('selected exercise ID = ', newExercise.ExerciseID); 
 
             if (response.isSuccess) {
 
                 // Find the exercise name from the exercises list
                 const exerciseName = exercises.find(exercise => exercise.ExerciseID === parseInt(newExercise.ExerciseID))?.ExerciseName || 'Exercise not found';
-                console.log("Found exercise name = ", exerciseName); 
+                console.log('Found exercise name = ', exerciseName); 
 
                 // Construct the new exercise with the necessary data
                 const addedExercise = {
                     ...newExercise,
-                    UserExerciseID: response.result.id,
                     ExerciseName: exerciseName,
                     formattedDate: new Date(newExercise.Date).toLocaleDateString()
                 };
+                console.log('added Exercise: ', addedExercise);
                 // Add the new exercise to the list of user exercises
                 setUserExercises([...userExercises, addedExercise]);
                 setLoadingMessage(''); 
@@ -101,24 +97,22 @@ function StrengthTraining() {
         }
     };
 
-
     const updateExercise = async (exerciseToUpdate) => {
-        setEditingExercise(exerciseToUpdate)
         setLoadingMessage('Updating exercise...');
         console.log('update userExerciseID check: ', exerciseToUpdate.UserExerciseID);
         console.log('update Exercise Name check: ', exerciseToUpdate.ExerciseID);
-        console.log('before API call: ', exerciseToUpdate);
+        console.log('updated exercise: ', exerciseToUpdate);
 
         exerciseToUpdate.editing = true;
 
         try {
-            const response = await API.put(`/userExercises/${exerciseToUpdate.UserExerciseID}/${exerciseToUpdate.UserUserID}`, exerciseToUpdate);
+            const response = await API.put(`/userExercises/${exerciseToUpdate.UserExerciseID}/${exerciseToUpdate.UserID}`, exerciseToUpdate);
             if (response.isSuccess && response.result) {
                 const updatedExercises = userExercises.map(exercise => 
                     exercise.UserExerciseID === exerciseToUpdate.UserExerciseID ?  {...exercise, ...exerciseToUpdate, editing: false} : exercise
                 );
                 setUserExercises(updatedExercises);
-        console.log('Updated userExercises: ', updatedExercises);
+                console.log('Updated user exercises: ', updatedExercises);
 
                 setLoadingMessage('');
             } else {
@@ -130,11 +124,10 @@ function StrengthTraining() {
         }
     };
 
-
     const deleteExercise = async (exerciseToDelete) => {
-        console.log('delete check: ', exerciseToDelete);
+        console.log('delete user exercise ID check: ', exerciseToDelete);
 
-        if (!window.confirm("Are you sure you want to delete this exercise?")) return;
+        if (!window.confirm('Are you sure you want to delete this exercise?')) return;
 
         setLoadingMessage('Deleting exercise...');
         try {
@@ -158,7 +151,6 @@ function StrengthTraining() {
             if (userExercise.UserExerciseID === userExerciseId) {
                 userExercise.ExerciseID = e.target.value
             }
-
             return userExercise
         })
         setUserExercises(newUserExercises);
@@ -172,7 +164,6 @@ function StrengthTraining() {
     };
 
     const cancelEdit = () => {
-        setEditingExercise(null);
         setUserExercises(userExercises.map(ex => {
             return { ...ex, editing: false };
         }));
@@ -182,32 +173,30 @@ function StrengthTraining() {
     const filteredExercises = exercises.filter(exercise => exercise.ExerciseTypeID === 3);
    
     // Sort exercises by their name
-    const sortByExerciseName = selectedExerciseName 
-    ? userExercises.filter(userExercise => {
+    const sortByExerciseName = selectedExerciseName ? userExercises.filter(userExercise => {
         const exercise = exercises.find(exercise => exercise.ExerciseName === selectedExerciseName);
         return exercise && userExercise.ExerciseID === exercise.ExerciseID;
     }) : userExercises;
-    console.log("name is :", sortByExerciseName);
 
     const handleSortChange = (e) => {
         setSelectedExerciseName(e.target.value);
-    }
+    };
 
     // View --------------------------------------------------
     return (
-        <div className="strength-training-container">
+        <div className='strength-training-container'>
             <div className='strength-header-container'>
             <h1>Strength Training</h1>
             <img src='https://loremflickr.com/320/240/strengthtraining' alt ='strength' className='strength-header-image' />
             </div>
             <p>A stronger body leads to a stronger mind </p>
             {!showForm && (
-                <button className="record-button" onClick={handleAdd}>Record New Exercise</button>
+                <button className='record-button' onClick={handleAdd}>Record New Exercise</button>
                 
             )}  
             <div className='dropdown-container'>
-                <select onChange={handleSortChange} value={selectedExerciseName}>
-                    <option value="">Select All Exercises</option>
+                <select onChange={handleSortChange} value={selectedExerciseName || ''}>
+                    <option value=''>Select All Exercises</option>
                     {filteredExercises.map(exercise => (
                         <option key={exercise.ExerciseID} value={exercise.ExerciseName}>{exercise.ExerciseName}</option>
                     ))}
@@ -227,7 +216,6 @@ function StrengthTraining() {
                         onUpdate={updateExercise}
                         onDelete={deleteExercise}
                         onExerciseNameChange={updateExerciseName}
-
                         onWeightChange={handleExerciseChange}
                         onRepsChange={handleExerciseChange}
                         onSetsChange={handleExerciseChange}
