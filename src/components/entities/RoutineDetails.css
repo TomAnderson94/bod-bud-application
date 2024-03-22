@@ -99,7 +99,7 @@
     background-color: rgb(204, 3, 3);
 }
 
-p {
+.routine-exercise-item p {
     margin-bottom: 20px;
     font-size: 16px;
     color: #666;
