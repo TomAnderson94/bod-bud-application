@@ -39,6 +39,7 @@
 .nutrition-container p {
     margin-top: 20px;
     font-size: larger;
+    padding: 10px;
 }
 
 .input-container {
@@ -71,6 +72,11 @@
 
 .calculate-button:hover {
     background-color: #0056b3;
+}
+
+.recommended-plan-container {
+    margin-top: 20px;
+    padding: 10px;
 }
 
 @media (max-width: 768px) { 
