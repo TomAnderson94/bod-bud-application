@@ -22,6 +22,9 @@
   display: flex;
   flex-direction: column; 
   gap: 20px; 
+  overflow-y: auto; /* Allows scrolling */
+  max-height: calc(100vh - 100px); /* Keeps the modal within the max height */
+
 }
 
 .modal-close-button {
