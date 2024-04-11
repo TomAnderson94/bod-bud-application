@@ -210,7 +210,6 @@ function RoutineDetailsPage() {
             {modalOpen && (
                 <Modal onClose={toggleModal}>
                     <RoutineExerciseForm 
-                    className='custom-form-styling'
                     exercises={exercises}
                     onSubmit={handleSubmitExercise}
                     />
