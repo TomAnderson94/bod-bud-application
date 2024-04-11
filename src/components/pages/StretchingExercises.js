@@ -70,7 +70,7 @@ function StretchingExercises() {
             console.log('selected user ID = ', newExercise.UserID); 
 
             if (response.isSuccess) {
-                setStretchingExercises([...stretchingExercises, newExercise]);
+                setStretchingExercises([newExercise, ...stretchingExercises]);
                 setLoadingMessage(''); 
             } else {
                 setLoadingMessage('Exercise could not be recorded: ' + response.message);

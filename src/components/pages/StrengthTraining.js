@@ -7,7 +7,7 @@ import './StrengthTraining.css';
 function StrengthTraining() {
 
     // Initialisation ----------------------------------------
-    const endpoint = `/userExercises`;
+    const endpoint = `/userExercises/1`;
     const exerciseEndpoint = `/exercises`;
 
 
@@ -86,7 +86,7 @@ function StrengthTraining() {
                 };
                 console.log('added Exercise: ', addedExercise);
                 // Add the new exercise to the list of user exercises
-                setUserExercises([...userExercises, addedExercise]);
+                setUserExercises([addedExercise, ...userExercises]);
                 setLoadingMessage(''); 
             } else {
                 setLoadingMessage('Exercise could not be recorded: ' + response.message);

@@ -82,7 +82,7 @@ function CardioExercise() {
                 };
                 console.log('new exercise: ', addedExercise);
                 // Add the new exercise to the list of user exercises
-                setCardioExercises([...cardioExercises, addedExercise]);
+                setCardioExercises([addedExercise, ...cardioExercises]);
                 setLoadingMessage(''); 
             } else {
                 setLoadingMessage('Exercise could not be recorded: ' + response.message);
