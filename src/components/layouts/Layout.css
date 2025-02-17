@@ -7,7 +7,7 @@ div#root {
 
 div#root div.centrepane {
     background: whitesmoke;
-    width: 100%;
+    width: 90%;
     max-width: 1000px;
     display: grid;
     grid-template-rows: auto auto 1fr auto;
