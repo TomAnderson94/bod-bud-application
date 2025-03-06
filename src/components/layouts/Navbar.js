@@ -20,13 +20,13 @@ function Navbar() {
             </div>  
             <div className='navItem'>
                 <NavLink to='/friends' className={getLinkStyle}>MyFriends</NavLink>
-            </div>                 
+            </div>      
+            <div className='navItem'>
+                <NavLink to='/trainer-dashboard' className={getLinkStyle}>Trainer</NavLink>
+            </div>             
             <div className='navItem'>
                 <NavLink to='/strengthtraining' className={getLinkStyle}>Strength Training</NavLink>
             </div>         
-            <div className='navItem'>
-                <NavLink to='/trainer-dashboard' className={getLinkStyle}>Trainer</NavLink>
-            </div>  
             <div className='navItem'>
                 <NavLink to='/cardioexercise' className={getLinkStyle}>Cardio</NavLink>
             </div>      
