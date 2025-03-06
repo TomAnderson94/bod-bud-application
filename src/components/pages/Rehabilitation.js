@@ -35,8 +35,9 @@ function Rehabilitation() {
     // View -------------------------------------------------
     return (
         <div className='rehab-container'>
+            <img src= 'https://img.freepik.com/free-photo/gorilla_23-2148167319.jpg?t=st=1741258145~exp=1741261745~hmac=b0010e80d128e5085e8dbe605032751af4f8f9b0a748606476f55fc5461d9fb6&w=1060' alt='rehab' className='rehab-img' />
             <h1>Rehabilitation</h1>
-            <p>Help Yourself</p>
+            <h2>Help Yourself</h2>
             <button className='nutrition-button' onClick={handleOnClick}>Nutrition</button>
             <div className='rehab-input-container'>
                 <label htmlFor='Injury'> Injury:</label>

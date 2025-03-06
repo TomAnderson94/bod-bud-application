@@ -26,8 +26,8 @@
 }
 
 .cardio-header-image {
-  max-width: 100%;
-  height: auto;
+  max-width: 40%;
+  height: 220px;
   margin-left: auto;
   border: 1% solid #002147;
   box-shadow: 3px 8px 10px rgba(255, 255, 255, 0.911);

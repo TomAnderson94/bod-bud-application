@@ -187,7 +187,7 @@ function StrengthTraining() {
         <div className='strength-training-container'>
             <div className='strength-header-container'>
                 <h1>Strength Training</h1>
-                <img src='https://loremflickr.com/320/240/strengthtraining' alt ='strength' className='strength-header-image' />
+                <img src='https://img.freepik.com/free-photo/close-up-panda-doing-liftings_23-2151004416.jpg?t=st=1741257435~exp=1741261035~hmac=5207171324ee9e6a39b3d2ef46df734caf3d6b82c1a98d6920bb458bc97a3c29&w=1060' alt ='strength' className='strength-header-image' />
             </div>
             <p>A stronger body leads to a stronger mind </p>
             {!showForm && (

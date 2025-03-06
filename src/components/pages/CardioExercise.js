@@ -194,7 +194,7 @@ function CardioExercise() {
         <div className='cardio-exercise-container'>
             <div className='cardio-header-container'>
                 <h1>Cardio Exercise</h1>
-                <img src='https://loremflickr.com/320/240/cardio' alt='cardio' className='cardio-header-image'/>
+                <img src='https://img.freepik.com/free-photo/majestic-cheetah-walking-savannah-alertness-its-eyes-generated-by-ai_188544-56140.jpg?t=st=1741257723~exp=1741261323~hmac=4a196812ae85592dd1acf2bf1637c6754cb10d887a2145adcc69cf5aef22006b&w=1380' alt='cardio' className='cardio-header-image'/>
             </div>
             <p>Run away from your problems... but keep running</p>
 

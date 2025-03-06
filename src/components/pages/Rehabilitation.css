@@ -5,16 +5,37 @@
     padding: 20px; 
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
+}
+
+.rehab-container img {
+    width: 40%;
+    height: 220px;
+    margin-left: auto;
+    border: 1% solid #7ed2ec;
+    box-shadow: 3px 8px 10px rgba(255, 255, 255, 0.911);
+    border-radius: 2px;
+    margin-top: 20px;
+    overflow: hidden;
 }
 
 .rehab-container h1{
     padding-bottom: 10px;
     margin-top: 30px;
+    margin-left: 22%;
+}
+
+.rehab-container h2{
+    margin-left: 26%;
+    padding-top: 10px;
+    font-size: 120%;
+    font-weight: 400;
 }
 
 .rehab-container p{
     padding-bottom: 10px;
+    margin-left: 3%;
+
 }
 
 .nutrition-button {
@@ -28,6 +49,8 @@
     margin-top: 30px;
     margin-bottom: 30px;
     cursor:cell;
+    margin-left: 23%;
+
 }
 
 .nutrition-button:hover {
@@ -43,16 +66,21 @@
     padding: 8px;
     border-radius: 2px;
     width: 400px;
+    margin-left: 25%;
+
 }
 
 .rehab-input-container label {    
     margin-bottom: 15px;
     color: #002147;
+    margin-left: 25%;
+
 }
 
 .rehab-message {
     margin-top: 20px;
     font-size: large;
+    margin-left: 10%;
 }
 
 .rehab-calculate-button {
@@ -62,7 +90,8 @@
     color: red;
     cursor:cell;
     margin-top: 10px;
-    font-weight: bolder
+    font-weight: bolder;
+    margin-left: 26%;
 }
 
 .rehab-calculate-button:hover {
