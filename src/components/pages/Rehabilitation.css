@@ -6,6 +6,8 @@
     display: flex;
     flex-direction: column;
     align-items: start;
+    background: linear-gradient(to right, #f73d3d, #e25b32);
+
 }
 
 .rehab-header-container {
@@ -62,7 +64,7 @@
     font-weight: bold;
     cursor: cell;
     margin-top: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     cursor:cell;
     margin-left: 23%;
 

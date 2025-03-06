@@ -3,7 +3,7 @@
     color: #ffffff; /*other colours: baby blue: #90cce7; sky blue: #86deee;*/
     min-height: 100vh; 
     padding: 20px; 
-    background: linear-gradient(to right, #7ed2ec, #afe2f1);
+    background: linear-gradient(to right, #3ccaf5, #4a5bf3);
 
 }
 
@@ -17,6 +17,7 @@
     max-height: 55px;   
     border-width: 0px; 
     max-width: 230px;
+    margin-left: 0%;
 }
 
 .header-container {
@@ -38,7 +39,7 @@
 }
 
 .stretching-exercise-container p {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     padding: 8px;
 }
 
@@ -101,13 +102,14 @@
 .stretch-record-button {
     padding: 10px 20px;
     border: none;
-    margin-top: 10px;
     background-color: #002147;
     color: white;
     border: 2px solid white;
     cursor: pointer;
     border-radius: 4px;
     white-space: nowrap;
+    margin-bottom: 20px;
+
 }
 
 .stretch-record-button:hover {

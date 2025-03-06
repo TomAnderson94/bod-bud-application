@@ -37,8 +37,21 @@
 }
 
 .cardio-exercise-container p {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   padding: 8px;
+}
+
+.record-button {
+  padding: 10px 20px;
+  border: none;
+  margin-bottom: 20px;
+  background-color: #002147;
+  color: white;
+  border: 2px solid white;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-left: 5px;
+  white-space: nowrap; 
 }
 
 .cardio-form-container {
