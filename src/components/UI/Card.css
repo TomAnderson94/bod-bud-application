@@ -33,7 +33,7 @@
 }
   
 .card img {
-  max-width: 100%;
+  max-width: 95%;
   height: 150px; 
   border-radius: 2px;
   object-fit: cover;

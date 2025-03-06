@@ -146,7 +146,7 @@ function StretchingExercises() {
         <div className='stretching-exercise-container'>
             <div className='header-container'>
                 <h1>StretchZone</h1> 
-                <img src='https://img.freepik.com/free-photo/view-adorable-looking-kitten_23-2150886390.jpg?t=st=1741257047~exp=1741260647~hmac=21febd64f6da5e128e55206f5d209502726958242b37bf21c5ac0f83d68e60ab&w=1380' alt='stretching' className='header-image'/> 
+                <img src='https://img.freepik.com/free-photo/silver-tabby-cat-lying-floor-inside-room_198169-1.jpg?t=st=1741262789~exp=1741266389~hmac=a38812d54d0e0e97134ddd52bc6477793ab065aed23e953055714ff52f82b91f&w=1060' alt='stretching' className='header-image'/> 
             </div>
             <p>We're flexible... are you?</p>
                 

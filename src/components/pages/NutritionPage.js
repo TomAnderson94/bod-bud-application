@@ -75,7 +75,7 @@ function NutritionPage() {
         <div className='nutrition-container'>
             <div className='header-container'>
                 <h1>Nutrition</h1>
-                <img src='https://loremflickr.com/320/240/healthyfood' alt='nutrition' className='nutrition-header-image' />
+                <img src='https://img.freepik.com/free-photo/cute-elephant-holding-green-leaves-with-trunk-walking-reserve_181624-42787.jpg?t=st=1741262927~exp=1741266527~hmac=29cd1e0aecf1ba2d589abbcde578beec508c4ca7cae971cd953f9fb06c6288ac&w=996' alt='nutrition' className='nutrition-header-image' />
             </div>
             <h2>Input your weight, height and age to calculate your Nutrition factor</h2>
             <div className='input-container'>
